@@ -88,19 +88,19 @@ def name_extract(product_name, artist_info):
 
 def main():
 
-    ynm_file_path = '/YNM/YNMPayoutAutomator/YNM_Sept_Final.csv'
+    ynm_file_path = '/YNM/PayoutAutomator/YNM_Sales_Final.csv'
     ynm_financial_info = read_csv(ynm_file_path)
 
-    yne_file_path = '/YNM/YNMPayoutAutomator/YNE_Sept_Final.csv'
+    yne_file_path = '/YNM/PayoutAutomator/YNE_Sales_Final.csv'
     yne_financial_info = read_csv(yne_file_path)
 
-    rollover_path = "/YNM/YNMPayoutAutomator/Rollovers.csv"
+    rollover_path = "/YNM/PayoutAutomator/Rollovers.csv"
     rollover_info = read_csv(rollover_path)
 
-    with open('/YNM/YNMPayoutAutomator/artists.json') as fp:
+    with open('/YNM/PayoutAutomator/artists.json') as fp:
         artist_info = json.load(fp)
 
-    with open('/YNM/YNMPayoutAutomator/namedItems.json') as fp:
+    with open('/YNM/PayoutAutomator/namedItems.json') as fp:
         item_info = json.load(fp)
 
     ynm_original_dict = {}
@@ -890,48 +890,6 @@ def main():
         payments_df["Artist"] = artist_col
         payments_df["Payment Due"] = payment_col
 
-        #Make third sheet for payments
-        payments_df.to_excel(writer, sheet_name="YNM Payouts Made", index=False)
-
-        # Workbook
-        workbook = writer.book
-        # Worksheet
-        worksheet = workbook["YNM Payouts Made"]
-
-        # Add a new column "Paid?" on the left
-        worksheet.insert_cols(1)
-        worksheet.cell(row=1, column=1).value = "Paid?"
-        worksheet.cell(row=1, column=1).font = Font(bold=True)
-        worksheet.cell(row=1, column=1).border = Border(left=Side(style='thin'), 
-                                                        right=Side(style='thin'), 
-                                                        top=Side(style='thin'), 
-                                                        bottom=Side(style='thin'))  
-
-        # Add new columns "Payments Made", "Transaction ID", and "Notes" on the right
-        for i, header in enumerate(["Payments Made", "Transaction ID", "Notes"], start=worksheet.max_column+1):
-            worksheet.cell(row=1, column=i).value = header
-            worksheet.cell(row=1, column=i).font = Font(bold=True)
-            worksheet.cell(row=1, column=i).border = Border(left=Side(style='thin'), 
-                                                            right=Side(style='thin'), 
-                                                            top=Side(style='thin'), 
-                                                            bottom=Side(style='thin'))
-       
-        # Define the fill colors
-        red_fill = PatternFill(start_color="FF474C", end_color="FF474C", fill_type="solid")
-        blue_fill = PatternFill(start_color="00B0F0", end_color="00B0F0", fill_type="solid")
-
-        #Apply to all except header
-        worksheet.conditional_formatting.add(f'A2:A{worksheet.max_row}', CellIsRule(operator='equal', formula=['"r"'], fill=blue_fill))
-        worksheet.conditional_formatting.add(f'A2:A{worksheet.max_row}', CellIsRule(operator='notEqual', formula=['"y"'], fill=red_fill))
-        worksheet.conditional_formatting.add(f'A2:A{worksheet.max_row}', CellIsRule(operator='equal', formula=['"y"'], fill=green_fill))
-
-        # AutoFit column width
-        for column in worksheet.columns:
-            max_length = max(len(str(cell.value)) for cell in column)
-            adjusted_width = (max_length + 2) * 1.0
-            worksheet.column_dimensions[column[0].column_letter].width = adjusted_width
-
-
         #
         # Now we move onto YNE
         #
@@ -945,6 +903,9 @@ def main():
         worksheet = workbook["YNE Artist Payouts"]
 
         # Create Styles to be used in the workbook
+        # Define the fill colors
+        red_fill = PatternFill(start_color="FF474C", end_color="FF474C", fill_type="solid")
+        blue_fill = PatternFill(start_color="00B0F0", end_color="00B0F0", fill_type="solid")
         bold_underline = Font(bold=True, underline="single")
         center = Alignment(horizontal="center")
         fill = PatternFill(start_color="D3D3D3", end_color="D3D3D3", fill_type="solid")
@@ -1125,6 +1086,7 @@ def main():
 
 
         # Apply the fill to cells where the artist changes
+
         i = 2  # start from 2 because 1 is the header
         total_profit = 0  # initialize total profit
         while i <= worksheet.max_row:
@@ -1292,49 +1254,6 @@ def main():
 
         payments_df["Artist"] = artist_col
         payments_df["Payment Due"] = payment_col
-
-        #Make third sheet for payments
-        payments_df.to_excel(writer, sheet_name="YNE Payouts Made", index=False)
-
-        # Workbook
-        workbook = writer.book
-        # Worksheet
-        worksheet = workbook["YNE Payouts Made"]
-
-        # Add a new column "Paid?" on the left
-        worksheet.insert_cols(1)
-        worksheet.cell(row=1, column=1).value = "Paid?"
-        worksheet.cell(row=1, column=1).font = Font(bold=True)
-        worksheet.cell(row=1, column=1).border = Border(left=Side(style='thin'), 
-                                                        right=Side(style='thin'), 
-                                                        top=Side(style='thin'), 
-                                                        bottom=Side(style='thin'))  
-
-        # Add new columns "Payments Made", "Transaction ID", and "Notes" on the right
-        for i, header in enumerate(["Payments Made", "Transaction ID", "Notes"], start=worksheet.max_column+1):
-            worksheet.cell(row=1, column=i).value = header
-            worksheet.cell(row=1, column=i).font = Font(bold=True)
-            worksheet.cell(row=1, column=i).border = Border(left=Side(style='thin'), 
-                                                            right=Side(style='thin'), 
-                                                            top=Side(style='thin'), 
-                                                            bottom=Side(style='thin'))
-       
-        # Define the fill colors
-        red_fill = PatternFill(start_color="FF474C", end_color="FF474C", fill_type="solid")
-        blue_fill = PatternFill(start_color="00B0F0", end_color="00B0F0", fill_type="solid")
-
-        #Apply to all except header
-        worksheet.conditional_formatting.add(f'A2:A{worksheet.max_row}', CellIsRule(operator='equal', formula=['"r"'], fill=blue_fill))
-        worksheet.conditional_formatting.add(f'A2:A{worksheet.max_row}', CellIsRule(operator='equal', formula=['"y"'], fill=green_fill))
-        worksheet.conditional_formatting.add(f'A2:A{worksheet.max_row}', CellIsRule(operator='notEqual', formula=['"y"'], fill=red_fill))
-
-
-        # AutoFit column width
-        for column in worksheet.columns:
-            max_length = max(len(str(cell.value)) for cell in column)
-            adjusted_width = (max_length + 2) * 1.0
-            worksheet.column_dimensions[column[0].column_letter].width = adjusted_width
-
 
         #Now we will make an aggregated sheet for all payouts both YNM and YNE
 
