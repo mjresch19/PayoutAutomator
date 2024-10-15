@@ -28,14 +28,14 @@ def main():
     to_do_cost_list = []
 
     #Open raw report files
-    ynm_file_path = '/YNM/YNMPayoutAutomator/SheetPreprocessor/YNM_Sept.csv'
+    ynm_file_path = '/YNM/PayoutAutomator/SheetPreprocessor/YNM_Sales.csv'
     ynm_financial_info = read_csv(ynm_file_path)
 
-    yne_file_path = '/YNM/YNMPayoutAutomator/SheetPreprocessor/YNE_Sept.csv'
+    yne_file_path = '/YNM/PayoutAutomator/SheetPreprocessor/YNE_Sales.csv'
     yne_financial_info = read_csv(yne_file_path)
 
     #Iterate throuh the raw YNM Information
-    with open('/YNM/YNMPayoutAutomator/SheetPreprocessor/YNM_Sept_Final.csv', 'w', newline='') as ynmcsvfile:
+    with open('/YNM/PayoutAutomator/SheetPreprocessor/YNM_Sales_Final.csv', 'w', newline='') as ynmcsvfile:
         ynmwriter = csv.writer(ynmcsvfile, delimiter=',')
 
         #Write header
@@ -58,12 +58,26 @@ def main():
             total_cost = float(product[10])
             gross_profit = float(product[9]) - process_fee - total_cost
 
+            #Detect distribution type
+            if "(Original)" or "(original)" in product_vendor:
+                dist_type = "Original"
+            elif "(Collab)" or "(collab)" in product_vendor:
+                if product_type.count("(Collab)") + product_type.count("(collab)") > 1:
+                    dist_type = "Group Collab"
+                else:
+                    dist_type = "Collab"
+            elif "(Commercial)" or "(commercial)" in product_vendor:
+                dist_type = "Commercial"
+            else:
+                dist_type = "Unknown"
+
+            #Add to the list of items that need to be costed
             if total_cost == 0:
                 to_do_cost_list.append(["YNM", product_name, product_vendor, dist_type, product_type, net_quantity, gross_sales, discounts, returns, net_sales, taxes, total_sales, process_fee, total_cost, gross_profit])
             
             ynmwriter.writerow([product_name, product_vendor, dist_type,product_type, net_quantity, gross_sales, discounts, returns, net_sales, taxes, total_sales, process_fee, total_cost, gross_profit])
 
-    with open('/YNM/YNMPayoutAutomator/SheetPreprocessor/YNE_Sept_Final.csv', 'w', newline='') as ynecsvfile:
+    with open('/YNM/PayoutAutomator/SheetPreprocessor/YNE_Sales_Final.csv', 'w', newline='') as ynecsvfile:
         ynewriter = csv.writer(ynecsvfile, delimiter=',')
 
         #Write header
@@ -86,13 +100,26 @@ def main():
             total_cost = float(product[10])
             gross_profit = float(product[9]) - process_fee - total_cost
 
+            #Detect distribution type
+            if "(Original)" in product_vendor:
+                dist_type = "Original"
+            elif "(Collab)" in product_vendor:
+                if product_type.count("Collab") > 1:
+                    dist_type = "Group Collab"
+                else:
+                    dist_type = "Collab"
+            elif "(Commercial)" in product_vendor:
+                dist_type = "Commercial"
+            else:
+                dist_type = "Unknown"
+
             if total_cost == 0:
                 to_do_cost_list.append(["YNE", product_name, product_vendor, dist_type, product_type, net_quantity, gross_sales, discounts, returns, net_sales, taxes, total_sales, process_fee, total_cost, gross_profit])
             
             ynewriter.writerow([product_name, product_vendor, dist_type,product_type, net_quantity, gross_sales, discounts, returns, net_sales, taxes, total_sales, process_fee, total_cost, gross_profit])
 
     #Write to a third sheet that will be composed of all items that have no cost associated with them
-    with open('/YNM/YNMPayoutAutomator/SheetPreprocessor/No_Cost_Items.csv', 'w', newline='') as nocostitems:
+    with open('/YNM/PayoutAutomator/SheetPreprocessor/No_Cost_Items.csv', 'w', newline='') as nocostitems:
         nocostitemswriter = csv.writer(nocostitems, delimiter=',')
 
         #Write Header
