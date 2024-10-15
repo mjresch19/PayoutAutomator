@@ -1,8 +1,4 @@
-# from ..utilities.database import database
 import csv
-import sys
-sys.path.append('/YNM/YNMPayoutAutomator/utilities')
-from database import database
 
 def read_csv(file_path):
     '''
