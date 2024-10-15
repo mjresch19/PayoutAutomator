@@ -31,11 +31,6 @@ def main():
 
     to_do_cost_list = []
 
-    #Get the database object
-    items_db = database('items.db')
-
-    item_information = items_db.get_items()
-
     #Open raw report files
     ynm_file_path = '/YNM/YNMPayoutAutomator/SheetPreprocessor/YNM_Sept.csv'
     ynm_financial_info = read_csv(ynm_file_path)
@@ -69,13 +64,6 @@ def main():
 
             if total_cost == 0:
                 to_do_cost_list.append(["YNM", product_name, product_vendor, dist_type, product_type, net_quantity, gross_sales, discounts, returns, net_sales, taxes, total_sales, process_fee, total_cost, gross_profit])
-
-            #Check if the product is in the database
-            dist_type = ''
-            for item in item_information:
-                if item[1] == product_name:
-                    dist_type = item[2]
-                    break
             
             ynmwriter.writerow([product_name, product_vendor, dist_type,product_type, net_quantity, gross_sales, discounts, returns, net_sales, taxes, total_sales, process_fee, total_cost, gross_profit])
 
@@ -101,13 +89,6 @@ def main():
             process_fee = round(float(product[9]) * .03,2)
             total_cost = float(product[10])
             gross_profit = float(product[9]) - process_fee - total_cost
-
-            #Check if the product is in the database
-            dist_type = ''
-            for item in item_information:
-                if item[1] == product_name:
-                    dist_type = item[2]
-                    break
 
             if total_cost == 0:
                 to_do_cost_list.append(["YNE", product_name, product_vendor, dist_type, product_type, net_quantity, gross_sales, discounts, returns, net_sales, taxes, total_sales, process_fee, total_cost, gross_profit])
