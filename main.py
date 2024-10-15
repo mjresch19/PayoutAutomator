@@ -94,7 +94,7 @@ def main():
     yne_file_path = '/YNM/YNMPayoutAutomator/YNE_Sept_Final.csv'
     yne_financial_info = read_csv(yne_file_path)
 
-    rollover_path = "/YNM/YNMPayoutAutomator/YNM_Rollovers.csv"
+    rollover_path = "/YNM/YNMPayoutAutomator/Rollovers.csv"
     rollover_info = read_csv(rollover_path)
 
     with open('/YNM/YNMPayoutAutomator/artists.json') as fp:
