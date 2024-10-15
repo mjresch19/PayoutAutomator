@@ -7,7 +7,6 @@ from openpyxl.styles.differential import DifferentialStyle
 from openpyxl.formatting.rule import Rule
 from openpyxl.utils.cell import get_column_letter
 from openpyxl.formatting.rule import CellIsRule
-from utilities.database import database
 
 def read_csv(file_path):
     '''
@@ -89,12 +88,6 @@ def name_extract(product_name, artist_info):
 
 def main():
 
-    #Connect to database
-    items_db = database("items.db")
-
-    #Create the items table - if it doesn't exist
-    items_db.create_items_table()
-
     ynm_file_path = '/YNM/YNMPayoutAutomator/YNM_Sept_Final.csv'
     ynm_financial_info = read_csv(ynm_file_path)
 
@@ -136,9 +129,6 @@ def main():
         processor_fee = float(product[11])
         total_cost = float(product[12])
         gross_profit = total_sales - processor_fee - total_cost
-
-        #Insert each item and their distribution type into the database
-        items_db.insert_item(product_name, distribution_type)
 
         #Conduct safer search for artist, considering the fact there might be ( )
         if "(" in product_vendor:
@@ -269,11 +259,7 @@ def main():
         processor_fee = float(product[11])
         total_cost = float(product[12])
         gross_profit = total_sales - processor_fee - total_cost
-
-        #Insert each item and their distribution type into the database
-        items_db.insert_item(product_name, distribution_type)
-
-
+        
         #Conduct safer search for artist, considering the fact there might be ( )
         if "(" in product_vendor:
 
