@@ -97,9 +97,6 @@ def main():
     ynm_rollover_path = "/YNM/YNMPayoutAutomator/YNM_Rollovers.csv"
     ynm_rollover_info = read_csv(ynm_rollover_path)
 
-    yne_rollover_path = "/YNM/YNMPayoutAutomator/YNE_Rollovers.csv"
-    yne_rollover_info = read_csv(yne_rollover_path)
-
     with open('/YNM/YNMPayoutAutomator/artists.json') as fp:
         artist_info = json.load(fp)
 
@@ -259,7 +256,7 @@ def main():
         processor_fee = float(product[11])
         total_cost = float(product[12])
         gross_profit = total_sales - processor_fee - total_cost
-        
+
         #Conduct safer search for artist, considering the fact there might be ( )
         if "(" in product_vendor:
 
@@ -1282,29 +1279,6 @@ def main():
             adjusted_width = (max_length + 2) * 1.0
             worksheet.column_dimensions[column[0].column_letter].width = adjusted_width
 
-        #Look over and see if we have any rollovers that we need to apply
-        for rollover in yne_rollover_info:
-
-            #Are they an easy find in the dictionary?
-            if rollover[1].title() in yne_artist_payments_dict.keys():
-
-                yne_artist_payments_dict[rollover[1].title()] += round(float(rollover[2]),2)
-
-            #Make sure that even if not found, we aren't under an alias
-            else:
-
-                search_vendor = artist_lookup(rollover[1], artist_info)
-
-                if search_vendor is not None and search_vendor in yne_artist_payments_dict.keys():
-
-                    yne_artist_payments_dict[search_vendor] += round(float(rollover[2]),2)
-
-                else:
-
-                    print("YNE ARTIST NOT FOUND ALREADY, ADDING NEW ENTRY", rollover[1].title(), "==>", rollover[2])
-                    yne_artist_payments_dict[rollover[1].title()] = round(float(rollover[2]),2)
-
-        print(yne_artist_payments_dict)
         yne_artist_payments_dict = dict(sorted(yne_artist_payments_dict.items()))
 
         payments_df = pd.DataFrame()
