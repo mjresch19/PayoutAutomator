@@ -97,6 +97,28 @@ def main():
     rollover_path = "/YNM/PayoutAutomator/Rollovers.csv"
     rollover_info = read_csv(rollover_path)
 
+    pending_rollover_path = '/YNM/PayoutAutomator/Pending_Rollovers.csv'
+    pending_rollover_info = read_csv(pending_rollover_path)
+
+    carry_pending_rollovers = []
+
+    #Determine what to do with pending rollovers
+    for pending_rollover in pending_rollover_info:
+
+        if pending_rollover[8].lower() == "y":
+
+            if pending_rollover[0].upper() == "YNM":
+
+                ynm_financial_info.append([pending_rollover[2], pending_rollover[1], pending_rollover[3], '', '', '', '', '', '', '', pending_rollover[4], pending_rollover[5], pending_rollover[6], pending_rollover[7]])
+
+            elif pending_rollover[0].upper() == "YNE":
+
+                yne_financial_info.append([pending_rollover[2], pending_rollover[1], pending_rollover[3], '', '', '', '', '', '', '', pending_rollover[4], pending_rollover[5], pending_rollover[6], pending_rollover[7]])
+        
+        else:
+            
+            carry_pending_rollovers.append(pending_rollover)
+
     with open('/YNM/PayoutAutomator/artists.json') as fp:
         artist_info = json.load(fp)
 
@@ -1358,6 +1380,41 @@ def main():
             adjusted_width = (max_length + 2) * 1.0
             worksheet.column_dimensions[column[0].column_letter].width = adjusted_width
 
-        
-        
+        #Create a pending rollovers sheet
+        pending_rollover_df = pd.DataFrame()
+
+        origin_col = []
+        artist_col = []
+        item_col = []
+        dist_type_col = []
+        sales_col = []
+        process_fee_col = []
+        cost_col = []
+        profit_col = []
+        ready_col = []
+
+        for carryover in carry_pending_rollovers:
+
+            origin_col.append(carryover[0])
+            artist_col.append(carryover[1])
+            item_col.append(carryover[2])
+            dist_type_col.append(carryover[3])
+            sales_col.append(float(carryover[4]))
+            process_fee_col.append(float(carryover[5]))
+            cost_col.append(float(carryover[6]))
+            profit_col.append(float(carryover[7]))
+            ready_col.append(carryover[8])
+
+        pending_rollover_df["Origin"] = origin_col
+        pending_rollover_df["Artist"] = artist_col
+        pending_rollover_df["Item"] = item_col
+        pending_rollover_df["Distribution Type"] = dist_type_col
+        pending_rollover_df["Total Value"] = sales_col
+        pending_rollover_df["Processing Fee"] = process_fee_col
+        pending_rollover_df["Cost"] = cost_col
+        pending_rollover_df["Profit"] = profit_col
+        pending_rollover_df["Ready"] = ready_col
+
+        pending_rollover_df.to_excel(writer, sheet_name="Pending Rollovers", index=False)
+
 main()
