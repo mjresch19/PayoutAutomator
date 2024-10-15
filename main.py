@@ -94,8 +94,8 @@ def main():
     yne_file_path = '/YNM/YNMPayoutAutomator/YNE_Sept_Final.csv'
     yne_financial_info = read_csv(yne_file_path)
 
-    ynm_rollover_path = "/YNM/YNMPayoutAutomator/YNM_Rollovers.csv"
-    ynm_rollover_info = read_csv(ynm_rollover_path)
+    rollover_path = "/YNM/YNMPayoutAutomator/YNM_Rollovers.csv"
+    rollover_info = read_csv(rollover_path)
 
     with open('/YNM/YNMPayoutAutomator/artists.json') as fp:
         artist_info = json.load(fp)
@@ -852,7 +852,7 @@ def main():
             worksheet.column_dimensions[column[0].column_letter].width = adjusted_width
 
         #Look over and see if we have any rollovers that we need to apply
-        for rollover in ynm_rollover_info:
+        for rollover in rollover_info:
 
             print(rollover)
 
