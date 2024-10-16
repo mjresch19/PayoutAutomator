@@ -5,7 +5,7 @@
 The only prequisite external installation you need for this program will be to have a Python instance on your computer. The documentation is stated here:
 https://www.python.org/downloads/
 
-You may need to do some Python installations if you do not have the packages:
+You may need to do some console Python installations if you do not have the packages:
 `!pip install openpyxl` \
 `!pip install pandas`
 
