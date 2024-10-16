@@ -1,11 +1,7 @@
 import csv
 import json
 import pandas as pd
-import pprint
-from openpyxl.styles import PatternFill, NamedStyle, Alignment, Font, Border, Side
-from openpyxl.styles.differential import DifferentialStyle
-from openpyxl.formatting.rule import Rule
-from openpyxl.utils.cell import get_column_letter
+from openpyxl.styles import PatternFill, Alignment, Font
 from openpyxl.formatting.rule import CellIsRule
 
 def read_csv(file_path):
