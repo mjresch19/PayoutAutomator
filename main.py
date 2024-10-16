@@ -534,7 +534,7 @@ def main():
 
 
 
-    with pd.ExcelWriter("YNM Payout Prototype.xlsx", engine="openpyxl") as writer:
+    with pd.ExcelWriter("YNM_Payout_Prototype.xlsx", engine="openpyxl") as writer:
         original_source_df.to_excel(writer, sheet_name="YNM Artist Payouts", index=False)
             
         # Workbook
