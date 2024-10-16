@@ -6,8 +6,8 @@ The only prequisite external installation you need for this program will be to h
 https://www.python.org/downloads/
 
 You may need to do some Python installations if you do not have the packages:
-`!pip install openpyxl`
-`!pip install pandas`
+`!pip install openpyxl
+!pip install pandas`
 
 ## How to Run
 
