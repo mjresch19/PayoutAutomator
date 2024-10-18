@@ -9,6 +9,12 @@ You may need to do some console Python installations if you do not have the pack
 `!pip install openpyxl` \
 `!pip install pandas`
 
+You should also have the following files initially to make the program function
+- YNE_Sales.csv
+- YNM_Sales.csv
+- Pending_Rollovers.csv (as needed)
+- Rollovers.csv (as needed)
+
 ## How to Run
 
 This program is a 2 step CLI program at the moment and will require you to have multiple files for digestion at runtime.
