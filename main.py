@@ -1294,7 +1294,6 @@ def main():
 
         artist_col = []
         payment_col = []
-        print("TEST", combined_artist_payments_dict)
         for key, val in combined_artist_payments_dict.items():
     
                 artist_col.append(key)
