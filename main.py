@@ -166,6 +166,7 @@ def main():
             if search_vendor is not None:
                 
                 product_vendor = search_vendor
+                print("TEST")
 
             #Our last resort search will be for Yorunmachi vended items,
             #If we cannot find the vendor at this point, we can assume we 
