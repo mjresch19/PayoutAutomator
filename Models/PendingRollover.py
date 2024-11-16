@@ -1,6 +1,17 @@
 class PendingRollover:
 
-    def __init__(self, origin, artist, item, distribution_type, total_value, processing_fee, cost, profit, ready):
+    def __init__(
+                    self, 
+                    origin: str,
+                    artist: str, 
+                    item: str, 
+                    distribution_type: str, 
+                    total_value: float, 
+                    processing_fee: float, 
+                    cost: float, 
+                    profit: float, 
+                    ready: bool
+                ):
         self.origin = origin
         self.artist = artist
         self.item = item

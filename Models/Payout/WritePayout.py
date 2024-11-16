@@ -1,20 +1,20 @@
 class WritePayout:
     def __init__(
-                self, 
-                product_title,  
-                product_vendor,
-                distribution_type,
-                product_type, 
-                net_quantity, 
-                gross_sales, 
-                discounts, 
-                returns, 
-                net_sales, 
-                taxes, 
-                total_sales, 
-                process_fee, 
-                total_cost, 
-                gross_profit
+                    self, 
+                    product_title: str,  
+                    product_vendor: str,
+                    distribution_type: str,
+                    product_type: str, 
+                    net_quantity: int, 
+                    gross_sales: float, 
+                    discounts: float, 
+                    returns: float, 
+                    net_sales: float, 
+                    taxes: float, 
+                    total_sales: float, 
+                    process_fee: float, 
+                    total_cost: float, 
+                    gross_profit: float
                 ):
         
         self.product_title = product_title
