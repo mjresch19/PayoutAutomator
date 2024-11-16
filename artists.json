@@ -17,7 +17,7 @@
     },
     "Ancestral Potato": {
         "name": "Ancestral Potato",
-        "aliases": ["Ancestral potato", "ancestralpotato"]
+        "aliases": ["Ancestral potato", "ancestralpotato", "Ancestralpotato"]
     },
     "Andou": {
         "name": "Andou",
@@ -283,6 +283,10 @@
         "name": "Kyoharu",
         "aliases": ["Kyoharu"]
     },
+    "Lewdwok": {
+        "name": "Lewdwok",
+        "aliases": ["Lewdwok"]
+    },
     "Lifelinelemons": {
         "name": "Lifelinelemons",
         "aliases": ["Lifelinelemons"]        
@@ -343,7 +347,7 @@
         "name": "Milk Tea",
         "aliases": ["Milk Tea"]
     },
-    "Milkubus": {
+    "Milkcubus": {
         "name": "Milkubus",
         "aliases": ["Milkcubus", "Milkubus"]
     },
@@ -353,7 +357,7 @@
     },
     "Mintrimo": {
         "name": "Mintrimo",
-        "aliases": ["Mintrimo"]
+        "aliases": ["Mintrimo", "mts", "MTS", "PT", "PTS", "pt", "pts"]
     },
     "Missus Mummy": {
         "name": "Missus Mummy",
@@ -495,10 +499,6 @@
         "name": "PrinceMatchaCakes",
         "aliases": ["PrinceMatchaCakes", "Matcha"]
     },
-    "Pt": {
-        "name": "PT",
-        "aliases": ["PT", "PTS"]
-    },
     "Radium225": {
         "name": "Radium225",
         "aliases": ["Radium225"]
@@ -543,9 +543,9 @@
         "name": "Saa Halust",
         "aliases": ["Saa", "Halust","Saa Halust"]
     },
-    "Safershawnk": {
-        "name": "Safershawnk",
-        "aliases": ["Safershawnk"]    
+    "Safershawk": {
+        "name": "Safershawk",
+        "aliases": ["Safershawnk", "Safershawk", "Safer Shawk"]    
     },
     "Sakananotenshi": {
         "name": "SakanaNoTenshi",

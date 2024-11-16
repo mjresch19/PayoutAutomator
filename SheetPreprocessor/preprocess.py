@@ -59,14 +59,14 @@ def main():
             gross_profit = float(product[9]) - process_fee - total_cost
 
             #Detect distribution type
-            if "(Original)" or "(original)" in product_vendor:
+            if "(Original)" in product_vendor or "(original)" in product_vendor:
                 dist_type = "Original"
-            elif "(Collab)" or "(collab)" in product_vendor:
+            elif "(Collab)" in product_vendor or "(collab)" in product_vendor:
                 if product_type.count("(Collab)") + product_type.count("(collab)") > 1:
                     dist_type = "Group Collab"
                 else:
                     dist_type = "Collab"
-            elif "(Commercial)" or "(commercial)" in product_vendor:
+            elif "(Commercial)" in product_vendor or "(commercial)" in product_vendor:
                 dist_type = "Commercial"
             else:
                 dist_type = "Unknown"
@@ -101,14 +101,14 @@ def main():
             gross_profit = float(product[9]) - process_fee - total_cost
 
             #Detect distribution type
-            if "(Original)" in product_vendor:
+            if "(Original)" in product_vendor or "(original)" in product_vendor:
                 dist_type = "Original"
-            elif "(Collab)" in product_vendor:
-                if product_type.count("Collab") > 1:
+            elif "(Collab)" in product_vendor or "(collab)" in product_vendor:
+                if product_type.count("(Collab)") + product_type.count("(collab)") > 1:
                     dist_type = "Group Collab"
                 else:
                     dist_type = "Collab"
-            elif "(Commercial)" in product_vendor:
+            elif "(Commercial)" in product_vendor or "(commercial)" in product_vendor:
                 dist_type = "Commercial"
             else:
                 dist_type = "Unknown"
