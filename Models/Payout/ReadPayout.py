@@ -17,15 +17,14 @@ class ReadPayout:
         self.product_title = product_title.strip("'").replace("''", "'") 
         self.product_vendor = product_vendor.strip("'").replace("''", "'")
         self.product_type = product_type
-        self.net_quantity = net_quantity
-        self.gross_sales = gross_sales
-        self.discounts = discounts
-        self.returns = returns
-        self.net_sales = net_sales
-        self.taxes = taxes
-        self.total_sales = total_sales
-        self.total_cost = total_cost
-
+        self.net_quantity = int(net_quantity)
+        self.gross_sales = round(float(gross_sales),2)
+        self.discounts = round(float(discounts),2)
+        self.returns = round(float(returns),2)
+        self.net_sales = round(float(net_sales),2)
+        self.taxes = round(float(taxes),2)
+        self.total_sales = round(float(total_sales),2)
+        self.total_cost = round(float(total_cost),2)
 
     def get_distribution_type(self):
         
@@ -50,7 +49,6 @@ class ReadPayout:
 
         return round(float(self.total_sales) * .03,2)
     
-
     def calculate_gross_profit(self):
 
         return self.total_sales - self.calculate_processing_fee() - self.total_cost
