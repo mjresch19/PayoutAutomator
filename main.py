@@ -84,10 +84,10 @@ def name_extract(product_name, artist_info):
 
 def main():
 
-    ynm_file_path = '/YNM/PayoutAutomator/YNM_Sales_Final.csv'
+    ynm_file_path = '/YNM/PayoutAutomator/SheetPreprocessor/YNM_Sales_Final.csv'
     ynm_financial_info = read_csv(ynm_file_path)
 
-    yne_file_path = '/YNM/PayoutAutomator/YNE_Sales_Final.csv'
+    yne_file_path = '/YNM/PayoutAutomator/SheetPreprocessor/YNE_Sales_Final.csv'
     yne_financial_info = read_csv(yne_file_path)
 
     rollover_path = "/YNM/PayoutAutomator/Rollovers.csv"
