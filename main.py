@@ -84,16 +84,16 @@ def name_extract(product_name, artist_info):
 
 def main():
 
-    ynm_file_path = '/YNM/PayoutAutomator/SheetPreprocessor/YNM_Sales_Final.csv'
+    ynm_file_path = '/YNM/PayoutAutomator/Data/SheetPreprocessor/YNM_Sales_Final.csv'
     ynm_financial_info = read_csv(ynm_file_path)
 
-    yne_file_path = '/YNM/PayoutAutomator/SheetPreprocessor/YNE_Sales_Final.csv'
+    yne_file_path = '/YNM/PayoutAutomator/Data/SheetPreprocessor/YNE_Sales_Final.csv'
     yne_financial_info = read_csv(yne_file_path)
 
-    rollover_path = "/YNM/PayoutAutomator/Rollovers.csv"
+    rollover_path = "/YNM/PayoutAutomator/Data/PayoutPrototype/Rollovers.csv"
     rollover_info = read_csv(rollover_path)
 
-    pending_rollover_path = '/YNM/PayoutAutomator/Pending_Rollovers.csv'
+    pending_rollover_path = '/YNM/PayoutAutomator/Data/PayoutPrototype/Pending_Rollovers.csv'
     pending_rollover_info = read_csv(pending_rollover_path)
 
     carry_pending_rollovers = []
@@ -118,7 +118,7 @@ def main():
     with open('/YNM/PayoutAutomator/Data/artists.json') as fp:
         artist_info = json.load(fp)
 
-    with open('/YNM/PayoutAutomator//Data/namedItems.json') as fp:
+    with open('/YNM/PayoutAutomator/Data/namedItems.json') as fp:
         item_info = json.load(fp)
 
     ynm_original_dict = {}
@@ -535,7 +535,7 @@ def main():
 
 
 
-    with pd.ExcelWriter("YNM_Payout_Prototype.xlsx", engine="openpyxl") as writer:
+    with pd.ExcelWriter("Data/PayoutPrototype/YNM_Payout_Prototype.xlsx", engine="openpyxl") as writer:
         original_source_df.to_excel(writer, sheet_name="YNM Artist Payouts", index=False)
             
         # Workbook

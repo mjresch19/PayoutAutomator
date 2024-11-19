@@ -35,14 +35,14 @@ def main():
     to_do_cost_list = []
 
     #Open raw report files
-    ynm_file_path = '/YNM/PayoutAutomator/SheetPreprocessor/YNM_Sales.csv'
+    ynm_file_path = '/YNM/PayoutAutomator/Data/SheetPreprocessor/YNM_Sales.csv'
     ynm_financial_info = read_csv(ynm_file_path)
 
-    yne_file_path = '/YNM/PayoutAutomator/SheetPreprocessor/YNE_Sales.csv'
+    yne_file_path = '/YNM/PayoutAutomator/Data/SheetPreprocessor/YNE_Sales.csv'
     yne_financial_info = read_csv(yne_file_path)
 
     #Iterate throuh the raw YNM Information
-    with open('/YNM/PayoutAutomator/SheetPreprocessor/YNM_Sales_Final.csv', 'w', newline='') as ynmcsvfile:
+    with open('/YNM/PayoutAutomator/Data/SheetPreprocessor/YNM_Sales_Final.csv', 'w', newline='') as ynmcsvfile:
         ynmwriter = csv.writer(ynmcsvfile, delimiter=',')
 
         #Write header
@@ -125,7 +125,7 @@ def main():
                     write_payout.gross_profit
                 ])
 
-    with open('/YNM/PayoutAutomator/SheetPreprocessor/YNE_Sales_Final.csv', 'w', newline='') as ynecsvfile:
+    with open('/YNM/PayoutAutomator/Data/SheetPreprocessor/YNE_Sales_Final.csv', 'w', newline='') as ynecsvfile:
         ynewriter = csv.writer(ynecsvfile, delimiter=',')
 
         #Write header
@@ -210,7 +210,7 @@ def main():
 
 
     #Write to a third sheet that will be composed of all items that have no cost associated with them
-    with open('/YNM/PayoutAutomator/SheetPreprocessor/No_Cost_Items.csv', 'w', newline='') as nocostitems:
+    with open('/YNM/PayoutAutomator/Data/SheetPreprocessor/No_Cost_Items.csv', 'w', newline='') as nocostitems:
         nocostitemswriter = csv.writer(nocostitems, delimiter=',')
 
         #Write Header
