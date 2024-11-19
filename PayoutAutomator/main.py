@@ -1,33 +1,13 @@
-import csv
+import sys
+import os
+curr_dir = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+sys.path.append(curr_dir)
+
 import json
 import pandas as pd
 from openpyxl.styles import PatternFill, Alignment, Font
 from openpyxl.formatting.rule import CellIsRule
-
-def read_csv(file_path):
-    '''
-    Translate csv contents into a python datatype
-
-    @param file_path: The path to the csv file
-    @return A list of lists containing the contents of the csv file
-    '''
-
-    file_contents = []
-
-    with open(file_path, 'r') as file:
-        reader = csv.reader(file)
-
-        #Skip the header
-        header = next(reader)
-
-        for row in reader:
-            
-            file_contents.append(row)
-
-
-    return file_contents
-
-
+from ExcelRW.readcsv import read_csv
 
 def artist_lookup(artist_name, artist_info):
     '''
