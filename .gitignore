@@ -9,3 +9,4 @@ Data/SheetPreprocessor/YNM_Sales.csv
 ExcelRW/__pycache__
 PayoutAutomator/__pycache__
 Models/__pycache__
+Models/Payout/__pycache__
