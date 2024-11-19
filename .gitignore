@@ -1,3 +1,5 @@
+
+#Remove files that include real data
 Data/PayoutPrototype/Pending_Rollovers.csv
 Data/PayoutPrototype/Rollovers.csv
 Data/PayoutPrototype/YNM_Payout_Prototype.xlsx
@@ -6,6 +8,8 @@ Data/SheetPreprocessor/YNE_Sales_Final.csv
 Data/SheetPreprocessor/YNE_Sales.csv
 Data/SheetPreprocessor/YNM_Sales_Final.csv
 Data/SheetPreprocessor/YNM_Sales.csv
+
+# Remove pycached files that occur due to packaging
 ExcelRW/__pycache__
 PayoutAutomator/__pycache__
 Models/__pycache__
