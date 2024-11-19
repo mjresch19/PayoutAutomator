@@ -115,10 +115,10 @@ def main():
             
             carry_pending_rollovers.append(pending_rollover)
 
-    with open('/YNM/PayoutAutomator/artists.json') as fp:
+    with open('/YNM/PayoutAutomator/Data/artists.json') as fp:
         artist_info = json.load(fp)
 
-    with open('/YNM/PayoutAutomator/namedItems.json') as fp:
+    with open('/YNM/PayoutAutomator//Data/namedItems.json') as fp:
         item_info = json.load(fp)
 
     ynm_original_dict = {}
