@@ -9,7 +9,7 @@ from openpyxl.styles import PatternFill, Alignment, Font
 from openpyxl.formatting.rule import CellIsRule
 from ExcelRW.readcsv import read_csv
 from datalookups import artist_lookup, item_lookup, name_extract
-from Models.PendingRollover import PendingRollover
+from Models.PendingRollover import PendingRollover, parse_pending_rollovers
 
 ynm_file_path = '/YNM/PayoutAutomator/Data/SheetPreprocessor/YNM_Sales_Final.csv'
 ynm_financial_info = read_csv(ynm_file_path)
@@ -23,39 +23,7 @@ rollover_info = read_csv(rollover_path)
 pending_rollover_path = '/YNM/PayoutAutomator/Data/PayoutPrototype/Pending_Rollovers.csv'
 pending_rollover_info = read_csv(pending_rollover_path)
 
-carry_pending_rollovers = []
-
-for pending_rollover in pending_rollover_info:
-
-    curr_pr = PendingRollover(
-        origin = pending_rollover[0],
-        artist = pending_rollover[1],
-        item = pending_rollover[2],
-        distribution_type = pending_rollover[3],
-        total_value = pending_rollover[4],
-        processing_fee = pending_rollover[5],
-        cost = pending_rollover[6],
-        profit = pending_rollover[7],
-        ready = pending_rollover[8],
-    )
-
-    if curr_pr.ready.lower() == "y":
-
-        if curr_pr.origin.upper() == "YNM":
-
-            ynm_financial_info.append([curr_pr.item, curr_pr.artist, curr_pr.distribution_type, '', '', '', '',
-                                        '', '', '', curr_pr.total_value, curr_pr.processing_fee, curr_pr.cost,
-                                          curr_pr.profit])
-
-        elif curr_pr.origin.upper() == "YNE":
-
-            yne_financial_info.append([curr_pr.item, curr_pr.artist, curr_pr.distribution_type, '', '', '', '',
-                                        '', '', '', curr_pr.total_value, curr_pr.processing_fee, curr_pr.cost,
-                                          curr_pr.profit])
-
-    else:
-            
-        carry_pending_rollovers.append(curr_pr)
+ynm_financial_info, yne_financial_info, carry_pending_rollovers = parse_pending_rollovers(pending_rollover_info, ynm_financial_info, yne_financial_info)
 
 with open('/YNM/PayoutAutomator/Data/artists.json') as fp:
     artist_info = json.load(fp)
