@@ -9,6 +9,7 @@ from openpyxl.styles import PatternFill, Alignment, Font
 from openpyxl.formatting.rule import CellIsRule
 from ExcelRW.readcsv import read_csv
 from datalookups import artist_lookup, item_lookup, name_extract
+from Models.PendingRollover import PendingRollover
 
 ynm_file_path = '/YNM/PayoutAutomator/Data/SheetPreprocessor/YNM_Sales_Final.csv'
 ynm_financial_info = read_csv(ynm_file_path)
@@ -24,22 +25,50 @@ pending_rollover_info = read_csv(pending_rollover_path)
 
 carry_pending_rollovers = []
 
-#Determine what to do with pending rollovers
 for pending_rollover in pending_rollover_info:
 
-    if pending_rollover[8].lower() == "y":
+    curr_pr = PendingRollover(
+        origin = pending_rollover[0],
+        artist = pending_rollover[1],
+        item = pending_rollover[2],
+        distribution_type = pending_rollover[3],
+        total_value = pending_rollover[4],
+        processing_fee = pending_rollover[5],
+        cost = pending_rollover[6],
+        profit = pending_rollover[7],
+        ready = pending_rollover[8],
+    )
 
-        if pending_rollover[0].upper() == "YNM":
+    if curr_pr.ready.lower() == "y":
 
-            ynm_financial_info.append([pending_rollover[2], pending_rollover[1], pending_rollover[3], '', '', '', '', '', '', '', pending_rollover[4], pending_rollover[5], pending_rollover[6], pending_rollover[7]])
+        if curr_pr.origin.upper() == "YNM":
 
-        elif pending_rollover[0].upper() == "YNE":
+            ynm_financial_info.append([curr_pr.item, curr_pr.artist, curr_pr.distribution_type, '', '', '', '', '', '', '', curr_pr.total_value, curr_pr.processing_fee, curr_pr.cost, curr_pr.profit])
 
-            yne_financial_info.append([pending_rollover[2], pending_rollover[1], pending_rollover[3], '', '', '', '', '', '', '', pending_rollover[4], pending_rollover[5], pending_rollover[6], pending_rollover[7]])
-    
+        elif curr_pr.origin.upper() == "YNE":
+
+            yne_financial_info.append([curr_pr.item, curr_pr.artist, curr_pr.distribution_type, '', '', '', '', '', '', '', curr_pr.total_value, curr_pr.processing_fee, curr_pr.cost, curr_pr.profit])
+
     else:
+            
+        carry_pending_rollovers.append(curr_pr)
+
+# #Determine what to do with pending rollovers
+# for pending_rollover in pending_rollover_info:
+
+#     if pending_rollover[8].lower() == "y":
+
+#         if pending_rollover[0].upper() == "YNM":
+
+#             ynm_financial_info.append([pending_rollover[2], pending_rollover[1], pending_rollover[3], '', '', '', '', '', '', '', pending_rollover[4], pending_rollover[5], pending_rollover[6], pending_rollover[7]])
+
+#         elif pending_rollover[0].upper() == "YNE":
+
+#             yne_financial_info.append([pending_rollover[2], pending_rollover[1], pending_rollover[3], '', '', '', '', '', '', '', pending_rollover[4], pending_rollover[5], pending_rollover[6], pending_rollover[7]])
+    
+#     else:
         
-        carry_pending_rollovers.append(pending_rollover)
+#         carry_pending_rollovers.append(pending_rollover)
 
 with open('/YNM/PayoutAutomator/Data/artists.json') as fp:
     artist_info = json.load(fp)
@@ -1317,15 +1346,15 @@ with pd.ExcelWriter("Data/PayoutPrototype/YNM_Payout_Prototype.xlsx", engine="op
 
     for carryover in carry_pending_rollovers:
 
-        origin_col.append(carryover[0])
-        artist_col.append(carryover[1])
-        item_col.append(carryover[2])
-        dist_type_col.append(carryover[3])
-        sales_col.append(float(carryover[4]))
-        process_fee_col.append(float(carryover[5]))
-        cost_col.append(float(carryover[6]))
-        profit_col.append(float(carryover[7]))
-        ready_col.append(carryover[8])
+        origin_col.append(carryover.origin)
+        artist_col.append(carryover.artist)
+        item_col.append(carryover.item)
+        dist_type_col.append(carryover.distribution_type)
+        sales_col.append(float(carryover.total_value))
+        process_fee_col.append(float(carryover.processing_fee))
+        cost_col.append(float(carryover.cost))
+        profit_col.append(float(carryover.profit))
+        ready_col.append(carryover.ready)
 
     pending_rollover_df["Origin"] = origin_col
     pending_rollover_df["Artist"] = artist_col
