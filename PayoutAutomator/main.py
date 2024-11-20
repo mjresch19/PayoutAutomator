@@ -441,10 +441,6 @@ yne_collab_commercial_df["SPE 40%"] = yne_collab_commercial_df["Gross Profit"] *
 yne_collab_commercial_df["SPE 50%"] = yne_collab_commercial_df["Gross Profit"] * 0.5
 yne_collab_commercial_df["SPE 60%"] = yne_collab_commercial_df["Gross Profit"] * 0.6
 
-
-
-
-
 with pd.ExcelWriter("Data/PayoutPrototype/YNM_Payout_Prototype.xlsx", engine="openpyxl") as writer:
     original_source_df.to_excel(writer, sheet_name="YNM Artist Payouts", index=False)
         
