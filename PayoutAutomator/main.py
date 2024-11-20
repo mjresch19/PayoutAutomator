@@ -43,32 +43,19 @@ for pending_rollover in pending_rollover_info:
 
         if curr_pr.origin.upper() == "YNM":
 
-            ynm_financial_info.append([curr_pr.item, curr_pr.artist, curr_pr.distribution_type, '', '', '', '', '', '', '', curr_pr.total_value, curr_pr.processing_fee, curr_pr.cost, curr_pr.profit])
+            ynm_financial_info.append([curr_pr.item, curr_pr.artist, curr_pr.distribution_type, '', '', '', '',
+                                        '', '', '', curr_pr.total_value, curr_pr.processing_fee, curr_pr.cost,
+                                          curr_pr.profit])
 
         elif curr_pr.origin.upper() == "YNE":
 
-            yne_financial_info.append([curr_pr.item, curr_pr.artist, curr_pr.distribution_type, '', '', '', '', '', '', '', curr_pr.total_value, curr_pr.processing_fee, curr_pr.cost, curr_pr.profit])
+            yne_financial_info.append([curr_pr.item, curr_pr.artist, curr_pr.distribution_type, '', '', '', '',
+                                        '', '', '', curr_pr.total_value, curr_pr.processing_fee, curr_pr.cost,
+                                          curr_pr.profit])
 
     else:
             
         carry_pending_rollovers.append(curr_pr)
-
-# #Determine what to do with pending rollovers
-# for pending_rollover in pending_rollover_info:
-
-#     if pending_rollover[8].lower() == "y":
-
-#         if pending_rollover[0].upper() == "YNM":
-
-#             ynm_financial_info.append([pending_rollover[2], pending_rollover[1], pending_rollover[3], '', '', '', '', '', '', '', pending_rollover[4], pending_rollover[5], pending_rollover[6], pending_rollover[7]])
-
-#         elif pending_rollover[0].upper() == "YNE":
-
-#             yne_financial_info.append([pending_rollover[2], pending_rollover[1], pending_rollover[3], '', '', '', '', '', '', '', pending_rollover[4], pending_rollover[5], pending_rollover[6], pending_rollover[7]])
-    
-#     else:
-        
-#         carry_pending_rollovers.append(pending_rollover)
 
 with open('/YNM/PayoutAutomator/Data/artists.json') as fp:
     artist_info = json.load(fp)
