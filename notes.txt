@@ -1,0 +1,1 @@
+"if you don't care about doing things right and packing crap into a shared virtual environment and all that, you can just create a directory called "deps". fill it with symlinks to directories you want to import or import from. they'll import just fine. probably should have been how it works the entire time."
