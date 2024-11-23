@@ -115,6 +115,10 @@
         "name": "Cerberos",
         "aliases": ["Cerberos", "CerberosVA"]
     },
+    "Charity": {
+        "name": "Charity",
+        "aliases": ["Charity"]
+    },
     "Chet rippo": {
         "name": "Chet Rippo",
         "aliases": ["Chet Rippo"]

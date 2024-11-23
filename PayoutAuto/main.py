@@ -119,6 +119,16 @@ for product in ynm_financial_info:
 
             ynm_collab_dict[product_vendor].append([product_name, distribution_type, total_sales, processor_fee, total_cost, gross_profit])
 
+    elif distribution_type == "Charity":
+
+        if product_vendor not in ynm_collab_dict:
+
+            ynm_collab_dict[product_vendor] = [[product_name, distribution_type, total_sales, processor_fee, total_cost, gross_profit]]
+
+        else:
+
+            ynm_collab_dict[product_vendor].append([product_name, distribution_type, total_sales, processor_fee, total_cost, gross_profit])
+
 
     elif distribution_type == "Collab":
 
@@ -162,10 +172,6 @@ for product in ynm_financial_info:
 
             ynm_original_dict[product_vendor].append([product_name, distribution_type, total_sales, processor_fee, total_cost, gross_profit])  
 
-    #TODO - Handle Bundles
-    elif distribution_type == "Bundle":
-
-        pass   
 
 
 #Iterate through each product that was sold this month for YNE
@@ -239,6 +245,16 @@ for product in yne_financial_info:
             yne_original_dict[product_vendor].append([product_name, distribution_type, total_sales, processor_fee, total_cost, gross_profit])
 
     elif distribution_type == "Commercial":
+
+        if product_vendor not in yne_collab_dict:
+
+            yne_collab_dict[product_vendor] = [[product_name, distribution_type, total_sales, processor_fee, total_cost, gross_profit]]
+
+        else:
+
+            yne_collab_dict[product_vendor].append([product_name, distribution_type, total_sales, processor_fee, total_cost, gross_profit])
+
+    elif distribution_type == "Charity":
 
         if product_vendor not in yne_collab_dict:
 
@@ -493,7 +509,7 @@ with pd.ExcelWriter("Data/PayoutPrototype/YNM_Payout_Prototype.xlsx", engine="op
             if worksheet.cell(row=i, column=1).value not in ynm_artist_payments_dict.keys():
 
                 #Ensure that we still add the new profit to the total profit
-                if worksheet.cell(row=i, column=3).value == "Original":
+                if worksheet.cell(row=i, column=3).value == "Original" or worksheet.cell(row=i, column=3).value == "Charity":
 
                     total_profit += worksheet.cell(row=i, column=10).value
                     worksheet.cell(row=i, column=10).fill = green_fill
@@ -519,7 +535,7 @@ with pd.ExcelWriter("Data/PayoutPrototype/YNM_Payout_Prototype.xlsx", engine="op
             else:
 
                 #Ensure that we still add the new profit to the total profit
-                if worksheet.cell(row=i, column=3).value == "Original":
+                if worksheet.cell(row=i, column=3).value == "Original" or worksheet.cell(row=i, column=3).value == "Charity":
 
                     total_profit += worksheet.cell(row=i, column=10).value
                     worksheet.cell(row=i, column=10).fill = green_fill
@@ -545,7 +561,7 @@ with pd.ExcelWriter("Data/PayoutPrototype/YNM_Payout_Prototype.xlsx", engine="op
         else:
             if worksheet.cell(row=i, column=1).value not in ynm_artist_payments_dict.keys():
                 #Ensure that we still add the new profit to the total profit
-                if worksheet.cell(row=i, column=3).value == "Original":
+                if worksheet.cell(row=i, column=3).value == "Original" or worksheet.cell(row=i, column=3).value == "Charity":
 
                     total_profit += worksheet.cell(row=i, column=10).value
                     worksheet.cell(row=i, column=10).fill = green_fill
@@ -571,7 +587,7 @@ with pd.ExcelWriter("Data/PayoutPrototype/YNM_Payout_Prototype.xlsx", engine="op
             else:
 
                 #Ensure that we still add the new profit to the total profit
-                if worksheet.cell(row=i, column=3).value == "Original":
+                if worksheet.cell(row=i, column=3).value == "Original" or worksheet.cell(row=i, column=3).value == "Charity":
 
                     total_profit += worksheet.cell(row=i, column=10).value
                     worksheet.cell(row=i, column=10).fill = green_fill
@@ -658,14 +674,14 @@ with pd.ExcelWriter("Data/PayoutPrototype/YNM_Payout_Prototype.xlsx", engine="op
             if worksheet.cell(row=i, column=1).value not in ynm_artist_payments_dict.keys():
 
                 #Ensure that we still add the new profit to the total profit
-                if worksheet.cell(row=i, column=3).value == "Original":
+                if worksheet.cell(row=i, column=3).value == "Original" or worksheet.cell(row=i, column=3).value == "Charity":
 
                     total_profit += worksheet.cell(row=i, column=10).value
                     worksheet.cell(row=i, column=10).fill = green_fill
 
                     new_profit = worksheet.cell(row=i, column=10).value
             
-                elif worksheet.cell(row=i, column=3).value == "Commercial":
+                elif worksheet.cell(row=i, column=3).value == "Commercial" or worksheet.cell(row=i, column=3).value == "Charity":
 
                     total_profit += worksheet.cell(row=i, column=9).value
                     worksheet.cell(row=i, column=9).fill = green_fill
@@ -684,7 +700,7 @@ with pd.ExcelWriter("Data/PayoutPrototype/YNM_Payout_Prototype.xlsx", engine="op
             else:
 
                 #Ensure that we still add the new profit to the total profit
-                if worksheet.cell(row=i, column=3).value == "Original":
+                if worksheet.cell(row=i, column=3).value == "Original" or worksheet.cell(row=i, column=3).value == "Charity":
 
                     total_profit += worksheet.cell(row=i, column=10).value
                     worksheet.cell(row=i, column=10).fill = green_fill
@@ -710,7 +726,7 @@ with pd.ExcelWriter("Data/PayoutPrototype/YNM_Payout_Prototype.xlsx", engine="op
         else:
             if worksheet.cell(row=i, column=1).value not in ynm_artist_payments_dict.keys():
                 #Ensure that we still add the new profit to the total profit
-                if worksheet.cell(row=i, column=3).value == "Original":
+                if worksheet.cell(row=i, column=3).value == "Original" or worksheet.cell(row=i, column=3).value == "Charity":
 
                     total_profit += worksheet.cell(row=i, column=10).value
                     worksheet.cell(row=i, column=10).fill = green_fill
@@ -736,7 +752,7 @@ with pd.ExcelWriter("Data/PayoutPrototype/YNM_Payout_Prototype.xlsx", engine="op
             else:
 
                 #Ensure that we still add the new profit to the total profit
-                if worksheet.cell(row=i, column=3).value == "Original":
+                if worksheet.cell(row=i, column=3).value == "Original" or worksheet.cell(row=i, column=3).value == "Charity":
 
                     total_profit += worksheet.cell(row=i, column=10).value
                     worksheet.cell(row=i, column=10).fill = green_fill
@@ -874,7 +890,7 @@ with pd.ExcelWriter("Data/PayoutPrototype/YNM_Payout_Prototype.xlsx", engine="op
             if worksheet.cell(row=i, column=1).value not in yne_artist_payments_dict.keys():
 
                 #Ensure that we still add the new profit to the total profit
-                if worksheet.cell(row=i, column=3).value == "Original":
+                if worksheet.cell(row=i, column=3).value == "Original" or worksheet.cell(row=i, column=3).value == "Charity":
                     
                     try:
                         total_profit += worksheet.cell(row=i, column=10).value
@@ -908,7 +924,7 @@ with pd.ExcelWriter("Data/PayoutPrototype/YNM_Payout_Prototype.xlsx", engine="op
             else:
 
                 #Ensure that we still add the new profit to the total profit
-                if worksheet.cell(row=i, column=3).value == "Original":
+                if worksheet.cell(row=i, column=3).value == "Original" or worksheet.cell(row=i, column=3).value == "Charity":
 
                     total_profit += worksheet.cell(row=i, column=10).value
                     worksheet.cell(row=i, column=10).fill = green_fill
@@ -934,7 +950,7 @@ with pd.ExcelWriter("Data/PayoutPrototype/YNM_Payout_Prototype.xlsx", engine="op
         else:
             if worksheet.cell(row=i, column=1).value not in yne_artist_payments_dict.keys():
                 #Ensure that we still add the new profit to the total profit
-                if worksheet.cell(row=i, column=3).value == "Original":
+                if worksheet.cell(row=i, column=3).value == "Original" or worksheet.cell(row=i, column=3).value == "Charity":
 
                     total_profit += worksheet.cell(row=i, column=10).value
                     worksheet.cell(row=i, column=10).fill = green_fill
@@ -960,7 +976,7 @@ with pd.ExcelWriter("Data/PayoutPrototype/YNM_Payout_Prototype.xlsx", engine="op
             else:
 
                 #Ensure that we still add the new profit to the total profit
-                if worksheet.cell(row=i, column=3).value == "Original":
+                if worksheet.cell(row=i, column=3).value == "Original" or worksheet.cell(row=i, column=3).value == "Charity":
 
                     total_profit += worksheet.cell(row=i, column=10).value
                     worksheet.cell(row=i, column=10).fill = green_fill
@@ -1048,7 +1064,7 @@ with pd.ExcelWriter("Data/PayoutPrototype/YNM_Payout_Prototype.xlsx", engine="op
             if worksheet.cell(row=i, column=1).value not in yne_artist_payments_dict.keys():
 
                 #Ensure that we still add the new profit to the total profit
-                if worksheet.cell(row=i, column=3).value == "Original":
+                if worksheet.cell(row=i, column=3).value == "Original" or worksheet.cell(row=i, column=3).value == "Charity":
 
                     total_profit += worksheet.cell(row=i, column=10).value
                     worksheet.cell(row=i, column=10).fill = green_fill
@@ -1074,7 +1090,7 @@ with pd.ExcelWriter("Data/PayoutPrototype/YNM_Payout_Prototype.xlsx", engine="op
             else:
 
                 #Ensure that we still add the new profit to the total profit
-                if worksheet.cell(row=i, column=3).value == "Original":
+                if worksheet.cell(row=i, column=3).value == "Original" or worksheet.cell(row=i, column=3).value == "Charity":
 
                     total_profit += worksheet.cell(row=i, column=10).value
                     worksheet.cell(row=i, column=10).fill = green_fill
@@ -1100,7 +1116,7 @@ with pd.ExcelWriter("Data/PayoutPrototype/YNM_Payout_Prototype.xlsx", engine="op
         else:
             if worksheet.cell(row=i, column=1).value not in yne_artist_payments_dict.keys():
                 #Ensure that we still add the new profit to the total profit
-                if worksheet.cell(row=i, column=3).value == "Original":
+                if worksheet.cell(row=i, column=3).value == "Original" or worksheet.cell(row=i, column=3).value == "Charity":
 
                     total_profit += worksheet.cell(row=i, column=10).value
                     worksheet.cell(row=i, column=10).fill = green_fill
@@ -1126,7 +1142,7 @@ with pd.ExcelWriter("Data/PayoutPrototype/YNM_Payout_Prototype.xlsx", engine="op
             else:
 
                 #Ensure that we still add the new profit to the total profit
-                if worksheet.cell(row=i, column=3).value == "Original":
+                if worksheet.cell(row=i, column=3).value == "Original" or worksheet.cell(row=i, column=3).value == "Charity":
 
                     total_profit += worksheet.cell(row=i, column=10).value
                     worksheet.cell(row=i, column=10).fill = green_fill
