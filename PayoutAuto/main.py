@@ -53,6 +53,11 @@ for product in ynm_financial_info:
     total_sales = float(product[10])
     processor_fee = float(product[11])
     total_cost = float(product[12])
+
+    #Handle processing fee for negative sales, let us eat the processing fee for these, but not debit to the artist
+    if total_sales < 0:
+        processor_fee = 0
+
     gross_profit = total_sales - processor_fee - total_cost
 
     #Conduct safer search for artist, considering the fact there might be ( )
@@ -189,9 +194,14 @@ for product in yne_financial_info:
     taxes = product[9]
     total_sales = float(product[10])
     processor_fee = float(product[11])
-    total_cost = float(product[12])
-    gross_profit = total_sales - processor_fee - total_cost
+    total_cost = float(product[12])\
+    
+    #Handle processing fee for negative sales, let us eat the processing fee for these, but not debit to the artist
+    if total_sales < 0:
+        processor_fee = 0
 
+    gross_profit = total_sales - processor_fee - total_cost
+    
     #Conduct safer search for artist, considering the fact there might be ( )
     if "(" in product_vendor:
 
