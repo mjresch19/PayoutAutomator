@@ -201,7 +201,7 @@ for product in yne_financial_info:
         processor_fee = 0
 
     gross_profit = total_sales - processor_fee - total_cost
-    
+
     #Conduct safer search for artist, considering the fact there might be ( )
     if "(" in product_vendor:
 
@@ -481,6 +481,7 @@ with pd.ExcelWriter("Data/PayoutPrototype/YNM_Payout_Prototype.xlsx", engine="op
     fill = PatternFill(start_color="D3D3D3", end_color="D3D3D3", fill_type="solid")
     new_header = ["Artist Name", "Item", "Distribution Type", "Total Value", "Processing Fee", "Cost", "Profit", "SPE 40%", "SPE 50%", "SPE 60%"]
     green_fill = PatternFill(start_color="00dc00", end_color="00dc00", fill_type="solid")
+    orange_fill = PatternFill(start_color="FFA500", end_color="FFA500", fill_type="solid")
 
     # Apply the fill to cells where the artist changes
     i = 2  # start from 2 because 1 is the header
@@ -528,6 +529,9 @@ with pd.ExcelWriter("Data/PayoutPrototype/YNM_Payout_Prototype.xlsx", engine="op
 
                 elif worksheet.cell(row=i, column=3).value == "Charity":
 
+                    for col in range(1, 11):
+                        worksheet.cell(row=i, column=col).fill = orange_fill
+
                     total_profit += 0
 
                     new_profit = 0
@@ -560,6 +564,9 @@ with pd.ExcelWriter("Data/PayoutPrototype/YNM_Payout_Prototype.xlsx", engine="op
 
 
                 elif worksheet.cell(row=i, column=3).value == "Charity":
+
+                    for col in range(1, 11):
+                        worksheet.cell(row=i, column=col).fill = orange_fill
 
                     total_profit += 0
 
@@ -593,6 +600,8 @@ with pd.ExcelWriter("Data/PayoutPrototype/YNM_Payout_Prototype.xlsx", engine="op
                 
                 elif worksheet.cell(row=i, column=3).value == "Charity":
 
+                    for col in range(1, 11):
+                        worksheet.cell(row=i, column=col).fill = orange_fill
                     total_profit += 0
 
                     new_profit = 0
@@ -624,6 +633,9 @@ with pd.ExcelWriter("Data/PayoutPrototype/YNM_Payout_Prototype.xlsx", engine="op
                     new_profit = worksheet.cell(row=i, column=10).value
 
                 elif worksheet.cell(row=i, column=3).value == "Charity":
+
+                    for col in range(1, 11):
+                        worksheet.cell(row=i, column=col).fill = orange_fill
 
                     total_profit += 0
 
@@ -718,6 +730,9 @@ with pd.ExcelWriter("Data/PayoutPrototype/YNM_Payout_Prototype.xlsx", engine="op
             
                 elif worksheet.cell(row=i, column=3).value == "Charity":
 
+                    for col in range(1, 11):
+                        worksheet.cell(row=i, column=col).fill = orange_fill
+
                     total_profit += 0
 
                     new_profit = 0
@@ -749,6 +764,9 @@ with pd.ExcelWriter("Data/PayoutPrototype/YNM_Payout_Prototype.xlsx", engine="op
                     new_profit = worksheet.cell(row=i, column=10).value
 
                 elif worksheet.cell(row=i, column=3).value == "Charity":
+
+                    for col in range(1, 11):
+                        worksheet.cell(row=i, column=col).fill = orange_fill
 
                     total_profit += 0
 
@@ -782,6 +800,9 @@ with pd.ExcelWriter("Data/PayoutPrototype/YNM_Payout_Prototype.xlsx", engine="op
 
                 elif worksheet.cell(row=i, column=3).value == "Charity":
 
+                    for col in range(1, 11):
+                        worksheet.cell(row=i, column=col).fill = orange_fill
+
                     total_profit += 0
 
                     new_profit = 0
@@ -814,6 +835,9 @@ with pd.ExcelWriter("Data/PayoutPrototype/YNM_Payout_Prototype.xlsx", engine="op
 
 
                 elif worksheet.cell(row=i, column=3).value == "Charity":
+
+                    for col in range(1, 11):
+                        worksheet.cell(row=i, column=col).fill = orange_fill
 
                     total_profit += 0
 
@@ -912,6 +936,7 @@ with pd.ExcelWriter("Data/PayoutPrototype/YNM_Payout_Prototype.xlsx", engine="op
     fill = PatternFill(start_color="D3D3D3", end_color="D3D3D3", fill_type="solid")
     new_header = ["Artist Name", "Item", "Distribution Type", "Total Value", "Processing Fee", "Cost", "Profit", "SPE 40%", "SPE 50%", "SPE 60%"]
     green_fill = PatternFill(start_color="00dc00", end_color="00dc00", fill_type="solid")
+    orange_fill = PatternFill(start_color="FFA500", end_color="FFA500", fill_type="solid")
 
     # Apply the fill to cells where the artist changes
     i = 2  # start from 2 because 1 is the header
@@ -950,7 +975,7 @@ with pd.ExcelWriter("Data/PayoutPrototype/YNM_Payout_Prototype.xlsx", engine="op
             if worksheet.cell(row=i, column=1).value not in yne_artist_payments_dict.keys():
 
                 #Ensure that we still add the new profit to the total profit
-                if worksheet.cell(row=i, column=3).value == "Original" or worksheet.cell(row=i, column=3).value == "Charity":
+                if worksheet.cell(row=i, column=3).value == "Original":
                     
                     total_profit += worksheet.cell(row=i, column=10).value
                     worksheet.cell(row=i, column=10).fill = green_fill
@@ -958,6 +983,9 @@ with pd.ExcelWriter("Data/PayoutPrototype/YNM_Payout_Prototype.xlsx", engine="op
                     new_profit = worksheet.cell(row=i, column=10).value
 
                 elif worksheet.cell(row=i, column=3).value == "Charity":
+
+                    for col in range(1, 11):
+                        worksheet.cell(row=i, column=col).fill = orange_fill
 
                     total_profit += 0
 
@@ -990,6 +1018,9 @@ with pd.ExcelWriter("Data/PayoutPrototype/YNM_Payout_Prototype.xlsx", engine="op
                     new_profit = worksheet.cell(row=i, column=10).value
 
                 elif worksheet.cell(row=i, column=3).value == "Charity":
+
+                    for col in range(1, 11):
+                        worksheet.cell(row=i, column=col).fill = orange_fill
 
                     total_profit += 0
 
@@ -1023,6 +1054,9 @@ with pd.ExcelWriter("Data/PayoutPrototype/YNM_Payout_Prototype.xlsx", engine="op
 
                 elif worksheet.cell(row=i, column=3).value == "Charity":
 
+                    for col in range(1, 11):
+                        worksheet.cell(row=i, column=col).fill = orange_fill
+
                     total_profit += 0
 
                     new_profit = 0
@@ -1054,6 +1088,9 @@ with pd.ExcelWriter("Data/PayoutPrototype/YNM_Payout_Prototype.xlsx", engine="op
                     new_profit = worksheet.cell(row=i, column=10).value
 
                 elif worksheet.cell(row=i, column=3).value == "Charity":
+
+                    for col in range(1, 11):
+                        worksheet.cell(row=i, column=col).fill = orange_fill
 
                     total_profit += 0
 
@@ -1149,6 +1186,9 @@ with pd.ExcelWriter("Data/PayoutPrototype/YNM_Payout_Prototype.xlsx", engine="op
 
                 elif worksheet.cell(row=i, column=3).value == "Charity":
 
+                    for col in range(1, 11):
+                        worksheet.cell(row=i, column=col).fill = orange_fill
+
                     total_profit += 0
 
                     new_profit = 0
@@ -1180,6 +1220,9 @@ with pd.ExcelWriter("Data/PayoutPrototype/YNM_Payout_Prototype.xlsx", engine="op
                     new_profit = worksheet.cell(row=i, column=10).value
 
                 elif worksheet.cell(row=i, column=3).value == "Charity":
+
+                    for col in range(1, 11):
+                        worksheet.cell(row=i, column=col).fill = orange_fill
 
                     total_profit += 0
 
@@ -1213,6 +1256,9 @@ with pd.ExcelWriter("Data/PayoutPrototype/YNM_Payout_Prototype.xlsx", engine="op
 
                 elif worksheet.cell(row=i, column=3).value == "Charity":
 
+                    for col in range(1, 11):
+                        worksheet.cell(row=i, column=col).fill = orange_fill
+
                     total_profit += 0
 
                     new_profit = 0
@@ -1244,6 +1290,9 @@ with pd.ExcelWriter("Data/PayoutPrototype/YNM_Payout_Prototype.xlsx", engine="op
                     new_profit = worksheet.cell(row=i, column=10).value
 
                 elif worksheet.cell(row=i, column=3).value == "Charity":
+
+                    for col in range(1, 11):
+                        worksheet.cell(row=i, column=col).fill = orange_fill
 
                     total_profit += 0
 
