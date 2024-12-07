@@ -33,7 +33,7 @@ class ReadPayout:
         
         if "(Collab)" in self.product_vendor or "(collab)" in self.product_vendor:
             if self.product_type.count("(Collab)") + self.product_type.count("(collab)") > 1:
-                return "Group Collab"
+                return f"Group Collab ({self.product_type.count('Collab') + self.product_type.count('collab') + 1})"
             else:
                return "Collab"
             

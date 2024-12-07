@@ -313,7 +313,7 @@ for product in yne_financial_info:
         else:
 
             yne_original_dict[product_vendor].append([product_name, distribution_type, total_sales, processor_fee, total_cost, gross_profit])             
-
+ 
 
 #
 #Start Creating the Output Spreadsheet
