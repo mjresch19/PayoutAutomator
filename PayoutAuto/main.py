@@ -879,12 +879,12 @@ with pd.ExcelWriter("Data/PayoutPrototype/YNM_Payout_Prototype.xlsx", engine="op
     #Look over and see if we have any rollovers that we need to apply
     for rollover in rollover_info:
 
-        print(rollover)
+        rollover_artist = rollover[1].title()
 
         #Are they an easy find in the dictionary?
-        if rollover[1].title() in ynm_artist_payments_dict.keys():
+        if rollover_artist in ynm_artist_payments_dict.keys():
 
-            ynm_artist_payments_dict[rollover[1].title()] += round(float(rollover[2]),2)
+            ynm_artist_payments_dict[rollover_artist] += round(float(rollover[2]),2)
 
         #Make sure that even if not found, we aren't under an alias
         else:
@@ -893,14 +893,13 @@ with pd.ExcelWriter("Data/PayoutPrototype/YNM_Payout_Prototype.xlsx", engine="op
 
             if search_vendor is not None and search_vendor in ynm_artist_payments_dict.keys():
 
-                ynm_artist_payments_dict[search_vendor] += round(float(rollover[2]),2)
+                ynm_artist_payments_dict[search_vendor.title()] += round(float(rollover[2]),2)
 
             else:
-
+                
                 print("ARTIST NOT FOUND ALREADY, ADDING NEW ENTRY", rollover[1].title(), "==>", rollover[2])
-                ynm_artist_payments_dict[rollover[1].title()] = round(float(rollover[2]),2)
+                ynm_artist_payments_dict[rollover_artist] = round(float(rollover[2]),2)
 
-    print(ynm_artist_payments_dict)
     ynm_artist_payments_dict = dict(sorted(ynm_artist_payments_dict.items()))
 
     payments_df = pd.DataFrame()
@@ -1352,6 +1351,7 @@ with pd.ExcelWriter("Data/PayoutPrototype/YNM_Payout_Prototype.xlsx", engine="op
 
     for key, val in yne_artist_payments_dict.items():
 
+
         if key in combined_artist_payments_dict.keys():
 
             combined_artist_payments_dict[key] += val
@@ -1359,6 +1359,9 @@ with pd.ExcelWriter("Data/PayoutPrototype/YNM_Payout_Prototype.xlsx", engine="op
         else:
 
             combined_artist_payments_dict[key] = val
+
+    #Sort the dictionary by the artist's names
+    combined_artist_payments_dict = dict(sorted(combined_artist_payments_dict.items()))
 
     
     combined_payments_df = pd.DataFrame()

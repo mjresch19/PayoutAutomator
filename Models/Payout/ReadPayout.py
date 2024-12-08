@@ -15,7 +15,7 @@ class ReadPayout:
                 ):
         
         self.product_title = product_title.strip("'").replace("''", "'") 
-        self.product_vendor = product_vendor.strip("'").replace("''", "'")
+        self.product_vendor = product_vendor.strip("'").replace("''", "'").title()
         self.product_type = product_type
         self.net_quantity = int(net_quantity)
         self.gross_sales = round(float(gross_sales),2)

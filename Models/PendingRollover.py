@@ -40,7 +40,7 @@ def parse_pending_rollovers(pending_rollover_info, ynm_financial_info, yne_finan
 
         curr_pr = PendingRollover(
             origin = pending_rollover[0],
-            artist = pending_rollover[1],
+            artist = pending_rollover[1].title(),
             item = pending_rollover[2],
             distribution_type = pending_rollover[3],
             total_value = pending_rollover[4],

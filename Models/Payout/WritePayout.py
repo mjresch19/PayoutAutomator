@@ -28,7 +28,7 @@ class WritePayout:
                 ):
         
         self.product_title = product_title
-        self.product_vendor = product_vendor
+        self.product_vendor = product_vendor.title()
         self.distribution_type = distribution_type
         self.product_type = product_type
         self.net_quantity = net_quantity
