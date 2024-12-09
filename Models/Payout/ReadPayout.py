@@ -43,6 +43,12 @@ class ReadPayout:
         if "(Charity)" in self.product_vendor or "(charity)" in self.product_vendor:
             return "Charity"
         
+        if "(Book)" in self.product_vendor or "(book)" in self.product_vendor:
+            return "Book"
+        
+        if "(In-House)" in self.product_vendor or "(in-house)" in self.product_vendor:
+            return "In-House"
+        
         return "Unknown"
     
     def calculate_processing_fee(self):

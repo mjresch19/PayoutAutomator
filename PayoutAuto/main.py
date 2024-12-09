@@ -134,6 +134,29 @@ for product in ynm_financial_info:
 
             ynm_collab_dict[product_vendor].append([product_name, distribution_type, total_sales, processor_fee, total_cost, gross_profit])
 
+    elif distribution_type == "Book":
+
+
+        if product_vendor not in ynm_collab_dict:
+
+            ynm_collab_dict[product_vendor] = [[product_name, distribution_type, total_sales, processor_fee, total_cost, gross_profit]]
+
+        else:
+
+            ynm_collab_dict[product_vendor].append([product_name, distribution_type, total_sales, processor_fee, total_cost, gross_profit])
+
+
+    elif distribution_type == "In-House":
+
+
+        if product_vendor not in ynm_collab_dict:
+
+            ynm_collab_dict[product_vendor] = [[product_name, distribution_type, total_sales, processor_fee, total_cost, gross_profit]]
+
+        else:
+
+            ynm_collab_dict[product_vendor].append([product_name, distribution_type, total_sales, processor_fee, total_cost, gross_profit])
+
 
     elif distribution_type == "Collab":
 
@@ -274,6 +297,28 @@ for product in yne_financial_info:
 
             yne_collab_dict[product_vendor].append([product_name, distribution_type, total_sales, processor_fee, total_cost, gross_profit])
 
+    elif distribution_type == "Book":
+
+
+        if product_vendor not in ynm_collab_dict:
+
+            ynm_collab_dict[product_vendor] = [[product_name, distribution_type, total_sales, processor_fee, total_cost, gross_profit]]
+
+        else:
+
+            ynm_collab_dict[product_vendor].append([product_name, distribution_type, total_sales, processor_fee, total_cost, gross_profit])
+
+
+    elif distribution_type == "In-House":
+
+
+        if product_vendor not in ynm_collab_dict:
+
+            ynm_collab_dict[product_vendor] = [[product_name, distribution_type, total_sales, processor_fee, total_cost, gross_profit]]
+
+        else:
+
+            ynm_collab_dict[product_vendor].append([product_name, distribution_type, total_sales, processor_fee, total_cost, gross_profit])
 
     elif distribution_type == "Collab":
 
@@ -482,6 +527,7 @@ with pd.ExcelWriter("Data/PayoutPrototype/YNM_Payout_Prototype.xlsx", engine="op
     new_header = ["Artist Name", "Item", "Distribution Type", "Total Value", "Processing Fee", "Cost", "Profit", "SPE 40%", "SPE 50%", "SPE 60%"]
     green_fill = PatternFill(start_color="00dc00", end_color="00dc00", fill_type="solid")
     orange_fill = PatternFill(start_color="FFA500", end_color="FFA500", fill_type="solid")
+    purple_fill = PatternFill(start_color="800080", end_color="DB67DB", fill_type="solid")
 
     # Apply the fill to cells where the artist changes
     i = 2  # start from 2 because 1 is the header
@@ -535,8 +581,17 @@ with pd.ExcelWriter("Data/PayoutPrototype/YNM_Payout_Prototype.xlsx", engine="op
                     total_profit += 0
 
                     new_profit = 0
+
+                elif worksheet.cell(row=i, column=3).value == "In-House":
+
+                    for col in range(1,11):
+                        worksheet.cell(row=i, column=col).fill = purple_fill
+
+                    total_profit += worksheet.cell(row=i, column=7).value
+
+                    new_profit = worksheet.cell(row=i, column=7).value
             
-                elif worksheet.cell(row=i, column=3).value == "Commercial":
+                elif worksheet.cell(row=i, column=3).value == "Commercial" or worksheet.cell(row=i, column=3).value == "Book":
 
                     total_profit += worksheet.cell(row=i, column=9).value
                     worksheet.cell(row=i, column=9).fill = green_fill
@@ -571,8 +626,17 @@ with pd.ExcelWriter("Data/PayoutPrototype/YNM_Payout_Prototype.xlsx", engine="op
                     total_profit += 0
 
                     new_profit = 0
-                
-                elif worksheet.cell(row=i, column=3).value == "Commercial":
+
+                elif worksheet.cell(row=i, column=3).value == "In-House":
+
+                    for col in range(1,11):
+                        worksheet.cell(row=i, column=col).fill = purple_fill
+
+                    total_profit += worksheet.cell(row=i, column=7).value
+
+                    new_profit = worksheet.cell(row=i, column=7).value
+
+                elif worksheet.cell(row=i, column=3).value == "Commercial" or worksheet.cell(row=i, column=3).value == "Book":
 
                     total_profit += worksheet.cell(row=i, column=9).value
                     worksheet.cell(row=i, column=9).fill = green_fill
@@ -606,7 +670,16 @@ with pd.ExcelWriter("Data/PayoutPrototype/YNM_Payout_Prototype.xlsx", engine="op
 
                     new_profit = 0
             
-                elif worksheet.cell(row=i, column=3).value == "Commercial":
+                elif worksheet.cell(row=i, column=3).value == "In-House":
+
+                    for col in range(1,11):
+                        worksheet.cell(row=i, column=col).fill = purple_fill
+
+                    total_profit += worksheet.cell(row=i, column=7).value
+
+                    new_profit = worksheet.cell(row=i, column=7).value
+
+                elif worksheet.cell(row=i, column=3).value == "Commercial" or worksheet.cell(row=i, column=3).value == "Book":
 
                     total_profit += worksheet.cell(row=i, column=9).value
                     worksheet.cell(row=i, column=9).fill = green_fill
@@ -640,8 +713,17 @@ with pd.ExcelWriter("Data/PayoutPrototype/YNM_Payout_Prototype.xlsx", engine="op
                     total_profit += 0
 
                     new_profit = 0
-                
-                elif worksheet.cell(row=i, column=3).value == "Commercial":
+
+                elif worksheet.cell(row=i, column=3).value == "In-House":
+
+                    for col in range(1,11):
+                        worksheet.cell(row=i, column=col).fill = purple_fill
+
+                    total_profit += worksheet.cell(row=i, column=7).value
+
+                    new_profit = worksheet.cell(row=i, column=7).value    
+
+                elif worksheet.cell(row=i, column=3).value == "Commercial" or worksheet.cell(row=i, column=3).value == "Book":
 
                     total_profit += worksheet.cell(row=i, column=9).value
                     worksheet.cell(row=i, column=9).fill = green_fill
@@ -737,7 +819,16 @@ with pd.ExcelWriter("Data/PayoutPrototype/YNM_Payout_Prototype.xlsx", engine="op
 
                     new_profit = 0
 
-                elif worksheet.cell(row=i, column=3).value == "Commercial":
+                elif worksheet.cell(row=i, column=3).value == "In-House":
+
+                    for col in range(1,11):
+                        worksheet.cell(row=i, column=col).fill = purple_fill
+
+                    total_profit += worksheet.cell(row=i, column=7).value
+
+                    new_profit = worksheet.cell(row=i, column=7).value
+
+                elif worksheet.cell(row=i, column=3).value == "Commercial" or worksheet.cell(row=i, column=3).value == "Book":
 
                     total_profit += worksheet.cell(row=i, column=9).value
                     worksheet.cell(row=i, column=9).fill = green_fill
@@ -771,8 +862,17 @@ with pd.ExcelWriter("Data/PayoutPrototype/YNM_Payout_Prototype.xlsx", engine="op
                     total_profit += 0
 
                     new_profit = 0
-                
-                elif worksheet.cell(row=i, column=3).value == "Commercial":
+
+                elif worksheet.cell(row=i, column=3).value == "In-House":
+
+                    for col in range(1,11):
+                        worksheet.cell(row=i, column=col).fill = purple_fill
+
+                    total_profit += worksheet.cell(row=i, column=7).value
+
+                    new_profit = worksheet.cell(row=i, column=7).value
+
+                elif worksheet.cell(row=i, column=3).value == "Commercial" or worksheet.cell(row=i, column=3).value == "Book":
 
                     total_profit += worksheet.cell(row=i, column=9).value
                     worksheet.cell(row=i, column=9).fill = green_fill
@@ -806,8 +906,17 @@ with pd.ExcelWriter("Data/PayoutPrototype/YNM_Payout_Prototype.xlsx", engine="op
                     total_profit += 0
 
                     new_profit = 0
-            
-                elif worksheet.cell(row=i, column=3).value == "Commercial":
+
+                elif worksheet.cell(row=i, column=3).value == "In-House":
+
+                    for col in range(1,11):
+                        worksheet.cell(row=i, column=col).fill = purple_fill
+
+                    total_profit += worksheet.cell(row=i, column=7).value
+
+                    new_profit = worksheet.cell(row=i, column=7).value
+
+                elif worksheet.cell(row=i, column=3).value == "Commercial" or worksheet.cell(row=i, column=3).value == "Book":
 
                     total_profit += worksheet.cell(row=i, column=9).value
                     worksheet.cell(row=i, column=9).fill = green_fill
@@ -842,8 +951,17 @@ with pd.ExcelWriter("Data/PayoutPrototype/YNM_Payout_Prototype.xlsx", engine="op
                     total_profit += 0
 
                     new_profit = 0
-                
-                elif worksheet.cell(row=i, column=3).value == "Commercial":
+
+                elif worksheet.cell(row=i, column=3).value == "In-House":
+
+                    for col in range(1,11):
+                        worksheet.cell(row=i, column=col).fill = purple_fill
+
+                    total_profit += worksheet.cell(row=i, column=7).value
+
+                    new_profit = worksheet.cell(row=i, column=7).value
+
+                elif worksheet.cell(row=i, column=3).value == "Commercial" or worksheet.cell(row=i, column=3).value == "Book":
 
                     total_profit += worksheet.cell(row=i, column=9).value
                     worksheet.cell(row=i, column=9).fill = green_fill
@@ -990,7 +1108,16 @@ with pd.ExcelWriter("Data/PayoutPrototype/YNM_Payout_Prototype.xlsx", engine="op
 
                     new_profit = 0
 
-                elif worksheet.cell(row=i, column=3).value == "Commercial":
+                elif worksheet.cell(row=i, column=3).value == "In-House":
+
+                    for col in range(1,11):
+                        worksheet.cell(row=i, column=col).fill = purple_fill
+
+                    total_profit += worksheet.cell(row=i, column=7).value
+
+                    new_profit = worksheet.cell(row=i, column=7).value
+
+                elif worksheet.cell(row=i, column=3).value == "Commercial" or worksheet.cell(row=i, column=3).value == "Book":
 
                     total_profit += worksheet.cell(row=i, column=9).value
                     worksheet.cell(row=i, column=9).fill = green_fill
@@ -1024,8 +1151,17 @@ with pd.ExcelWriter("Data/PayoutPrototype/YNM_Payout_Prototype.xlsx", engine="op
                     total_profit += 0
 
                     new_profit = 0
-                
-                elif worksheet.cell(row=i, column=3).value == "Commercial":
+
+                elif worksheet.cell(row=i, column=3).value == "In-House":
+
+                    for col in range(1,11):
+                        worksheet.cell(row=i, column=col).fill = purple_fill
+
+                    total_profit += worksheet.cell(row=i, column=7).value
+
+                    new_profit = worksheet.cell(row=i, column=7).value
+
+                elif worksheet.cell(row=i, column=3).value == "Commercial" or worksheet.cell(row=i, column=3).value == "Book":
 
                     total_profit += worksheet.cell(row=i, column=9).value
                     worksheet.cell(row=i, column=9).fill = green_fill
@@ -1059,8 +1195,17 @@ with pd.ExcelWriter("Data/PayoutPrototype/YNM_Payout_Prototype.xlsx", engine="op
                     total_profit += 0
 
                     new_profit = 0
-            
-                elif worksheet.cell(row=i, column=3).value == "Commercial":
+
+                elif worksheet.cell(row=i, column=3).value == "In-House":
+
+                    for col in range(1,11):
+                        worksheet.cell(row=i, column=col).fill = purple_fill
+
+                    total_profit += worksheet.cell(row=i, column=7).value
+
+                    new_profit = worksheet.cell(row=i, column=7).value
+
+                elif worksheet.cell(row=i, column=3).value == "Commercial" or worksheet.cell(row=i, column=3).value == "Book":
 
                     total_profit += worksheet.cell(row=i, column=9).value
                     worksheet.cell(row=i, column=9).fill = green_fill
@@ -1094,8 +1239,17 @@ with pd.ExcelWriter("Data/PayoutPrototype/YNM_Payout_Prototype.xlsx", engine="op
                     total_profit += 0
 
                     new_profit = 0
-                
-                elif worksheet.cell(row=i, column=3).value == "Commercial":
+
+                elif worksheet.cell(row=i, column=3).value == "In-House":
+
+                    for col in range(1,11):
+                        worksheet.cell(row=i, column=col).fill = purple_fill
+
+                    total_profit += worksheet.cell(row=i, column=7).value
+
+                    new_profit = worksheet.cell(row=i, column=7).value
+
+                elif worksheet.cell(row=i, column=3).value == "Commercial" or worksheet.cell(row=i, column=3).value == "Book":
 
                     total_profit += worksheet.cell(row=i, column=9).value
                     worksheet.cell(row=i, column=9).fill = green_fill
@@ -1191,8 +1345,17 @@ with pd.ExcelWriter("Data/PayoutPrototype/YNM_Payout_Prototype.xlsx", engine="op
                     total_profit += 0
 
                     new_profit = 0
-            
-                elif worksheet.cell(row=i, column=3).value == "Commercial":
+
+                elif worksheet.cell(row=i, column=3).value == "In-House":
+
+                    for col in range(1,11):
+                        worksheet.cell(row=i, column=col).fill = purple_fill
+
+                    total_profit += worksheet.cell(row=i, column=7).value
+
+                    new_profit = worksheet.cell(row=i, column=7).value
+
+                elif worksheet.cell(row=i, column=3).value == "Commercial" or worksheet.cell(row=i, column=3).value == "Book":
 
                     total_profit += worksheet.cell(row=i, column=9).value
                     worksheet.cell(row=i, column=9).fill = green_fill
@@ -1226,8 +1389,18 @@ with pd.ExcelWriter("Data/PayoutPrototype/YNM_Payout_Prototype.xlsx", engine="op
                     total_profit += 0
 
                     new_profit = 0
-                
-                elif worksheet.cell(row=i, column=3).value == "Commercial":
+
+                elif worksheet.cell(row=i, column=3).value == "In-House":
+
+                    for col in range(1,11):
+                        worksheet.cell(row=i, column=col).fill = purple_fill
+
+                    total_profit += worksheet.cell(row=i, column=7).value
+
+                    new_profit = worksheet.cell(row=i, column=7).value
+
+
+                elif worksheet.cell(row=i, column=3).value == "Commercial" or worksheet.cell(row=i, column=3).value == "Book":
 
                     total_profit += worksheet.cell(row=i, column=9).value
                     worksheet.cell(row=i, column=9).fill = green_fill
@@ -1261,8 +1434,17 @@ with pd.ExcelWriter("Data/PayoutPrototype/YNM_Payout_Prototype.xlsx", engine="op
                     total_profit += 0
 
                     new_profit = 0
-            
-                elif worksheet.cell(row=i, column=3).value == "Commercial":
+
+                elif worksheet.cell(row=i, column=3).value == "In-House":
+
+                    for col in range(1,11):
+                        worksheet.cell(row=i, column=col).fill = purple_fill
+
+                    total_profit += worksheet.cell(row=i, column=7).value
+
+                    new_profit = worksheet.cell(row=i, column=7).value
+
+                elif worksheet.cell(row=i, column=3).value == "Commercial" or worksheet.cell(row=i, column=3).value == "Book":
 
                     total_profit += worksheet.cell(row=i, column=9).value
                     worksheet.cell(row=i, column=9).fill = green_fill
@@ -1296,8 +1478,17 @@ with pd.ExcelWriter("Data/PayoutPrototype/YNM_Payout_Prototype.xlsx", engine="op
                     total_profit += 0
 
                     new_profit = 0
-                
-                elif worksheet.cell(row=i, column=3).value == "Commercial":
+
+                elif worksheet.cell(row=i, column=3).value == "In-House":
+
+                    for col in range(1,11):
+                        worksheet.cell(row=i, column=col).fill = purple_fill
+
+                    total_profit += worksheet.cell(row=i, column=7).value
+
+                    new_profit = worksheet.cell(row=i, column=7).value
+
+                elif worksheet.cell(row=i, column=3).value == "Commercial" or worksheet.cell(row=i, column=3).value == "Book":
 
                     total_profit += worksheet.cell(row=i, column=9).value
                     worksheet.cell(row=i, column=9).fill = green_fill
