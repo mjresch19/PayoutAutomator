@@ -1,0 +1,8 @@
+product_title,product_vendor,product_type,net_quantity,gross_sales,discounts,returns,net_sales,taxes,total_sales,total_cost,gross_profit
+Ann Poster,Jupiter (Original),Poster,4,100,0,0,100,0,100,40,60
+Benz Sticker Sheet,Jupiter (Collab) Berry,Sticker,1,5,0,0,5,0,5,1,4
+Cider Standee,Lina (Collab) Rhea,Standee,10,250,50,0,200,0,200,80,120
+Dramatic Sticker,Beanni (Original),Sticker,-3,-15,0,-15,-15,0,-15,-6,-9
+Event YNM Hat,Yorunoecchi (In-House),Hat,5,120,0,-20,100,10,90,50,40
+Fanatic Book,Pomme (Book),Book,20,200,100,0,100,0,100,100,0
+Great T-Shirt,Rhea (Commercial),T-Shirt,5,120,20,-20,80,10,70,50,20
