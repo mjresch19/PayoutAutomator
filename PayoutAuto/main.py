@@ -40,7 +40,7 @@ yne_collab_dict = {}
 #Iterate through each product that was sold this month for YNM
 for product in ynm_financial_info:
 
-    product_vendor  = product[1].strip("'").replace("''", "'")
+    product_vendors = product[1].strip("'").replace("''", "'")
     product_name = product[0].strip("'").replace("''", "'") #Clean up the string to be readable in json
     distribution_type = product[2]
     product_type = product[3]
@@ -61,10 +61,20 @@ for product in ynm_financial_info:
     gross_profit = total_sales - processor_fee - total_cost
 
     #Conduct safer search for artist, considering the fact there might be ( )
-    if "(" in product_vendor:
+    if "(" in product_vendors:
 
         #Obtain all chars up to the " (""
-        product_vendor = product_vendor[:product_vendor.index("(") - 1]
+        product_vendor = product_vendors[:product_vendors.index("(") - 1]
+    
+    if ")" in product_vendors and distribution_type == "Collab":
+
+        try:
+
+            collab_vendor = product_vendors[product_vendors.index(") ") + 2:]
+
+        except:
+
+            print("ERROR IN COLLAB VENDOR NAME:", product[1].title(), "==>",product_vendor, "(" + product_name + ")")
 
     #First check to see if our vendor is an *actual* artist
     if product_vendor.title() in artist_info:
@@ -160,9 +170,14 @@ for product in ynm_financial_info:
 
     elif distribution_type == "Collab":
 
+        #First check to see if our vendor is an *actual* artist
+        if collab_vendor.title() in artist_info:
+            
+            collab_name = collab_vendor.title()
+        else:
 
-        #We find the collaborator and add them to the collab dict
-        collab_name = name_extract(product_name, artist_info)
+            #We find the collaborator and add them to the collab dict through a deeper search
+            collab_name = artist_lookup(collab_vendor, artist_info)
 
         if not(collab_name):
 
@@ -178,19 +193,6 @@ for product in ynm_financial_info:
                 
             ynm_collab_dict[collab_name].append([product_name, distribution_type, total_sales, processor_fee, total_cost, gross_profit])
 
-        #Handle if YNM was a vendor - we have to take collaborator's name out of list as it was already accounted for
-        if type(product_vendor) == list:
-
-            try:
-                product_vendor.remove(collab_name)
-            except:
-
-                print("FIX NAME:", collab_name, product_vendor, product_name)
-
-            #Recreate the one element list to a string
-            product_vendor = product_vendor[0]
-
-
         #Next, we must find the product vendor as an original source, so they go in the original source dict
         if product_vendor not in ynm_original_dict:
 
@@ -205,7 +207,7 @@ for product in ynm_financial_info:
 #Iterate through each product that was sold this month for YNE
 for product in yne_financial_info:
 
-    product_vendor  = product[1].strip("'").replace("''", "'")
+    product_vendors  = product[1].strip("'").replace("''", "'")
     product_name = product[0].strip("'").replace("''", "'") #Clean up the string to be readable in json
     distribution_type = product[2]
     product_type = product[3]
@@ -226,10 +228,21 @@ for product in yne_financial_info:
     gross_profit = total_sales - processor_fee - total_cost
 
     #Conduct safer search for artist, considering the fact there might be ( )
-    if "(" in product_vendor:
+    if "(" in product_vendors:
 
         #Obtain all chars up to the " (""
-        product_vendor = product_vendor[:product_vendor.index("(") - 1]
+        product_vendor = product_vendors[:product_vendors.index("(") - 1]
+
+    if ")" in product_vendors and distribution_type == "Collab":
+
+        try:
+
+            collab_vendor = product_vendors[product_vendors.index(") ") + 2:]
+
+        except:
+
+            print("ERROR IN COLLAB VENDOR NAME:", product[1].title(), "==>",product_vendor, "(" + product_name + ")")
+
 
     #First check to see if our vendor is an *actual* artist
     if product_vendor.title() in artist_info:
@@ -322,8 +335,14 @@ for product in yne_financial_info:
 
     elif distribution_type == "Collab":
 
-        #We find the collaborator and add them to the collab dict
-        collab_name = name_extract(product_name, artist_info)
+        #First check to see if our vendor is an *actual* artist
+        if collab_vendor.title() in artist_info:
+            
+            collab_name = collab_vendor.title()
+        else:
+
+            #We find the collaborator and add them to the collab dict through a deeper search
+            collab_name = artist_lookup(collab_vendor, artist_info)
 
         if not(collab_name):
 
@@ -338,17 +357,6 @@ for product in yne_financial_info:
                 
             yne_collab_dict[collab_name].append([product_name, distribution_type, total_sales, processor_fee, total_cost, gross_profit])
 
-        #Handle if YNE was a vendor - we have to take collaborator's name out of list as it was already accounted for
-        if type(product_vendor) == list:
-
-            try:
-                product_vendor.remove(collab_name)
-            except:
-
-                print("FIX NAME:", collab_name, product_vendor, product_name)
-
-            #Recreate the one element list to a string
-            product_vendor = product_vendor[0]
 
         #Next, we must find the product vendor as an original source, so they go in the original source dict
         if product_vendor not in yne_original_dict:

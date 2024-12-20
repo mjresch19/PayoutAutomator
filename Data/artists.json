@@ -1,5 +1,5 @@
 {
-  "A4loveletter": {
+  "A4Loveletter": {
     "name": "A4LoveLetter",
     "aliases": ["A4LoveLetter"],
     "client_type": "Artist"
@@ -21,7 +21,12 @@
   },
   "Ancestral Potato": {
     "name": "Ancestral Potato",
-    "aliases": ["Ancestral potato", "ancestralpotato", "AncestralPotato"],
+    "aliases": [
+      "Ancestral potato",
+      "ancestralpotato",
+      "AncestralPotato",
+      "Ancestralpotato"
+    ],
     "client_type": "Artist"
   },
   "Andou": {
@@ -496,7 +501,7 @@
   },
   "Moxie": {
     "name": "Moxie",
-    "aliases": ["Moxie", "MoxieWoxie", "MoxieChew"],
+    "aliases": ["Moxie", "MoxieWoxie", "MoxieChew", "Moxiewoxie"],
     "client_type": "Artist"
   },
   "Mts": {
@@ -770,7 +775,13 @@
   },
   "Suikaart": {
     "name": "Suikaart",
-    "aliases": ["Suikaart", "Suika", "Suika Art", "Suika's Sweets"],
+    "aliases": [
+      "Suikaart",
+      "Suika",
+      "Suika Art",
+      "Suika's Sweets",
+      "Suika'S Sweets"
+    ],
     "client_type": "Artist"
   },
   "Superspoe": {

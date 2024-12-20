@@ -28,7 +28,9 @@ def item_lookup(item_name, item_info):
     '''
     return item_info.get(item_name, None)
 
-
+#
+# Deprecated - Can Delete in later update
+#
 def name_extract(product_name, artist_info):
     '''
     This function will work to extract the collaborator's name from our artist info dictionary
