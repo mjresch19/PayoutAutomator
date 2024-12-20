@@ -8,7 +8,7 @@ import pandas as pd
 from openpyxl.styles import PatternFill, Alignment, Font
 from openpyxl.formatting.rule import CellIsRule
 from ExcelRW.readcsv import read_csv
-from datalookups import artist_lookup, item_lookup, name_extract
+from datalookups import artist_lookup, item_lookup
 from Models.PendingRollover import PendingRollover, parse_pending_rollovers
 
 ynm_file_path = '/YNM/PayoutAutomator/Data/SheetPreprocessor/YNM_Sales_Final.csv'
