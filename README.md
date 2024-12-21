@@ -1,4 +1,4 @@
-# PayoutAutomator
+# PayoutAutomator - (TODO Update README to reflect new changes, below is outdated)
 
 ## Prequisites
 
@@ -13,13 +13,15 @@ You may need to do some console Python installations if you do not have the pack
 
 This program is a 2 step CLI program at the moment and will require you to have multiple files for digestion at runtime.
 
-1) Run preprocess.py
+1. Run preprocess.py
 
 You will need multiple files to input to this program
+
 - YNE_Sales.csv
 - YNM_Sales.csv
 
 You will receive multiple files as an output to this step
+
 - YNE_Sales_Final.csv
 - YNM_Sales_Final.csv
 - No_Cost_Items.csv
@@ -29,13 +31,15 @@ program and shall be placed in the input file "Pending_Rollovers.csv" that is ne
 
 It is recommended that you consult a member in Finance or Quality Control first before proceeding to the 2nd step.
 
-2) Run main.py
+2. Run main.py
 
 You will need multiple files to input to this program
+
 - YNE_Sales_Final.csv
 - YNM_Sales_Final.csv
 - Pending_Rollovers.csv
 - Rollovers.csv
 
 You will receive a single output file from this program
+
 - YNM Payout Prototype.xlsx
