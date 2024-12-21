@@ -219,27 +219,15 @@ def construct_df(store_dict: dict):
 
     return pd.DataFrame(store_source_df)
 
-ynm_original_dict, ynm_collab_dict = parse_product_information(ynm_financial_info)
-yne_original_dict, yne_collab_dict = parse_product_information(yne_financial_info)
 
-ynm_original_df = construct_df(ynm_original_dict)
-ynm_collab_df = construct_df(ynm_collab_dict)
-yne_original_df = construct_df(yne_original_dict)
-yne_collab_df = construct_df(yne_collab_dict)
+def construct_payout_worksheet(store_source_df: pd.DataFrame, artists_payments_dict: dict, sheet_name: str):
 
-#
-#Start Creating the Output Spreadsheet
-#
-ynm_artist_payments_dict = {}
-yne_artist_payments_dict = {}
-
-with pd.ExcelWriter("Data/PayoutPrototype/YNM_Payout_Prototype.xlsx", engine="openpyxl") as writer:
-    ynm_original_df.to_excel(writer, sheet_name="YNM Artist Payouts", index=False)
+    store_source_df.to_excel(writer, sheet_name=sheet_name, index=False)
         
     # Workbook
     workbook = writer.book
     # Worksheet
-    worksheet = workbook["YNM Artist Payouts"]
+    worksheet = workbook[sheet_name]
 
     # Create Styles to be used in the workbook
     bold_underline = Font(bold=True, underline="single")
@@ -284,7 +272,7 @@ with pd.ExcelWriter("Data/PayoutPrototype/YNM_Payout_Prototype.xlsx", engine="op
             i += 1  # skip the newly inserted row
 
             new_profit = 0
-            if worksheet.cell(row=i, column=1).value not in ynm_artist_payments_dict.keys():
+            if worksheet.cell(row=i, column=1).value not in artists_payments_dict.keys():
 
                 #Ensure that we still add the new profit to the total profit
                 if worksheet.cell(row=i, column=3).value == "Original":
@@ -326,7 +314,7 @@ with pd.ExcelWriter("Data/PayoutPrototype/YNM_Payout_Prototype.xlsx", engine="op
 
                     new_profit = worksheet.cell(row=i, column=8).value
 
-                ynm_artist_payments_dict[worksheet.cell(row=i, column=1).value] = new_profit
+                artists_payments_dict[worksheet.cell(row=i, column=1).value] = new_profit
 
             else:
 
@@ -371,10 +359,10 @@ with pd.ExcelWriter("Data/PayoutPrototype/YNM_Payout_Prototype.xlsx", engine="op
 
                     new_profit = worksheet.cell(row=i, column=8).value
 
-                ynm_artist_payments_dict[worksheet.cell(row=i, column=1).value] += new_profit
+                artists_payments_dict[worksheet.cell(row=i, column=1).value] += new_profit
 
         else:
-            if worksheet.cell(row=i, column=1).value not in ynm_artist_payments_dict.keys():
+            if worksheet.cell(row=i, column=1).value not in artists_payments_dict.keys():
                 #Ensure that we still add the new profit to the total profit
                 if worksheet.cell(row=i, column=3).value == "Original":
 
@@ -414,7 +402,7 @@ with pd.ExcelWriter("Data/PayoutPrototype/YNM_Payout_Prototype.xlsx", engine="op
 
                     new_profit = worksheet.cell(row=i, column=8).value
 
-                ynm_artist_payments_dict[worksheet.cell(row=i, column=1).value] = new_profit
+                artists_payments_dict[worksheet.cell(row=i, column=1).value] = new_profit
 
             else:
 
@@ -458,7 +446,7 @@ with pd.ExcelWriter("Data/PayoutPrototype/YNM_Payout_Prototype.xlsx", engine="op
 
                     new_profit = worksheet.cell(row=i, column=8).value
 
-                ynm_artist_payments_dict[worksheet.cell(row=i, column=1).value] += new_profit
+                artists_payments_dict[worksheet.cell(row=i, column=1).value] += new_profit
         
         i += 1
 
@@ -478,809 +466,85 @@ with pd.ExcelWriter("Data/PayoutPrototype/YNM_Payout_Prototype.xlsx", engine="op
         adjusted_width = (max_length + 2) * 1.0
         worksheet.column_dimensions[column[0].column_letter].width = adjusted_width
 
-
-    ynm_collab_df.to_excel(writer, sheet_name="YNM Collab Payouts", index=False)
-        
-    # Workbook
-    workbook = writer.book
-    # Worksheet
-    worksheet = workbook["YNM Collab Payouts"]
-
-
-    # Apply the fill to cells where the artist changes
-    i = 2  # start from 2 because 1 is the header
-    total_profit = 0  # initialize total profit
-    while i <= worksheet.max_row:
-        if worksheet.cell(row=i, column=1).value != worksheet.cell(row=i-1, column=1).value:
-            # Insert total profit for previous artist
-            if i > 2:  # skip for the first artist
-                worksheet.insert_rows(i)
-                worksheet.cell(row=i, column=9).value = "Total Payout"
-                worksheet.cell(row=i, column=9).font = bold_underline
-                worksheet.cell(row=i, column=10).value = total_profit
-                worksheet.cell(row=i, column=10).font = bold_underline
-                i += 1  # skip the newly inserted row
-            # Reset total profit for the new artist
-            total_profit = 0
-            new_artist = worksheet.cell(row=i, column=1).value
-            worksheet.insert_rows(i)
-            for j in range(1, worksheet.max_column + 1):
-                worksheet.cell(row=i, column=j).fill = fill
-            i += 1  # skip the newly inserted row
-            worksheet.insert_rows(i)
-            worksheet.cell(row=i, column=1).value = new_artist
-            worksheet.cell(row=i, column=1).font = bold_underline  # make the artist name bold and underlined
-            worksheet.cell(row=i, column=1).alignment = center
-            # i += 1  # skip the newly inserted row
-            # worksheet.insert_rows(i)
-            for j, header in enumerate(new_header, start=1):
-                cell = worksheet.cell(row=i, column=j)
-                cell.value = header
-                cell.font = bold_underline  # make the header bold and underlined
-                cell.alignment = center
-            i += 1  # skip the newly inserted row
-
-            new_profit = 0
-            if worksheet.cell(row=i, column=1).value not in ynm_artist_payments_dict.keys():
-
-                #Ensure that we still add the new profit to the total profit
-                if worksheet.cell(row=i, column=3).value == "Original":
-
-                    total_profit += worksheet.cell(row=i, column=10).value
-                    worksheet.cell(row=i, column=10).fill = green_fill
-
-                    new_profit = worksheet.cell(row=i, column=10).value
-            
-                elif worksheet.cell(row=i, column=3).value == "Charity":
-
-                    for col in range(1, 11):
-                        worksheet.cell(row=i, column=col).fill = orange_fill
-
-                    total_profit += 0
-
-                    new_profit = 0
-
-                elif worksheet.cell(row=i, column=3).value == "In-House":
-
-                    for col in range(1,11):
-                        worksheet.cell(row=i, column=col).fill = purple_fill
-
-                    total_profit += worksheet.cell(row=i, column=7).value
-
-                    new_profit = worksheet.cell(row=i, column=7).value
-
-                elif worksheet.cell(row=i, column=3).value == "Commercial" or worksheet.cell(row=i, column=3).value == "Book":
-
-                    total_profit += worksheet.cell(row=i, column=9).value
-                    worksheet.cell(row=i, column=9).fill = green_fill
-
-                    new_profit = worksheet.cell(row=i, column=9).value
-                
-                elif worksheet.cell(row=i, column=3).value == "Collab":
-
-                    total_profit += worksheet.cell(row=i, column=8).value
-                    worksheet.cell(row=i, column=8).fill = green_fill
-
-                    new_profit = worksheet.cell(row=i, column=8).value
-
-                ynm_artist_payments_dict[worksheet.cell(row=i, column=1).value] = new_profit
-
-            else:
-
-                #Ensure that we still add the new profit to the total profit
-                if worksheet.cell(row=i, column=3).value == "Original":
-
-                    total_profit += worksheet.cell(row=i, column=10).value
-                    worksheet.cell(row=i, column=10).fill = green_fill
-
-                    new_profit = worksheet.cell(row=i, column=10).value
-
-                elif worksheet.cell(row=i, column=3).value == "Charity":
-
-                    for col in range(1, 11):
-                        worksheet.cell(row=i, column=col).fill = orange_fill
-
-                    total_profit += 0
-
-                    new_profit = 0
-
-                elif worksheet.cell(row=i, column=3).value == "In-House":
-
-                    for col in range(1,11):
-                        worksheet.cell(row=i, column=col).fill = purple_fill
-
-                    total_profit += worksheet.cell(row=i, column=7).value
-
-                    new_profit = worksheet.cell(row=i, column=7).value
-
-                elif worksheet.cell(row=i, column=3).value == "Commercial" or worksheet.cell(row=i, column=3).value == "Book":
-
-                    total_profit += worksheet.cell(row=i, column=9).value
-                    worksheet.cell(row=i, column=9).fill = green_fill
-
-                    new_profit = worksheet.cell(row=i, column=9).value
-                
-                elif worksheet.cell(row=i, column=3).value == "Collab":
-
-                    total_profit += worksheet.cell(row=i, column=8).value
-                    worksheet.cell(row=i, column=8).fill = green_fill
-
-                    new_profit = worksheet.cell(row=i, column=8).value
-
-                ynm_artist_payments_dict[worksheet.cell(row=i, column=1).value] += new_profit
-
-        else:
-            if worksheet.cell(row=i, column=1).value not in ynm_artist_payments_dict.keys():
-                #Ensure that we still add the new profit to the total profit
-                if worksheet.cell(row=i, column=3).value == "Original":
-
-                    total_profit += worksheet.cell(row=i, column=10).value
-                    worksheet.cell(row=i, column=10).fill = green_fill
-
-                    new_profit = worksheet.cell(row=i, column=10).value
-
-                elif worksheet.cell(row=i, column=3).value == "Charity":
-
-                    for col in range(1, 11):
-                        worksheet.cell(row=i, column=col).fill = orange_fill
-
-                    total_profit += 0
-
-                    new_profit = 0
-
-                elif worksheet.cell(row=i, column=3).value == "In-House":
-
-                    for col in range(1,11):
-                        worksheet.cell(row=i, column=col).fill = purple_fill
-
-                    total_profit += worksheet.cell(row=i, column=7).value
-
-                    new_profit = worksheet.cell(row=i, column=7).value
-
-                elif worksheet.cell(row=i, column=3).value == "Commercial" or worksheet.cell(row=i, column=3).value == "Book":
-
-                    total_profit += worksheet.cell(row=i, column=9).value
-                    worksheet.cell(row=i, column=9).fill = green_fill
-
-                    new_profit = worksheet.cell(row=i, column=9).value
-                
-                elif worksheet.cell(row=i, column=3).value == "Collab":
-
-                    total_profit += worksheet.cell(row=i, column=8).value
-                    worksheet.cell(row=i, column=8).fill = green_fill
-
-                    new_profit = worksheet.cell(row=i, column=8).value
-
-                ynm_artist_payments_dict[worksheet.cell(row=i, column=1).value] = new_profit
-
-            else:
-
-                #Ensure that we still add the new profit to the total profit
-                if worksheet.cell(row=i, column=3).value == "Original":
-
-                    total_profit += worksheet.cell(row=i, column=10).value
-                    worksheet.cell(row=i, column=10).fill = green_fill
-
-                    new_profit = worksheet.cell(row=i, column=10).value
-
-
-                elif worksheet.cell(row=i, column=3).value == "Charity":
-
-                    for col in range(1, 11):
-                        worksheet.cell(row=i, column=col).fill = orange_fill
-
-                    total_profit += 0
-
-                    new_profit = 0
-
-                elif worksheet.cell(row=i, column=3).value == "In-House":
-
-                    for col in range(1,11):
-                        worksheet.cell(row=i, column=col).fill = purple_fill
-
-                    total_profit += worksheet.cell(row=i, column=7).value
-
-                    new_profit = worksheet.cell(row=i, column=7).value
-
-                elif worksheet.cell(row=i, column=3).value == "Commercial" or worksheet.cell(row=i, column=3).value == "Book":
-
-                    total_profit += worksheet.cell(row=i, column=9).value
-                    worksheet.cell(row=i, column=9).fill = green_fill
-
-                    new_profit = worksheet.cell(row=i, column=9).value
-                
-                elif worksheet.cell(row=i, column=3).value == "Collab":
-
-                    total_profit += worksheet.cell(row=i, column=8).value
-                    worksheet.cell(row=i, column=8).fill = green_fill
-
-                    new_profit = worksheet.cell(row=i, column=8).value
-
-                ynm_artist_payments_dict[worksheet.cell(row=i, column=1).value] += new_profit
-        i += 1
-
-    # Insert total profit for the last artist
-    worksheet.insert_rows(i)
-    worksheet.cell(row=i, column=9).value = "Total Payout"
-    worksheet.cell(row=i, column=9).font = bold_underline
-    worksheet.cell(row=i, column=10).value = total_profit
-    worksheet.cell(row=i, column=10).font = bold_underline
-
-    # Remove header
-    worksheet.delete_rows(1)
-
-    # AutoFit column width
-    for column in worksheet.columns:
-        max_length = max(len(str(cell.value)) for cell in column)
-        adjusted_width = (max_length + 2) * 1.0
-        worksheet.column_dimensions[column[0].column_letter].width = adjusted_width
-
-    #Look over and see if we have any rollovers that we need to apply
+    return artists_payments_dict
+
+ynm_original_dict, ynm_collab_dict = parse_product_information(ynm_financial_info)
+yne_original_dict, yne_collab_dict = parse_product_information(yne_financial_info)
+
+ynm_original_df = construct_df(ynm_original_dict)
+ynm_collab_df = construct_df(ynm_collab_dict)
+yne_original_df = construct_df(yne_original_dict)
+yne_collab_df = construct_df(yne_collab_dict)
+
+#
+#Start Creating the Output Spreadsheet
+#
+artists_payments_dict = {}
+
+# Create Styles to be used in the workbook
+bold_underline = Font(bold=True, underline="single")
+center = Alignment(horizontal="center")
+fill = PatternFill(start_color="D3D3D3", end_color="D3D3D3", fill_type="solid")
+new_header = ["Artist Name", "Item", "Distribution Type", "Total Value", "Processing Fee", "Cost", "Profit", "SPE 40%", "SPE 50%", "SPE 60%"]
+green_fill = PatternFill(start_color="00dc00", end_color="00dc00", fill_type="solid")
+orange_fill = PatternFill(start_color="FFA500", end_color="FFA500", fill_type="solid")
+purple_fill = PatternFill(start_color="800080", end_color="DB67DB", fill_type="solid")
+
+with pd.ExcelWriter("Data/PayoutPrototype/YNM_Payout_Prototype.xlsx", engine="openpyxl") as writer:
+    red_fill = PatternFill(start_color="FF474C", end_color="FF474C", fill_type="solid")
+    blue_fill = PatternFill(start_color="00B0F0", end_color="00B0F0", fill_type="solid")
+    artists_payments_dict = construct_payout_worksheet(ynm_original_df, artists_payments_dict, "YNM Artist Payouts")
+    artists_payments_dict = construct_payout_worksheet(ynm_collab_df, artists_payments_dict, "YNM Collab Payouts")
+    artists_payments_dict = construct_payout_worksheet(yne_original_df, artists_payments_dict, "YNE Artist Payouts")
+    artists_payments_dict = construct_payout_worksheet(yne_collab_df, artists_payments_dict, "YNE Collab Payouts")
+
+  
     for rollover in rollover_info:
 
         rollover_artist = rollover[1].title()
 
         #Are they an easy find in the dictionary?
-        if rollover_artist in ynm_artist_payments_dict.keys():
+        if rollover_artist in artists_payments_dict.keys():
 
-            ynm_artist_payments_dict[rollover_artist] += round(float(rollover[2]),2)
+            artists_payments_dict[rollover_artist] += round(float(rollover[2]),2)
 
         #Make sure that even if not found, we aren't under an alias
         else:
 
             search_vendor = artist_lookup(rollover[1], artist_info)
 
-            if search_vendor is not None and search_vendor in ynm_artist_payments_dict.keys():
+            if search_vendor is not None and search_vendor in artists_payments_dict.keys():
 
-                ynm_artist_payments_dict[search_vendor.title()] += round(float(rollover[2]),2)
+                artists_payments_dict[search_vendor.title()] += round(float(rollover[2]),2)
 
             else:
                 
                 print("ARTIST NOT FOUND ALREADY, ADDING NEW ENTRY", rollover[1].title(), "==>", rollover[2])
-                ynm_artist_payments_dict[rollover_artist] = round(float(rollover[2]),2)
+                artists_payments_dict[rollover_artist] = round(float(rollover[2]),2)
 
-    ynm_artist_payments_dict = dict(sorted(ynm_artist_payments_dict.items()))
+    artists_payments_dict = dict(sorted(artists_payments_dict.items()))
 
     payments_df = pd.DataFrame()
     artist_col = []
     payment_col = []
 
-    for key, val in ynm_artist_payments_dict.items():
+    for key, val in artists_payments_dict.items():
 
         artist_col.append(key)
         payment_col.append(round(val, 2))
 
     payments_df["Artist"] = artist_col
     payments_df["Payment Due"] = payment_col
-
-    #
-    # Now we move onto YNE
-    #
-
-
-    yne_original_df.to_excel(writer, sheet_name="YNE Artist Payouts", index=False)
-        
-    # Workbook
-    workbook = writer.book
-    # Worksheet
-    worksheet = workbook["YNE Artist Payouts"]
-
-    # Create Styles to be used in the workbook
-    # Define the fill colors
-    red_fill = PatternFill(start_color="FF474C", end_color="FF474C", fill_type="solid")
-    blue_fill = PatternFill(start_color="00B0F0", end_color="00B0F0", fill_type="solid")
-    bold_underline = Font(bold=True, underline="single")
-    center = Alignment(horizontal="center")
-    fill = PatternFill(start_color="D3D3D3", end_color="D3D3D3", fill_type="solid")
-    new_header = ["Artist Name", "Item", "Distribution Type", "Total Value", "Processing Fee", "Cost", "Profit", "SPE 40%", "SPE 50%", "SPE 60%"]
-    green_fill = PatternFill(start_color="00dc00", end_color="00dc00", fill_type="solid")
-    orange_fill = PatternFill(start_color="FFA500", end_color="FFA500", fill_type="solid")
-
-    # Apply the fill to cells where the artist changes
-    i = 2  # start from 2 because 1 is the header
-    total_profit = 0  # initialize total profit
-    while i <= worksheet.max_row:
-        if worksheet.cell(row=i, column=1).value != worksheet.cell(row=i-1, column=1).value:
-            # Insert total profit for previous artist
-            if i > 2:  # skip for the first artist
-                worksheet.insert_rows(i)
-                worksheet.cell(row=i, column=9).value = "Total Payout"
-                worksheet.cell(row=i, column=9).font = bold_underline
-                worksheet.cell(row=i, column=10).value = total_profit
-                worksheet.cell(row=i, column=10).font = bold_underline
-                i += 1  # skip the newly inserted row
-            # Reset total profit for the new artist
-            total_profit = 0
-            new_artist = worksheet.cell(row=i, column=1).value
-            worksheet.insert_rows(i)
-            for j in range(1, worksheet.max_column + 1):
-                worksheet.cell(row=i, column=j).fill = fill
-            i += 1  # skip the newly inserted row
-            worksheet.insert_rows(i)
-            worksheet.cell(row=i, column=1).value = new_artist
-            worksheet.cell(row=i, column=1).font = bold_underline  # make the artist name bold and underlined
-            worksheet.cell(row=i, column=1).alignment = center
-            # i += 1  # skip the newly inserted row
-            # worksheet.insert_rows(i)
-            for j, header in enumerate(new_header, start=1):
-                cell = worksheet.cell(row=i, column=j)
-                cell.value = header
-                cell.font = bold_underline  # make the header bold and underlined
-                cell.alignment = center
-            i += 1  # skip the newly inserted row
-
-            new_profit = 0
-            if worksheet.cell(row=i, column=1).value not in yne_artist_payments_dict.keys():
-
-                #Ensure that we still add the new profit to the total profit
-                if worksheet.cell(row=i, column=3).value == "Original":
-                    
-                    total_profit += worksheet.cell(row=i, column=10).value
-                    worksheet.cell(row=i, column=10).fill = green_fill
-
-                    new_profit = worksheet.cell(row=i, column=10).value
-
-                elif worksheet.cell(row=i, column=3).value == "Charity":
-
-                    for col in range(1, 11):
-                        worksheet.cell(row=i, column=col).fill = orange_fill
-
-                    total_profit += 0
-
-                    new_profit = 0
-
-                elif worksheet.cell(row=i, column=3).value == "In-House":
-
-                    for col in range(1,11):
-                        worksheet.cell(row=i, column=col).fill = purple_fill
-
-                    total_profit += worksheet.cell(row=i, column=7).value
-
-                    new_profit = worksheet.cell(row=i, column=7).value
-
-                elif worksheet.cell(row=i, column=3).value == "Commercial" or worksheet.cell(row=i, column=3).value == "Book":
-
-                    total_profit += worksheet.cell(row=i, column=9).value
-                    worksheet.cell(row=i, column=9).fill = green_fill
-
-                    new_profit = worksheet.cell(row=i, column=9).value
-                
-                elif worksheet.cell(row=i, column=3).value == "Collab":
-
-                    total_profit += worksheet.cell(row=i, column=8).value
-                    worksheet.cell(row=i, column=8).fill = green_fill
-
-                    new_profit = worksheet.cell(row=i, column=8).value
-
-                yne_artist_payments_dict[worksheet.cell(row=i, column=1).value] = new_profit
-
-            else:
-
-                #Ensure that we still add the new profit to the total profit
-                if worksheet.cell(row=i, column=3).value == "Original":
-
-                    total_profit += worksheet.cell(row=i, column=10).value
-                    worksheet.cell(row=i, column=10).fill = green_fill
-
-                    new_profit = worksheet.cell(row=i, column=10).value
-
-                elif worksheet.cell(row=i, column=3).value == "Charity":
-
-                    for col in range(1, 11):
-                        worksheet.cell(row=i, column=col).fill = orange_fill
-
-                    total_profit += 0
-
-                    new_profit = 0
-
-                elif worksheet.cell(row=i, column=3).value == "In-House":
-
-                    for col in range(1,11):
-                        worksheet.cell(row=i, column=col).fill = purple_fill
-
-                    total_profit += worksheet.cell(row=i, column=7).value
-
-                    new_profit = worksheet.cell(row=i, column=7).value
-
-                elif worksheet.cell(row=i, column=3).value == "Commercial" or worksheet.cell(row=i, column=3).value == "Book":
-
-                    total_profit += worksheet.cell(row=i, column=9).value
-                    worksheet.cell(row=i, column=9).fill = green_fill
-
-                    new_profit = worksheet.cell(row=i, column=9).value
-                
-                elif worksheet.cell(row=i, column=3).value == "Collab":
-
-                    total_profit += worksheet.cell(row=i, column=8).value
-                    worksheet.cell(row=i, column=8).fill = green_fill
-
-                    new_profit = worksheet.cell(row=i, column=8).value
-
-                yne_artist_payments_dict[worksheet.cell(row=i, column=1).value] += new_profit
-
-        else:
-            if worksheet.cell(row=i, column=1).value not in yne_artist_payments_dict.keys():
-                #Ensure that we still add the new profit to the total profit
-                if worksheet.cell(row=i, column=3).value == "Original":
-
-                    total_profit += worksheet.cell(row=i, column=10).value
-                    worksheet.cell(row=i, column=10).fill = green_fill
-
-                    new_profit = worksheet.cell(row=i, column=10).value
-
-                elif worksheet.cell(row=i, column=3).value == "Charity":
-
-                    for col in range(1, 11):
-                        worksheet.cell(row=i, column=col).fill = orange_fill
-
-                    total_profit += 0
-
-                    new_profit = 0
-
-                elif worksheet.cell(row=i, column=3).value == "In-House":
-
-                    for col in range(1,11):
-                        worksheet.cell(row=i, column=col).fill = purple_fill
-
-                    total_profit += worksheet.cell(row=i, column=7).value
-
-                    new_profit = worksheet.cell(row=i, column=7).value
-
-                elif worksheet.cell(row=i, column=3).value == "Commercial" or worksheet.cell(row=i, column=3).value == "Book":
-
-                    total_profit += worksheet.cell(row=i, column=9).value
-                    worksheet.cell(row=i, column=9).fill = green_fill
-
-                    new_profit = worksheet.cell(row=i, column=9).value
-                
-                elif worksheet.cell(row=i, column=3).value == "Collab":
-
-                    total_profit += worksheet.cell(row=i, column=8).value
-                    worksheet.cell(row=i, column=8).fill = green_fill
-
-                    new_profit = worksheet.cell(row=i, column=8).value
-
-                yne_artist_payments_dict[worksheet.cell(row=i, column=1).value] = new_profit
-
-            else:
-
-                #Ensure that we still add the new profit to the total profit
-                if worksheet.cell(row=i, column=3).value == "Original":
-
-                    total_profit += worksheet.cell(row=i, column=10).value
-                    worksheet.cell(row=i, column=10).fill = green_fill
-
-                    new_profit = worksheet.cell(row=i, column=10).value
-
-                elif worksheet.cell(row=i, column=3).value == "Charity":
-
-                    for col in range(1, 11):
-                        worksheet.cell(row=i, column=col).fill = orange_fill
-
-                    total_profit += 0
-
-                    new_profit = 0
-
-                elif worksheet.cell(row=i, column=3).value == "In-House":
-
-                    for col in range(1,11):
-                        worksheet.cell(row=i, column=col).fill = purple_fill
-
-                    total_profit += worksheet.cell(row=i, column=7).value
-
-                    new_profit = worksheet.cell(row=i, column=7).value
-
-                elif worksheet.cell(row=i, column=3).value == "Commercial" or worksheet.cell(row=i, column=3).value == "Book":
-
-                    total_profit += worksheet.cell(row=i, column=9).value
-                    worksheet.cell(row=i, column=9).fill = green_fill
-
-                    new_profit = worksheet.cell(row=i, column=9).value
-                
-                elif worksheet.cell(row=i, column=3).value == "Collab":
-
-                    total_profit += worksheet.cell(row=i, column=8).value
-                    worksheet.cell(row=i, column=8).fill = green_fill
-
-                    new_profit = worksheet.cell(row=i, column=8).value
-
-                yne_artist_payments_dict[worksheet.cell(row=i, column=1).value] += new_profit
-        
-        i += 1
-
-    # Insert total profit for the last artist
-    worksheet.insert_rows(i)
-    worksheet.cell(row=i, column=9).value = "Total Payout"
-    worksheet.cell(row=i, column=9).font = bold_underline
-    worksheet.cell(row=i, column=10).value = total_profit
-    worksheet.cell(row=i, column=10).font = bold_underline
-
-    # Remove header
-    worksheet.delete_rows(1)
-
-    # AutoFit column width
-    for column in worksheet.columns:
-        max_length = max(len(str(cell.value)) for cell in column)
-        adjusted_width = (max_length + 2) * 1.0
-        worksheet.column_dimensions[column[0].column_letter].width = adjusted_width
-
-
-    yne_collab_df.to_excel(writer, sheet_name="YNE Collab Payouts", index=False)
-        
-    # Workbook
-    workbook = writer.book
-    # Worksheet
-    worksheet = workbook["YNE Collab Payouts"]
-
-
-    # Apply the fill to cells where the artist changes
-
-    i = 2  # start from 2 because 1 is the header
-    total_profit = 0  # initialize total profit
-    while i <= worksheet.max_row:
-        if worksheet.cell(row=i, column=1).value != worksheet.cell(row=i-1, column=1).value:
-            # Insert total profit for previous artist
-            if i > 2:  # skip for the first artist
-                worksheet.insert_rows(i)
-                worksheet.cell(row=i, column=9).value = "Total Payout"
-                worksheet.cell(row=i, column=9).font = bold_underline
-                worksheet.cell(row=i, column=10).value = total_profit
-                worksheet.cell(row=i, column=10).font = bold_underline
-                i += 1  # skip the newly inserted row
-            # Reset total profit for the new artist
-            total_profit = 0
-            new_artist = worksheet.cell(row=i, column=1).value
-            worksheet.insert_rows(i)
-            for j in range(1, worksheet.max_column + 1):
-                worksheet.cell(row=i, column=j).fill = fill
-            i += 1  # skip the newly inserted row
-            worksheet.insert_rows(i)
-            worksheet.cell(row=i, column=1).value = new_artist
-            worksheet.cell(row=i, column=1).font = bold_underline  # make the artist name bold and underlined
-            worksheet.cell(row=i, column=1).alignment = center
-            # i += 1  # skip the newly inserted row
-            # worksheet.insert_rows(i)
-            for j, header in enumerate(new_header, start=1):
-                cell = worksheet.cell(row=i, column=j)
-                cell.value = header
-                cell.font = bold_underline  # make the header bold and underlined
-                cell.alignment = center
-            i += 1  # skip the newly inserted row
-
-            new_profit = 0
-            if worksheet.cell(row=i, column=1).value not in yne_artist_payments_dict.keys():
-
-                #Ensure that we still add the new profit to the total profit
-                if worksheet.cell(row=i, column=3).value == "Original":
-
-                    total_profit += worksheet.cell(row=i, column=10).value
-                    worksheet.cell(row=i, column=10).fill = green_fill
-
-                    new_profit = worksheet.cell(row=i, column=10).value
-
-                elif worksheet.cell(row=i, column=3).value == "Charity":
-
-                    for col in range(1, 11):
-                        worksheet.cell(row=i, column=col).fill = orange_fill
-
-                    total_profit += 0
-
-                    new_profit = 0
-
-                elif worksheet.cell(row=i, column=3).value == "In-House":
-
-                    for col in range(1,11):
-                        worksheet.cell(row=i, column=col).fill = purple_fill
-
-                    total_profit += worksheet.cell(row=i, column=7).value
-
-                    new_profit = worksheet.cell(row=i, column=7).value
-
-                elif worksheet.cell(row=i, column=3).value == "Commercial" or worksheet.cell(row=i, column=3).value == "Book":
-
-                    total_profit += worksheet.cell(row=i, column=9).value
-                    worksheet.cell(row=i, column=9).fill = green_fill
-
-                    new_profit = worksheet.cell(row=i, column=9).value
-                
-                elif worksheet.cell(row=i, column=3).value == "Collab":
-
-                    total_profit += worksheet.cell(row=i, column=8).value
-                    worksheet.cell(row=i, column=8).fill = green_fill
-
-                    new_profit = worksheet.cell(row=i, column=8).value
-
-                yne_artist_payments_dict[worksheet.cell(row=i, column=1).value] = new_profit
-
-            else:
-
-                #Ensure that we still add the new profit to the total profit
-                if worksheet.cell(row=i, column=3).value == "Original":
-
-                    total_profit += worksheet.cell(row=i, column=10).value
-                    worksheet.cell(row=i, column=10).fill = green_fill
-
-                    new_profit = worksheet.cell(row=i, column=10).value
-
-                elif worksheet.cell(row=i, column=3).value == "Charity":
-
-                    for col in range(1, 11):
-                        worksheet.cell(row=i, column=col).fill = orange_fill
-
-                    total_profit += 0
-
-                    new_profit = 0
-
-                elif worksheet.cell(row=i, column=3).value == "In-House":
-
-                    for col in range(1,11):
-                        worksheet.cell(row=i, column=col).fill = purple_fill
-
-                    total_profit += worksheet.cell(row=i, column=7).value
-
-                    new_profit = worksheet.cell(row=i, column=7).value
-
-
-                elif worksheet.cell(row=i, column=3).value == "Commercial" or worksheet.cell(row=i, column=3).value == "Book":
-
-                    total_profit += worksheet.cell(row=i, column=9).value
-                    worksheet.cell(row=i, column=9).fill = green_fill
-
-                    new_profit = worksheet.cell(row=i, column=9).value
-                
-                elif worksheet.cell(row=i, column=3).value == "Collab":
-
-                    total_profit += worksheet.cell(row=i, column=8).value
-                    worksheet.cell(row=i, column=8).fill = green_fill
-
-                    new_profit = worksheet.cell(row=i, column=8).value
-
-                yne_artist_payments_dict[worksheet.cell(row=i, column=1).value] += new_profit
-
-        else:
-            if worksheet.cell(row=i, column=1).value not in yne_artist_payments_dict.keys():
-                #Ensure that we still add the new profit to the total profit
-                if worksheet.cell(row=i, column=3).value == "Original":
-
-                    total_profit += worksheet.cell(row=i, column=10).value
-                    worksheet.cell(row=i, column=10).fill = green_fill
-
-                    new_profit = worksheet.cell(row=i, column=10).value
-
-                elif worksheet.cell(row=i, column=3).value == "Charity":
-
-                    for col in range(1, 11):
-                        worksheet.cell(row=i, column=col).fill = orange_fill
-
-                    total_profit += 0
-
-                    new_profit = 0
-
-                elif worksheet.cell(row=i, column=3).value == "In-House":
-
-                    for col in range(1,11):
-                        worksheet.cell(row=i, column=col).fill = purple_fill
-
-                    total_profit += worksheet.cell(row=i, column=7).value
-
-                    new_profit = worksheet.cell(row=i, column=7).value
-
-                elif worksheet.cell(row=i, column=3).value == "Commercial" or worksheet.cell(row=i, column=3).value == "Book":
-
-                    total_profit += worksheet.cell(row=i, column=9).value
-                    worksheet.cell(row=i, column=9).fill = green_fill
-
-                    new_profit = worksheet.cell(row=i, column=9).value
-                
-                elif worksheet.cell(row=i, column=3).value == "Collab":
-
-                    total_profit += worksheet.cell(row=i, column=8).value
-                    worksheet.cell(row=i, column=8).fill = green_fill
-
-                    new_profit = worksheet.cell(row=i, column=8).value
-
-                yne_artist_payments_dict[worksheet.cell(row=i, column=1).value] = new_profit
-
-            else:
-
-                #Ensure that we still add the new profit to the total profit
-                if worksheet.cell(row=i, column=3).value == "Original":
-
-                    total_profit += worksheet.cell(row=i, column=10).value
-                    worksheet.cell(row=i, column=10).fill = green_fill
-
-                    new_profit = worksheet.cell(row=i, column=10).value
-
-                elif worksheet.cell(row=i, column=3).value == "Charity":
-
-                    for col in range(1, 11):
-                        worksheet.cell(row=i, column=col).fill = orange_fill
-
-                    total_profit += 0
-
-                    new_profit = 0
-
-                elif worksheet.cell(row=i, column=3).value == "In-House":
-
-                    for col in range(1,11):
-                        worksheet.cell(row=i, column=col).fill = purple_fill
-
-                    total_profit += worksheet.cell(row=i, column=7).value
-
-                    new_profit = worksheet.cell(row=i, column=7).value
-
-                elif worksheet.cell(row=i, column=3).value == "Commercial" or worksheet.cell(row=i, column=3).value == "Book":
-
-                    total_profit += worksheet.cell(row=i, column=9).value
-                    worksheet.cell(row=i, column=9).fill = green_fill
-
-                    new_profit = worksheet.cell(row=i, column=9).value
-                
-                elif worksheet.cell(row=i, column=3).value == "Collab":
-
-                    total_profit += worksheet.cell(row=i, column=8).value
-                    worksheet.cell(row=i, column=8).fill = green_fill
-
-                    new_profit = worksheet.cell(row=i, column=8).value
-
-                yne_artist_payments_dict[worksheet.cell(row=i, column=1).value] += new_profit
-        i += 1
-
-    # Insert total profit for the last artist
-    worksheet.insert_rows(i)
-    worksheet.cell(row=i, column=9).value = "Total Payout"
-    worksheet.cell(row=i, column=9).font = bold_underline
-    worksheet.cell(row=i, column=10).value = total_profit
-    worksheet.cell(row=i, column=10).font = bold_underline
-
-    # Remove header
-    worksheet.delete_rows(1)
-
-    # AutoFit column width
-    for column in worksheet.columns:
-        max_length = max(len(str(cell.value)) for cell in column)
-        adjusted_width = (max_length + 2) * 1.0
-        worksheet.column_dimensions[column[0].column_letter].width = adjusted_width
-
-    yne_artist_payments_dict = dict(sorted(yne_artist_payments_dict.items()))
-
-    payments_df = pd.DataFrame()
-    artist_col = []
-    payment_col = []
-
-    for key, val in yne_artist_payments_dict.items():
-
-        artist_col.append(key)
-        payment_col.append(round(val, 2))
-
-    payments_df["Artist"] = artist_col
-    payments_df["Payment Due"] = payment_col
-
-    #Now we will make an aggregated sheet for all payouts both YNM and YNE
-
-    #First we combine the dictionaries to get aggregated payments
-    combined_artist_payments_dict = ynm_artist_payments_dict.copy()
-
-    for key, val in yne_artist_payments_dict.items():
-
-
-        if key in combined_artist_payments_dict.keys():
-
-            combined_artist_payments_dict[key] += val
-
-        else:
-
-            combined_artist_payments_dict[key] = val
 
     #Sort the dictionary by the artist's names
-    combined_artist_payments_dict = dict(sorted(combined_artist_payments_dict.items()))
+    artists_payments_dict = dict(sorted(artists_payments_dict.items()))
 
     
     combined_payments_df = pd.DataFrame()
 
     artist_col = []
     payment_col = []
-    for key, val in combined_artist_payments_dict.items():
+    for key, val in artists_payments_dict.items():
 
             artist_col.append(key)
             payment_col.append(round(val, 2))
@@ -1329,7 +593,7 @@ with pd.ExcelWriter("Data/PayoutPrototype/YNM_Payout_Prototype.xlsx", engine="op
     artist_col = []
     rollover_col = []
 
-    for key, val in combined_artist_payments_dict.items():
+    for key, val in artists_payments_dict.items():
 
         if val < 0:
 
