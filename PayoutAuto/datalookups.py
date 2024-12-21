@@ -15,15 +15,3 @@ def artist_lookup(artist_name, artist_info):
             return key
         
     return None
-
-def item_lookup(item_name, item_info):
-    '''
-    This function looks up an item that was labeled as YNM Vended. If it exists
-    then we return the artists, if not then we return None.
-
-    @param item_name: The name of the item we are looking for
-    @param item_info: The json containing all item information
-
-    @return The artist name associated with the item
-    '''
-    return item_info.get(item_name, None)

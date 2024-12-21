@@ -8,7 +8,7 @@ import pandas as pd
 from openpyxl.styles import PatternFill, Alignment, Font
 from openpyxl.formatting.rule import CellIsRule
 from ExcelRW.readcsv import read_csv
-from datalookups import artist_lookup, item_lookup
+from datalookups import artist_lookup
 from Models.PendingRollover import PendingRollover, parse_pending_rollovers
 
 ynm_file_path = '/YNM/PayoutAutomator/Data/SheetPreprocessor/YNM_Sales_Final.csv'
@@ -27,9 +27,6 @@ ynm_financial_info, yne_financial_info, carry_pending_rollovers = parse_pending_
 
 with open('/YNM/PayoutAutomator/Data/artists.json') as fp:
     artist_info = json.load(fp)
-
-with open('/YNM/PayoutAutomator/Data/namedItems.json') as fp:
-    item_info = json.load(fp)
 
 ynm_original_dict = {}
 ynm_collab_dict = {}
