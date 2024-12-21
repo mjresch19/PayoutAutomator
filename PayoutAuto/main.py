@@ -91,23 +91,9 @@ for product in ynm_financial_info:
         if search_vendor is not None:
             
             product_vendor = search_vendor
-            
-
-        #Our last resort search will be for Yorunmachi vended items,
-        #If we cannot find the vendor at this point, we can assume we 
-        #need to enter a new entry or make a fix
+        
         else:
-
-            search_vendor_item = item_lookup(product_name, item_info)
-
-            if search_vendor_item:
-
-                product_vendor = search_vendor_item
-            
-            else:
-
-                print("YNM ARTIST NOT FOUND, TAKE ACTION. SKIPPING FOR NOW:", product[1].title(), "==>",product_vendor, "(" + product_name + ")")
-                continue
+            print("YNM ARTIST NOT FOUND, TAKE ACTION. SKIPPING FOR NOW:", product[1].title(), "==>",product_vendor, "(" + product_name + ")")
     
     #
     #Get associated information for the artist's product - handle differently dependent on the distribution type
@@ -259,22 +245,10 @@ for product in yne_financial_info:
         if search_vendor is not None:
             
             product_vendor = search_vendor
-
-        #Our last resort search will be for Yorunmachi vended items,
-        #If we cannot find the vendor at this point, we can assume we 
-        #need to enter a new entry or make a fix
+        
         else:
-
-            search_vendor_item = item_lookup(product_name, item_info)
-
-            if search_vendor_item:
-
-                product_vendor = search_vendor_item
-            
-            else:
-
-                print("ARTIST NOT FOUND, TAKE ACTION. SKIPPING FOR NOW:", product[1].title(), "==>",product_vendor, "(" + product_name + ")")
-                continue
+            print("YNE ARTIST NOT FOUND, TAKE ACTION. SKIPPING FOR NOW:", product[1].title(), "==>",product_vendor, "(" + product_name + ")")
+    
 
     #
     #Get associated information for the artist's product - handle differently dependent on the distribution type

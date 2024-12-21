@@ -892,6 +892,11 @@
     "aliases": ["Xenvita"],
     "client_type": "Artist"
   },
+  "Yorunomachi": {
+    "name": "Yorunomachi",
+    "aliases": ["Yorunomachi"],
+    "client_type": "Artist"
+  },
   "Yorunoecchi": {
     "name": "Yorunoecchi",
     "aliases": ["Yorunoecchi"],
