@@ -522,20 +522,6 @@ with pd.ExcelWriter("Data/PayoutPrototype/YNM_Payout_Prototype.xlsx", engine="op
                 print("ARTIST NOT FOUND ALREADY, ADDING NEW ENTRY", rollover[1].title(), "==>", rollover[2])
                 artists_payments_dict[rollover_artist] = round(float(rollover[2]),2)
 
-    artists_payments_dict = dict(sorted(artists_payments_dict.items()))
-
-    payments_df = pd.DataFrame()
-    artist_col = []
-    payment_col = []
-
-    for key, val in artists_payments_dict.items():
-
-        artist_col.append(key)
-        payment_col.append(round(val, 2))
-
-    payments_df["Artist"] = artist_col
-    payments_df["Payment Due"] = payment_col
-
     #Sort the dictionary by the artist's names
     artists_payments_dict = dict(sorted(artists_payments_dict.items()))
 
