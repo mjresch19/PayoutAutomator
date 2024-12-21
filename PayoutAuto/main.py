@@ -28,316 +28,161 @@ ynm_financial_info, yne_financial_info, carry_pending_rollovers = parse_pending_
 with open('/YNM/PayoutAutomator/Data/artists.json') as fp:
     artist_info = json.load(fp)
 
-ynm_original_dict = {}
-ynm_collab_dict = {}
+def parse_product_information(store_financial_info):
 
-yne_original_dict = {}
-yne_collab_dict = {}
+    store_original_dict = {}
+    store_collab_dict = {}
 
-#Iterate through each product that was sold this month for YNM
-for product in ynm_financial_info:
+    #Iterate through each product that was sold this month for YNM
+    for product in store_financial_info:
+        product_vendors = product[1].strip("'").replace("''", "'")
+        product_name = product[0].strip("'").replace("''", "'") #Clean up the string to be readable in json
+        distribution_type = product[2]
+        total_sales = float(product[10])
+        processor_fee = float(product[11])
+        total_cost = float(product[12])
 
-    product_vendors = product[1].strip("'").replace("''", "'")
-    product_name = product[0].strip("'").replace("''", "'") #Clean up the string to be readable in json
-    distribution_type = product[2]
-    product_type = product[3]
-    net_quantity = product[4]
-    gross_sales = product[5]
-    discounts = product[6]
-    returns = product[7]
-    net_sales = product[8]
-    taxes = product[9]
-    total_sales = float(product[10])
-    processor_fee = float(product[11])
-    total_cost = float(product[12])
+        #Handle processing fee for negative sales, let us eat the processing fee for these, but not debit to the artist
+        if total_sales < 0:
+            processor_fee = 0
 
-    #Handle processing fee for negative sales, let us eat the processing fee for these, but not debit to the artist
-    if total_sales < 0:
-        processor_fee = 0
+        gross_profit = total_sales - processor_fee - total_cost
 
-    gross_profit = total_sales - processor_fee - total_cost
+        #Conduct safer search for artist, considering the fact there might be ( )
+        if "(" in product_vendors:
 
-    #Conduct safer search for artist, considering the fact there might be ( )
-    if "(" in product_vendors:
-
-        #Obtain all chars up to the " (""
-        product_vendor = product_vendors[:product_vendors.index("(") - 1]
-    
-    if ")" in product_vendors and distribution_type == "Collab":
-
-        try:
-
-            collab_vendor = product_vendors[product_vendors.index(") ") + 2:]
-
-        except:
-
-            print("ERROR IN COLLAB VENDOR NAME:", product[1].title(), "==>",product_vendor, "(" + product_name + ")")
-
-    #First check to see if our vendor is an *actual* artist
-    if product_vendor.title() in artist_info:
+            #Obtain all chars up to the " (""
+            product_vendor = product_vendors[:product_vendors.index("(") - 1]
         
-        product_vendor = product_vendor.title()
+        if ")" in product_vendors and distribution_type == "Collab":
 
-    else:
-        
+            try:
 
-        #If our quick search of artist is not found, we need to look up
-        #the artist aliases. LOOK UP EXACT MATCH (No titles)
-        search_vendor = artist_lookup(product_vendor, artist_info)
+                collab_vendor = product_vendors[product_vendors.index(") ") + 2:]
 
-        if search_vendor is not None:
-            
-            product_vendor = search_vendor
-        
-        else:
-            print("YNM ARTIST NOT FOUND, TAKE ACTION. SKIPPING FOR NOW:", product[1].title(), "==>",product_vendor, "(" + product_name + ")")
-    
-    #
-    #Get associated information for the artist's product - handle differently dependent on the distribution type
-    #
+            except:
 
-    if distribution_type == "Original":
-
-        if product_vendor not in ynm_original_dict:
-
-            ynm_original_dict[product_vendor] = [[product_name, distribution_type, total_sales, processor_fee, total_cost, gross_profit]]
-
-        else:
-
-            ynm_original_dict[product_vendor].append([product_name, distribution_type, total_sales, processor_fee, total_cost, gross_profit])
-
-    elif distribution_type == "Charity":
-
-        if product_vendor not in ynm_collab_dict:
-
-            ynm_original_dict[product_vendor] = [[product_name, distribution_type, total_sales, processor_fee, total_cost, gross_profit]]
-
-        else:
-
-            ynm_original_dict[product_vendor].append([product_name, distribution_type, total_sales, processor_fee, total_cost, gross_profit])
-
-    elif distribution_type == "Commercial":
-
-
-        if product_vendor not in ynm_collab_dict:
-
-            ynm_collab_dict[product_vendor] = [[product_name, distribution_type, total_sales, processor_fee, total_cost, gross_profit]]
-
-        else:
-
-            ynm_collab_dict[product_vendor].append([product_name, distribution_type, total_sales, processor_fee, total_cost, gross_profit])
-
-    elif distribution_type == "Book":
-
-
-        if product_vendor not in ynm_collab_dict:
-
-            ynm_collab_dict[product_vendor] = [[product_name, distribution_type, total_sales, processor_fee, total_cost, gross_profit]]
-
-        else:
-
-            ynm_collab_dict[product_vendor].append([product_name, distribution_type, total_sales, processor_fee, total_cost, gross_profit])
-
-
-    elif distribution_type == "In-House":
-
-
-        if product_vendor not in ynm_collab_dict:
-
-            ynm_collab_dict[product_vendor] = [[product_name, distribution_type, total_sales, processor_fee, total_cost, gross_profit]]
-
-        else:
-
-            ynm_collab_dict[product_vendor].append([product_name, distribution_type, total_sales, processor_fee, total_cost, gross_profit])
-
-
-    elif distribution_type == "Collab":
+                print("ERROR IN COLLAB VENDOR NAME:", product[1].title(), "==>",product_vendor, "(" + product_name + ")")
 
         #First check to see if our vendor is an *actual* artist
-        if collab_vendor.title() in artist_info:
+        if product_vendor.title() in artist_info:
             
-            collab_name = collab_vendor.title()
+            product_vendor = product_vendor.title()
+
         else:
+            
 
-            #We find the collaborator and add them to the collab dict through a deeper search
-            collab_name = artist_lookup(collab_vendor, artist_info)
+            #If our quick search of artist is not found, we need to look up
+            #the artist aliases. LOOK UP EXACT MATCH (No titles)
+            search_vendor = artist_lookup(product_vendor, artist_info)
 
-        if not(collab_name):
-
-            print("COLLABORATOR NOT FOUND, TAKE ACTION. SKIPPING FOR NOW:", product[1].title(), "==>",product_vendor, "(" + product_name + ")")
-            continue
-
-
-        if collab_name not in ynm_collab_dict:
-
-            ynm_collab_dict[collab_name] = [[product_name, distribution_type, total_sales, processor_fee, total_cost, gross_profit]]
-        
-        else:
+            if search_vendor is not None:
                 
-            ynm_collab_dict[collab_name].append([product_name, distribution_type, total_sales, processor_fee, total_cost, gross_profit])
-
-        #Next, we must find the product vendor as an original source, so they go in the original source dict
-        if product_vendor not in ynm_original_dict:
-
-            ynm_original_dict[product_vendor] = [[product_name, distribution_type, total_sales, processor_fee, total_cost, gross_profit]]
-
-        else:
-
-            ynm_original_dict[product_vendor].append([product_name, distribution_type, total_sales, processor_fee, total_cost, gross_profit])  
-
-
-
-#Iterate through each product that was sold this month for YNE
-for product in yne_financial_info:
-
-    product_vendors  = product[1].strip("'").replace("''", "'")
-    product_name = product[0].strip("'").replace("''", "'") #Clean up the string to be readable in json
-    distribution_type = product[2]
-    product_type = product[3]
-    net_quantity = product[4]
-    gross_sales = product[5]
-    discounts = product[6]
-    returns = product[7]
-    net_sales = product[8]
-    taxes = product[9]
-    total_sales = float(product[10])
-    processor_fee = float(product[11])
-    total_cost = float(product[12])\
-    
-    #Handle processing fee for negative sales, let us eat the processing fee for these, but not debit to the artist
-    if total_sales < 0:
-        processor_fee = 0
-
-    gross_profit = total_sales - processor_fee - total_cost
-
-    #Conduct safer search for artist, considering the fact there might be ( )
-    if "(" in product_vendors:
-
-        #Obtain all chars up to the " (""
-        product_vendor = product_vendors[:product_vendors.index("(") - 1]
-
-    if ")" in product_vendors and distribution_type == "Collab":
-
-        try:
-
-            collab_vendor = product_vendors[product_vendors.index(") ") + 2:]
-
-        except:
-
-            print("ERROR IN COLLAB VENDOR NAME:", product[1].title(), "==>",product_vendor, "(" + product_name + ")")
-
-
-    #First check to see if our vendor is an *actual* artist
-    if product_vendor.title() in artist_info:
-        
-        product_vendor = product_vendor.title()
-
-    else:
-        
-
-        #If our quick search of artist is not found, we need to look up
-        #the artist aliases. LOOK UP EXACT MATCH (No titles)
-        search_vendor = artist_lookup(product_vendor, artist_info)
-
-        if search_vendor is not None:
+                product_vendor = search_vendor
             
-            product_vendor = search_vendor
+            else:
+                print("YNM ARTIST NOT FOUND, TAKE ACTION. SKIPPING FOR NOW:", product[1].title(), "==>",product_vendor, "(" + product_name + ")")
         
-        else:
-            print("YNE ARTIST NOT FOUND, TAKE ACTION. SKIPPING FOR NOW:", product[1].title(), "==>",product_vendor, "(" + product_name + ")")
-    
+        #
+        #Get associated information for the artist's product - handle differently dependent on the distribution type
+        #
 
-    #
-    #Get associated information for the artist's product - handle differently dependent on the distribution type
-    #
+        if distribution_type == "Original":
 
-    if distribution_type == "Original":
+            if product_vendor not in store_original_dict:
 
-        if product_vendor not in yne_original_dict:
+                store_original_dict[product_vendor] = [[product_name, distribution_type, total_sales, processor_fee, total_cost, gross_profit]]
 
-            yne_original_dict[product_vendor] = [[product_name, distribution_type, total_sales, processor_fee, total_cost, gross_profit]]
+            else:
 
-        else:
+                store_original_dict[product_vendor].append([product_name, distribution_type, total_sales, processor_fee, total_cost, gross_profit])
 
-            yne_original_dict[product_vendor].append([product_name, distribution_type, total_sales, processor_fee, total_cost, gross_profit])
+        elif distribution_type == "Charity":
 
-    elif distribution_type == "Charity":
+            if product_vendor not in store_collab_dict:
 
-        if product_vendor not in yne_collab_dict:
+                store_original_dict[product_vendor] = [[product_name, distribution_type, total_sales, processor_fee, total_cost, gross_profit]]
 
-            ynm_original_dict[product_vendor] = [[product_name, distribution_type, total_sales, processor_fee, total_cost, gross_profit]]
+            else:
 
-        else:
+                store_original_dict[product_vendor].append([product_name, distribution_type, total_sales, processor_fee, total_cost, gross_profit])
 
-            ynm_original_dict[product_vendor].append([product_name, distribution_type, total_sales, processor_fee, total_cost, gross_profit])
-
-    elif distribution_type == "Commercial":
-
-        if product_vendor not in yne_collab_dict:
-
-            yne_collab_dict[product_vendor] = [[product_name, distribution_type, total_sales, processor_fee, total_cost, gross_profit]]
-
-        else:
-
-            yne_collab_dict[product_vendor].append([product_name, distribution_type, total_sales, processor_fee, total_cost, gross_profit])
-
-    elif distribution_type == "Book":
+        elif distribution_type == "Commercial":
 
 
-        if product_vendor not in ynm_collab_dict:
+            if product_vendor not in store_collab_dict:
 
-            ynm_collab_dict[product_vendor] = [[product_name, distribution_type, total_sales, processor_fee, total_cost, gross_profit]]
+                store_collab_dict[product_vendor] = [[product_name, distribution_type, total_sales, processor_fee, total_cost, gross_profit]]
 
-        else:
+            else:
 
-            ynm_collab_dict[product_vendor].append([product_name, distribution_type, total_sales, processor_fee, total_cost, gross_profit])
+                store_collab_dict[product_vendor].append([product_name, distribution_type, total_sales, processor_fee, total_cost, gross_profit])
+
+        elif distribution_type == "Book":
 
 
-    elif distribution_type == "In-House":
+            if product_vendor not in store_original_dict:
+
+                store_original_dict[product_vendor] = [[product_name, distribution_type, total_sales, processor_fee, total_cost, gross_profit]]
+
+            else:
+
+                store_original_dict[product_vendor].append([product_name, distribution_type, total_sales, processor_fee, total_cost, gross_profit])
 
 
-        if product_vendor not in ynm_collab_dict:
+        elif distribution_type == "In-House":
 
-            ynm_collab_dict[product_vendor] = [[product_name, distribution_type, total_sales, processor_fee, total_cost, gross_profit]]
 
-        else:
+            if product_vendor not in store_original_dict:
 
-            ynm_collab_dict[product_vendor].append([product_name, distribution_type, total_sales, processor_fee, total_cost, gross_profit])
+                store_original_dict[product_vendor] = [[product_name, distribution_type, total_sales, processor_fee, total_cost, gross_profit]]
 
-    elif distribution_type == "Collab":
+            else:
 
-        #First check to see if our vendor is an *actual* artist
-        if collab_vendor.title() in artist_info:
-            
-            collab_name = collab_vendor.title()
-        else:
+                store_original_dict[product_vendor].append([product_name, distribution_type, total_sales, processor_fee, total_cost, gross_profit])
 
-            #We find the collaborator and add them to the collab dict through a deeper search
-            collab_name = artist_lookup(collab_vendor, artist_info)
 
-        if not(collab_name):
+        elif distribution_type == "Collab":
 
-            print("COLLABORATOR NOT FOUND, TAKE ACTION. SKIPPING FOR NOW:", product[1].title(), "==>",product_vendor, "(" + product_name + ")")
-            continue
-
-        if collab_name not in yne_collab_dict:
-
-            yne_collab_dict[collab_name] = [[product_name, distribution_type, total_sales, processor_fee, total_cost, gross_profit]]
-        
-        else:
+            #First check to see if our vendor is an *actual* artist
+            if collab_vendor.title() in artist_info:
                 
-            yne_collab_dict[collab_name].append([product_name, distribution_type, total_sales, processor_fee, total_cost, gross_profit])
+                collab_name = collab_vendor.title()
+            else:
+
+                #We find the collaborator and add them to the collab dict through a deeper search
+                collab_name = artist_lookup(collab_vendor, artist_info)
+
+            if not(collab_name):
+
+                print("COLLABORATOR NOT FOUND, TAKE ACTION. SKIPPING FOR NOW:", product[1].title(), "==>",product_vendor, "(" + product_name + ")")
+                continue
 
 
-        #Next, we must find the product vendor as an original source, so they go in the original source dict
-        if product_vendor not in yne_original_dict:
+            if collab_name not in store_collab_dict:
 
-            yne_original_dict[product_vendor] = [[product_name, distribution_type, total_sales, processor_fee, total_cost, gross_profit]]
+                store_collab_dict[collab_name] = [[product_name, distribution_type, total_sales, processor_fee, total_cost, gross_profit]]
+            
+            else:
+                    
+                store_collab_dict[collab_name].append([product_name, distribution_type, total_sales, processor_fee, total_cost, gross_profit])
 
-        else:
+            #Next, we must find the product vendor as an original source, so they go in the original source dict
+            if product_vendor not in store_original_dict:
 
-            yne_original_dict[product_vendor].append([product_name, distribution_type, total_sales, processor_fee, total_cost, gross_profit])             
- 
+                store_original_dict[product_vendor] = [[product_name, distribution_type, total_sales, processor_fee, total_cost, gross_profit]]
+
+            else:
+
+                store_original_dict[product_vendor].append([product_name, distribution_type, total_sales, processor_fee, total_cost, gross_profit])  
+
+
+
+    return store_original_dict, store_collab_dict
+
+
+ynm_original_dict, ynm_collab_dict = parse_product_information(ynm_financial_info)
+yne_original_dict, yne_collab_dict = parse_product_information(yne_financial_info)
 
 #
 #Start Creating the Output Spreadsheet
