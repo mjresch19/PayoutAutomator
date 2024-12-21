@@ -28,7 +28,7 @@ ynm_financial_info, yne_financial_info, carry_pending_rollovers = parse_pending_
 with open('/YNM/PayoutAutomator/Data/artists.json') as fp:
     artist_info = json.load(fp)
 
-def parse_product_information(store_financial_info):
+def parse_product_information(store_financial_info: list):
 
     store_original_dict = {}
     store_collab_dict = {}
@@ -181,66 +181,20 @@ def parse_product_information(store_financial_info):
     return store_original_dict, store_collab_dict
 
 
-ynm_original_dict, ynm_collab_dict = parse_product_information(ynm_financial_info)
-yne_original_dict, yne_collab_dict = parse_product_information(yne_financial_info)
+def construct_df(store_dict: dict):
 
-#
-#Start Creating the Output Spreadsheet
-#
-ynm_artist_payments_dict = {}
-yne_artist_payments_dict = {}
+    sorted_store_dict = dict(sorted(store_dict.items()))
 
-#Start with YNM
-ynm_original_dict = dict(sorted(ynm_original_dict.items()))
+    artist_col = []
+    item_col = []
+    dist_type_col = []
+    sales_col = []
+    process_fee_col = []
+    cost_col = []
+    profit_col = []
 
-artist_col = []
-item_col = []
-dist_type_col = []
-sales_col = []
-process_fee_col = []
-cost_col = []
-profit_col = []
+    for key, val_list in sorted_store_dict.items():
 
-for key, val_list in ynm_original_dict.items():
-
-    for val in val_list:
-        artist_col.append(key)
-        item_col.append(val[0])
-        dist_type_col.append(val[1])
-        sales_col.append(float(val[2]))
-        process_fee_col.append(round(float(val[3]), 2))
-        cost_col.append(round(float(val[4]),2))
-        profit_col.append(float(val[5]))
-
-
-original_source_df = pd.DataFrame()
-original_source_df["Artist"] = artist_col
-original_source_df["Item"] = item_col
-original_source_df["Distribution Type"] = dist_type_col
-original_source_df["Total Sales"] = sales_col
-original_source_df["Processing Fee"] = process_fee_col
-original_source_df["Total Cost"] = cost_col
-original_source_df["Gross Profit"] = profit_col
-# original_source_df["Gross Profit"] = original_source_df["Total Sales"] - original_source_df["Total Cost"]
-original_source_df["SPE 40%"] = original_source_df["Gross Profit"] * 0.4
-original_source_df["SPE 50%"] = original_source_df["Gross Profit"] * 0.5
-original_source_df["SPE 60%"] = original_source_df["Gross Profit"] * 0.6
-
-
-
-
-ynm_collab_dict = dict(sorted(ynm_collab_dict.items()))
-
-artist_col = []
-item_col = []
-dist_type_col = []
-sales_col = []
-process_fee_col = []
-cost_col = []
-profit_col = []
-
-for key, val_list in ynm_collab_dict.items():
-        
         for val in val_list:
             artist_col.append(key)
             item_col.append(val[0])
@@ -250,94 +204,37 @@ for key, val_list in ynm_collab_dict.items():
             cost_col.append(round(float(val[4]),2))
             profit_col.append(float(val[5]))
 
-collab_commercial_df = pd.DataFrame()
-collab_commercial_df["Artist"] = artist_col
-collab_commercial_df["Item"] = item_col
-collab_commercial_df["Distribution Type"] = dist_type_col
-collab_commercial_df["Total Sales"] = sales_col
-collab_commercial_df["Processing Fee"] = process_fee_col
-collab_commercial_df["Total Cost"] = cost_col
-collab_commercial_df["Gross Profit"] = profit_col
-# collab_commercial_df["Gross Profit"] = collab_commercial_df["Total Sales"] - collab_commercial_df["Total Cost"]
-collab_commercial_df["SPE 40%"] = collab_commercial_df["Gross Profit"] * 0.4
-collab_commercial_df["SPE 50%"] = collab_commercial_df["Gross Profit"] * 0.5
-collab_commercial_df["SPE 60%"] = collab_commercial_df["Gross Profit"] * 0.6
 
+    store_source_df = pd.DataFrame()
+    store_source_df["Artist"] = artist_col
+    store_source_df["Item"] = item_col
+    store_source_df["Distribution Type"] = dist_type_col
+    store_source_df["Total Sales"] = sales_col
+    store_source_df["Processing Fee"] = process_fee_col
+    store_source_df["Total Cost"] = cost_col
+    store_source_df["Gross Profit"] = profit_col
+    store_source_df["SPE 40%"] = store_source_df["Gross Profit"] * 0.4
+    store_source_df["SPE 50%"] = store_source_df["Gross Profit"] * 0.5
+    store_source_df["SPE 60%"] = store_source_df["Gross Profit"] * 0.6
 
-#Next we go over YNE, doing the same thing
-yne_original_dict = dict(sorted(yne_original_dict.items()))
+    return pd.DataFrame(store_source_df)
 
-artist_col = []
-item_col = []
-dist_type_col = []
-sales_col = []
-process_fee_col = []
-cost_col = []
-profit_col = []
+ynm_original_dict, ynm_collab_dict = parse_product_information(ynm_financial_info)
+yne_original_dict, yne_collab_dict = parse_product_information(yne_financial_info)
 
-for key, val_list in yne_original_dict.items():
+ynm_original_df = construct_df(ynm_original_dict)
+ynm_collab_df = construct_df(ynm_collab_dict)
+yne_original_df = construct_df(yne_original_dict)
+yne_collab_df = construct_df(yne_collab_dict)
 
-    for val in val_list:
-        artist_col.append(key)
-        item_col.append(val[0])
-        dist_type_col.append(val[1])
-        sales_col.append(float(val[2]))
-        process_fee_col.append(round(float(val[3]), 2))
-        cost_col.append(round(float(val[4]),2))
-        profit_col.append(float(val[5]))
-
-
-yne_original_source_df = pd.DataFrame()
-yne_original_source_df["Artist"] = artist_col
-yne_original_source_df["Item"] = item_col
-yne_original_source_df["Distribution Type"] = dist_type_col
-yne_original_source_df["Total Sales"] = sales_col
-yne_original_source_df["Processing Fee"] = process_fee_col
-yne_original_source_df["Total Cost"] = cost_col
-yne_original_source_df["Gross Profit"] = profit_col
-# yne_original_source_df["Gross Profit"] = yne_original_source_df["Total Sales"] - yne_original_source_df["Total Cost"]
-yne_original_source_df["SPE 40%"] = yne_original_source_df["Gross Profit"] * 0.4
-yne_original_source_df["SPE 50%"] = yne_original_source_df["Gross Profit"] * 0.5
-yne_original_source_df["SPE 60%"] = yne_original_source_df["Gross Profit"] * 0.6
-
-
-yne_collab_dict = dict(sorted(yne_collab_dict.items()))
-
-artist_col = []
-item_col = []
-dist_type_col = []
-sales_col = []
-process_fee_col = []
-cost_col = []
-profit_col = []
-
-for key, val_list in yne_collab_dict.items():
-
-    for val in val_list:
-        artist_col.append(key)
-        item_col.append(val[0])
-        dist_type_col.append(val[1])
-        sales_col.append(float(val[2]))
-        process_fee_col.append(round(float(val[3]), 2))
-        cost_col.append(round(float(val[4]),2))
-        profit_col.append(float(val[5]))
-
-
-yne_collab_commercial_df = pd.DataFrame()
-yne_collab_commercial_df["Artist"] = artist_col
-yne_collab_commercial_df["Item"] = item_col
-yne_collab_commercial_df["Distribution Type"] = dist_type_col
-yne_collab_commercial_df["Total Sales"] = sales_col
-yne_collab_commercial_df["Processing Fee"] = process_fee_col
-yne_collab_commercial_df["Total Cost"] = cost_col
-yne_collab_commercial_df["Gross Profit"] = profit_col
-# yne_collab_commercial_df["Gross Profit"] = yne_collab_commercial_df["Total Sales"] - yne_collab_commercial_df["Total Cost"]
-yne_collab_commercial_df["SPE 40%"] = yne_collab_commercial_df["Gross Profit"] * 0.4
-yne_collab_commercial_df["SPE 50%"] = yne_collab_commercial_df["Gross Profit"] * 0.5
-yne_collab_commercial_df["SPE 60%"] = yne_collab_commercial_df["Gross Profit"] * 0.6
+#
+#Start Creating the Output Spreadsheet
+#
+ynm_artist_payments_dict = {}
+yne_artist_payments_dict = {}
 
 with pd.ExcelWriter("Data/PayoutPrototype/YNM_Payout_Prototype.xlsx", engine="openpyxl") as writer:
-    original_source_df.to_excel(writer, sheet_name="YNM Artist Payouts", index=False)
+    ynm_original_df.to_excel(writer, sheet_name="YNM Artist Payouts", index=False)
         
     # Workbook
     workbook = writer.book
@@ -582,7 +479,7 @@ with pd.ExcelWriter("Data/PayoutPrototype/YNM_Payout_Prototype.xlsx", engine="op
         worksheet.column_dimensions[column[0].column_letter].width = adjusted_width
 
 
-    collab_commercial_df.to_excel(writer, sheet_name="YNM Collab Payouts", index=False)
+    ynm_collab_df.to_excel(writer, sheet_name="YNM Collab Payouts", index=False)
         
     # Workbook
     workbook = writer.book
@@ -861,7 +758,7 @@ with pd.ExcelWriter("Data/PayoutPrototype/YNM_Payout_Prototype.xlsx", engine="op
     #
 
 
-    yne_original_source_df.to_excel(writer, sheet_name="YNE Artist Payouts", index=False)
+    yne_original_df.to_excel(writer, sheet_name="YNE Artist Payouts", index=False)
         
     # Workbook
     workbook = writer.book
@@ -1108,7 +1005,7 @@ with pd.ExcelWriter("Data/PayoutPrototype/YNM_Payout_Prototype.xlsx", engine="op
         worksheet.column_dimensions[column[0].column_letter].width = adjusted_width
 
 
-    yne_collab_commercial_df.to_excel(writer, sheet_name="YNE Collab Payouts", index=False)
+    yne_collab_df.to_excel(writer, sheet_name="YNE Collab Payouts", index=False)
         
     # Workbook
     workbook = writer.book
