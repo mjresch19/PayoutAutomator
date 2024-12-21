@@ -71,7 +71,6 @@ def parse_product_information(store_financial_info: list):
 
         else:
             
-
             #If our quick search of artist is not found, we need to look up
             #the artist aliases. LOOK UP EXACT MATCH (No titles)
             search_vendor = artist_lookup(product_vendor, artist_info)
@@ -109,7 +108,6 @@ def parse_product_information(store_financial_info: list):
 
         elif distribution_type == "Commercial":
 
-
             if product_vendor not in store_collab_dict:
 
                 store_collab_dict[product_vendor] = [[product_name, distribution_type, total_sales, processor_fee, total_cost, gross_profit]]
@@ -120,7 +118,6 @@ def parse_product_information(store_financial_info: list):
 
         elif distribution_type == "Book":
 
-
             if product_vendor not in store_original_dict:
 
                 store_original_dict[product_vendor] = [[product_name, distribution_type, total_sales, processor_fee, total_cost, gross_profit]]
@@ -128,7 +125,6 @@ def parse_product_information(store_financial_info: list):
             else:
 
                 store_original_dict[product_vendor].append([product_name, distribution_type, total_sales, processor_fee, total_cost, gross_profit])
-
 
         elif distribution_type == "In-House":
 
@@ -140,7 +136,6 @@ def parse_product_information(store_financial_info: list):
             else:
 
                 store_original_dict[product_vendor].append([product_name, distribution_type, total_sales, processor_fee, total_cost, gross_profit])
-
 
         elif distribution_type == "Collab":
 
@@ -176,10 +171,7 @@ def parse_product_information(store_financial_info: list):
 
                 store_original_dict[product_vendor].append([product_name, distribution_type, total_sales, processor_fee, total_cost, gross_profit])  
 
-
-
     return store_original_dict, store_collab_dict
-
 
 def construct_df(store_dict: dict):
 
@@ -204,7 +196,6 @@ def construct_df(store_dict: dict):
             cost_col.append(round(float(val[4]),2))
             profit_col.append(float(val[5]))
 
-
     store_source_df = pd.DataFrame()
     store_source_df["Artist"] = artist_col
     store_source_df["Item"] = item_col
@@ -218,7 +209,6 @@ def construct_df(store_dict: dict):
     store_source_df["SPE 60%"] = store_source_df["Gross Profit"] * 0.6
 
     return pd.DataFrame(store_source_df)
-
 
 def construct_payout_worksheet(store_source_df: pd.DataFrame, artists_payments_dict: dict, sheet_name: str):
 
@@ -525,7 +515,6 @@ with pd.ExcelWriter("Data/PayoutPrototype/YNM_Payout_Prototype.xlsx", engine="op
     #Sort the dictionary by the artist's names
     artists_payments_dict = dict(sorted(artists_payments_dict.items()))
 
-    
     combined_payments_df = pd.DataFrame()
 
     artist_col = []
@@ -564,13 +553,11 @@ with pd.ExcelWriter("Data/PayoutPrototype/YNM_Payout_Prototype.xlsx", engine="op
     worksheet.conditional_formatting.add(f'A2:A{worksheet.max_row}', CellIsRule(operator='equal', formula=['"r"'], fill=blue_fill))
     worksheet.conditional_formatting.add(f'A2:A{worksheet.max_row}', CellIsRule(operator='notEqual', formula=['"y"'], fill=red_fill))
 
-
     # AutoFit column width
     for column in worksheet.columns:
         max_length = max(len(str(cell.value)) for cell in column)
         adjusted_width = (max_length + 2) * 1.0
         worksheet.column_dimensions[column[0].column_letter].width = adjusted_width
-
 
     #Now create a combined rollovers sheet
     combined_rollover_df = pd.DataFrame()
