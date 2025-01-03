@@ -520,6 +520,10 @@ with pd.ExcelWriter("Data/PayoutPrototype/YNM_Payout_Prototype.xlsx", engine="op
     artist_col = []
     payment_col = []
     for key, val in artists_payments_dict.items():
+            
+            #skip if artist doesn't have any debit/credit
+            if val == 0:
+                continue
 
             artist_col.append(key)
             payment_col.append(round(val, 2))
@@ -567,6 +571,10 @@ with pd.ExcelWriter("Data/PayoutPrototype/YNM_Payout_Prototype.xlsx", engine="op
     rollover_col = []
 
     for key, val in artists_payments_dict.items():
+
+        #skip if artist doesn't have any debit/credit
+        if val == 0:
+            continue
 
         if val < 0:
 
