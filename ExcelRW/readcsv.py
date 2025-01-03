@@ -10,7 +10,7 @@ def read_csv(file_path):
 
     file_contents = []
 
-    with open(file_path, 'r', encoding='utf-8') as file:
+    with open(file_path, 'r') as file:
         reader = csv.reader(file)
 
         #Skip the header
