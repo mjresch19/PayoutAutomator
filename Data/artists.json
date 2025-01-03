@@ -76,7 +76,7 @@
   },
   "Bermuda": {
     "name": "Bermuda",
-    "aliases": ["Bermuda", "IntoDebu", "Muda", "Bermuda_Muda"],
+    "aliases": ["Bermuda", "IntoDebu", "Intodebu", "Muda", "Bermuda_Muda"],
     "client_type": "Artist"
   },
   "Berry": {
@@ -581,6 +581,11 @@
   "Peachyghouls": {
     "name": "PeachyGhouls",
     "aliases": ["PeachyGhouls"],
+    "client_type": "Artist"
+  },
+  "Peekeasy": {
+    "name": "Peekeasy",
+    "aliases": ["Peekeasy"],
     "client_type": "Artist"
   },
   "Pgr": {
