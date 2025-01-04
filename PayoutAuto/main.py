@@ -188,6 +188,11 @@ def construct_df(store_dict: dict):
     for key, val_list in sorted_store_dict.items():
 
         for val in val_list:
+
+            #skip if artist doesn't have any debit/credit for an item
+            if val[2] == 0: 
+                continue
+
             artist_col.append(key)
             item_col.append(val[0])
             dist_type_col.append(val[1])
