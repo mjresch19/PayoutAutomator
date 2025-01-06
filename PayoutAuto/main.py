@@ -95,6 +95,16 @@ def parse_product_information(store_financial_info: list):
             else:
 
                 store_original_dict[product_vendor].append([product_name, distribution_type, total_sales, processor_fee, total_cost, gross_profit])
+    
+        elif distribution_type == "Digital":
+
+            if product_vendor not in store_original_dict:
+
+                store_original_dict[product_vendor] = [[product_name, distribution_type, total_sales, processor_fee, total_cost, gross_profit]]
+
+            else:
+
+                store_original_dict[product_vendor].append([product_name, distribution_type, total_sales, processor_fee, total_cost, gross_profit])
 
         elif distribution_type == "Charity":
 
@@ -308,6 +318,13 @@ def construct_payout_worksheet(store_source_df: pd.DataFrame, artists_payments_d
                     worksheet.cell(row=i, column=8).fill = green_fill
 
                     new_profit = worksheet.cell(row=i, column=8).value
+            
+                elif worksheet.cell(row=i, column=3).value == "Digital":
+
+                    total_profit += worksheet.cell(row=i, column=7).value * 0.9
+                    worksheet.cell(row=i, column=7).fill = green_fill
+
+                    new_profit = worksheet.cell(row=i, column=7).value
 
                 artists_payments_dict[worksheet.cell(row=i, column=1).value] = new_profit
 
@@ -354,6 +371,13 @@ def construct_payout_worksheet(store_source_df: pd.DataFrame, artists_payments_d
 
                     new_profit = worksheet.cell(row=i, column=8).value
 
+                elif worksheet.cell(row=i, column=3).value == "Digital":
+
+                    total_profit += worksheet.cell(row=i, column=7).value * 0.9
+                    worksheet.cell(row=i, column=7).fill = green_fill
+
+                    new_profit = worksheet.cell(row=i, column=7).value
+
                 artists_payments_dict[worksheet.cell(row=i, column=1).value] += new_profit
 
         else:
@@ -396,6 +420,14 @@ def construct_payout_worksheet(store_source_df: pd.DataFrame, artists_payments_d
                     worksheet.cell(row=i, column=8).fill = green_fill
 
                     new_profit = worksheet.cell(row=i, column=8).value
+                
+
+                elif worksheet.cell(row=i, column=3).value == "Digital":
+
+                    total_profit += worksheet.cell(row=i, column=7).value * 0.9
+                    worksheet.cell(row=i, column=7).fill = green_fill
+
+                    new_profit = worksheet.cell(row=i, column=7).value
 
                 artists_payments_dict[worksheet.cell(row=i, column=1).value] = new_profit
 
@@ -440,6 +472,13 @@ def construct_payout_worksheet(store_source_df: pd.DataFrame, artists_payments_d
                     worksheet.cell(row=i, column=8).fill = green_fill
 
                     new_profit = worksheet.cell(row=i, column=8).value
+                
+                elif worksheet.cell(row=i, column=3).value == "Digital":
+
+                    total_profit += worksheet.cell(row=i, column=7).value * 0.9
+                    worksheet.cell(row=i, column=7).fill = green_fill
+
+                    new_profit = worksheet.cell(row=i, column=7).value
 
                 artists_payments_dict[worksheet.cell(row=i, column=1).value] += new_profit
         

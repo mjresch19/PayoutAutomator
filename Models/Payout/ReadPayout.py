@@ -49,6 +49,9 @@ class ReadPayout:
         if "(In-House)" in self.product_vendor or "(in-house)" in self.product_vendor:
             return "In-House"
         
+        if "(Digital)" in self.product_vendor or "(digital)" in self.product_vendor:
+            return "Digital"
+        
         return "Unknown"
     
     def calculate_processing_fee(self):
