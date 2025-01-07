@@ -219,6 +219,7 @@ def construct_df(store_dict: dict):
     store_source_df["Processing Fee"] = process_fee_col
     store_source_df["Total Cost"] = cost_col
     store_source_df["Gross Profit"] = profit_col
+    #TODO: Create column for Digital Profit Splits
     store_source_df["SPE 40%"] = store_source_df["Gross Profit"] * 0.4
     store_source_df["SPE 50%"] = store_source_df["Gross Profit"] * 0.5
     store_source_df["SPE 60%"] = store_source_df["Gross Profit"] * 0.6
