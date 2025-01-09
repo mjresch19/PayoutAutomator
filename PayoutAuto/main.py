@@ -618,7 +618,7 @@ with pd.ExcelWriter("Data/PayoutPrototype/YNM_Payout_Prototype.xlsx", engine="op
 
     for key, val in artists_payments_dict.items():
 
-        #skip if artist doesn't have any debit/credit
+        #skip if artist doesn't have any debit/credit - zero balance for item
         if val == 0:
             continue
 
