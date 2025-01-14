@@ -240,7 +240,7 @@ def construct_payout_worksheet(store_source_df: pd.DataFrame, artists_payments_d
     bold_underline = Font(bold=True, underline="single")
     center = Alignment(horizontal="center")
     fill = PatternFill(start_color="D3D3D3", end_color="D3D3D3", fill_type="solid")
-    new_header = ["Artist Name", "Item", "Distribution Type", "Total Value", "Processing Fee", "Cost", "Profit", "SPE 40%", "SPE 50%", "SPE 60%"]
+    new_header = ["Artist Name", "Item", "Distribution Type", "Total Value", "Processing Fee", "Cost", "Profit", "SPE 40%", "SPE 50%", "SPE 60%", "SPE 90%"]
     green_fill = PatternFill(start_color="00dc00", end_color="00dc00", fill_type="solid")
     orange_fill = PatternFill(start_color="FFA500", end_color="FFA500", fill_type="solid")
     purple_fill = PatternFill(start_color="800080", end_color="DB67DB", fill_type="solid")
@@ -253,10 +253,10 @@ def construct_payout_worksheet(store_source_df: pd.DataFrame, artists_payments_d
             # Insert total profit for previous artist
             if i > 2:  # skip for the first artist
                 worksheet.insert_rows(i)
-                worksheet.cell(row=i, column=9).value = "Total Payout"
-                worksheet.cell(row=i, column=9).font = bold_underline
-                worksheet.cell(row=i, column=10).value = total_profit
+                worksheet.cell(row=i, column=10).value = "Total Payout"
                 worksheet.cell(row=i, column=10).font = bold_underline
+                worksheet.cell(row=i, column=11).value = total_profit
+                worksheet.cell(row=i, column=11).font = bold_underline
                 i += 1  # skip the newly inserted row
             # Reset total profit for the new artist
             total_profit = 0
@@ -378,7 +378,7 @@ def construct_payout_worksheet(store_source_df: pd.DataFrame, artists_payments_d
                     total_profit += worksheet.cell(row=i, column=11).value
                     worksheet.cell(row=i, column=11).fill = green_fill
 
-                    new_profit = worksheet.cell(row=i, column=7).value
+                    new_profit = worksheet.cell(row=i, column=11).value
 
                 artists_payments_dict[worksheet.cell(row=i, column=1).value] += new_profit
 
@@ -427,7 +427,7 @@ def construct_payout_worksheet(store_source_df: pd.DataFrame, artists_payments_d
                 elif worksheet.cell(row=i, column=3).value == "Digital":
 
                     total_profit += worksheet.cell(row=i, column=11).value
-                    worksheet.cell(row=i, column=7).fill = green_fill
+                    worksheet.cell(row=i, column=11).fill = green_fill
 
                     new_profit = worksheet.cell(row=i, column=11).value
 
@@ -478,7 +478,7 @@ def construct_payout_worksheet(store_source_df: pd.DataFrame, artists_payments_d
                 elif worksheet.cell(row=i, column=3).value == "Digital":
 
                     total_profit += worksheet.cell(row=i, column=11).value
-                    worksheet.cell(row=i, column=7).fill = green_fill
+                    worksheet.cell(row=i, column=11).fill = green_fill
 
                     new_profit = worksheet.cell(row=i, column=11).value
 
@@ -488,10 +488,10 @@ def construct_payout_worksheet(store_source_df: pd.DataFrame, artists_payments_d
 
     # Insert total profit for the last artist
     worksheet.insert_rows(i)
-    worksheet.cell(row=i, column=9).value = "Total Payout"
-    worksheet.cell(row=i, column=9).font = bold_underline
-    worksheet.cell(row=i, column=10).value = total_profit
+    worksheet.cell(row=i, column=10).value = "Total Payout"
     worksheet.cell(row=i, column=10).font = bold_underline
+    worksheet.cell(row=i, column=11).value = total_profit
+    worksheet.cell(row=i, column=11).font = bold_underline
 
     # Remove header
     worksheet.delete_rows(1)
@@ -521,7 +521,7 @@ artists_payments_dict = {}
 bold_underline = Font(bold=True, underline="single")
 center = Alignment(horizontal="center")
 fill = PatternFill(start_color="D3D3D3", end_color="D3D3D3", fill_type="solid")
-new_header = ["Artist Name", "Item", "Distribution Type", "Total Value", "Processing Fee", "Cost", "Profit", "SPE 40%", "SPE 50%", "SPE 60%"]
+new_header = ["Artist Name", "Item", "Distribution Type", "Total Value", "Processing Fee", "Cost", "Profit", "SPE 40%", "SPE 50%", "SPE 60%", "SPE 90%"]
 green_fill = PatternFill(start_color="00dc00", end_color="00dc00", fill_type="solid")
 orange_fill = PatternFill(start_color="FFA500", end_color="FFA500", fill_type="solid")
 purple_fill = PatternFill(start_color="800080", end_color="DB67DB", fill_type="solid")
