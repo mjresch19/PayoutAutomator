@@ -42,6 +42,9 @@ def parse_product_information(store_financial_info: list):
         processor_fee = float(product[11])
         total_cost = float(product[12])
 
+        if product_name == "Bermuda Muda Bellypad":
+            print("Found")
+
         #Handle processing fee for negative sales, let us eat the processing fee for these, but not debit to the artist
         if total_sales < 0:
             processor_fee = 0
@@ -63,6 +66,9 @@ def parse_product_information(store_financial_info: list):
             except:
 
                 print("ERROR IN COLLAB VENDOR NAME:", product[1].title(), "==>",product_vendor, "(" + product_name + ")")
+        
+        else:
+            product_vendor = product_vendors
 
         #First check to see if our vendor is an *actual* artist
         if product_vendor.title() in artist_info:
