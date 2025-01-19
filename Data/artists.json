@@ -106,12 +106,7 @@
   },
   "Bobberkyu": {
     "name": "BobberKyu",
-    "aliases": ["BobberKyu"],
-    "client_type": "Artist"
-  },
-  "Bobberwcc": {
-    "name": "BobberWCC",
-    "aliases": ["BobberWCC", "Bobber"],
+    "aliases": ["BobberKyu", "Bobberwcc", "BobberWCC", "Bobber"],
     "client_type": "Artist"
   },
   "Botfishe": {
