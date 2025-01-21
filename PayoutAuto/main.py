@@ -217,6 +217,8 @@ def construct_df(store_dict: dict):
             cost_col.append(round(float(val[4]),2))
             profit_col.append(float(val[5]))
 
+            #create logic to determine the profit cuts for each artist (dist_type_col and profit_col)
+
     store_source_df = pd.DataFrame()
     store_source_df["Artist"] = artist_col
     store_source_df["Item"] = item_col
@@ -225,7 +227,7 @@ def construct_df(store_dict: dict):
     store_source_df["Processing Fee"] = process_fee_col
     store_source_df["Total Cost"] = cost_col
     store_source_df["Gross Profit"] = profit_col
-    #TODO: Consolidate columns
+    #TODO: Consolidate columns - make a column for profit cuts separately 
     store_source_df["SPE 40%"] = store_source_df["Gross Profit"] * 0.4
     store_source_df["SPE 50%"] = store_source_df["Gross Profit"] * 0.5
     store_source_df["SPE 60%"] = store_source_df["Gross Profit"] * 0.6
