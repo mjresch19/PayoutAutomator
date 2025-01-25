@@ -248,7 +248,7 @@ def construct_payout_worksheet(store_source_df: pd.DataFrame, artists_payments_d
     bold_underline = Font(bold=True, underline="single")
     center = Alignment(horizontal="center")
     fill = PatternFill(start_color="D3D3D3", end_color="D3D3D3", fill_type="solid")
-    #TODO - change columns - consolidate
+    #TODO - change columns - consolidate columns
     new_header = ["Artist Name", "Item", "Distribution Type", "Total Value", "Processing Fee", "Cost", "Profit", "SPE 40%", "SPE 50%", "SPE 60%", "SPE 90%"]
     green_fill = PatternFill(start_color="00dc00", end_color="00dc00", fill_type="solid")
     orange_fill = PatternFill(start_color="FFA500", end_color="FFA500", fill_type="solid")
