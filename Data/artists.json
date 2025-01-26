@@ -481,6 +481,10 @@
     "name": "Moi Yablochki",
     "aliases": ["Moi Yablochki", "moiyablochki"]
   },
+  "Moomochi": {
+    "name": "Moomochi",
+    "aliases": ["Moomochi"]
+  },
   "Monoyoki": {
     "name": "Monoyoki",
     "aliases": ["Monoyoki", "Mono"],
@@ -801,7 +805,7 @@
   },
   "Takamoom": {
     "name": "Takamoom",
-    "aliases": ["Takamoom", "Moomy", "Moomochi"],
+    "aliases": ["Takamoom", "Moomy"],
     "client_type": "Artist"
   },
   "Tdookus": {
