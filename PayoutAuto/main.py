@@ -42,8 +42,6 @@ def parse_product_information(store_financial_info: list):
         processor_fee = float(product[11])
         total_cost = float(product[12])
 
-        if product_name == "Bermuda Muda Bellypad":
-            print("Found")
 
         #Handle processing fee for negative sales, let us eat the processing fee for these, but not debit to the artist
         if total_sales < 0:
@@ -52,15 +50,18 @@ def parse_product_information(store_financial_info: list):
         gross_profit = total_sales - processor_fee - total_cost
 
         #Conduct safer search for artist, considering the fact there might be ( )
-        if "(" in product_vendors:
+        if "(" in product_vendors and distribution_type != "Collab":
 
             #Obtain all chars up to the " (""
             product_vendor = product_vendors[:product_vendors.index("(") - 1]
         
-        if ")" in product_vendors and distribution_type == "Collab":
+        elif ")" in product_vendors and distribution_type == "Collab":
 
             try:
+                #Obtain all chars up to the " (""
+                product_vendor = product_vendors[:product_vendors.index("(") - 1]
 
+                #Obtain all chars past the ") "
                 collab_vendor = product_vendors[product_vendors.index(") ") + 2:]
 
             except:
