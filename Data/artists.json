@@ -601,6 +601,11 @@
     "aliases": ["Pinbun", "PinBun"],
     "client_type": "Collab"
   },
+  "Pivko": {
+    "name": "Pivko",
+    "aliases": ["Pivko"],
+    "client_type": "Artist"
+  },
   "Plumpcognito": {
     "name": "Plumpcognito",
     "aliases": ["Plumpcognito"],
