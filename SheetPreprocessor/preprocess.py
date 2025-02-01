@@ -6,16 +6,16 @@ sys.path.append(curr_dir)
 
 from Models.Payout.ReadPayout import ReadPayout
 from Models.Payout.WritePayout import WritePayout
-from ExcelRW.readcsv import read_csv
+from ExcelRW.readcsv import read_csv_utf8
 
 to_do_cost_list = []
 
 #Open raw report files
 ynm_file_path = '/YNM/PayoutAutomator/Data/SheetPreprocessor/YNM_Sales.csv'
-ynm_financial_info = read_csv(ynm_file_path)
+ynm_financial_info = read_csv_utf8(ynm_file_path)
 
 yne_file_path = '/YNM/PayoutAutomator/Data/SheetPreprocessor/YNE_Sales.csv'
-yne_financial_info = read_csv(yne_file_path)
+yne_financial_info = read_csv_utf8(yne_file_path)
 
 #Iterate throuh the raw YNM Information
 with open('/YNM/PayoutAutomator/Data/SheetPreprocessor/YNM_Sales_Final.csv', 'w', newline='') as ynmcsvfile:
@@ -60,7 +60,7 @@ with open('/YNM/PayoutAutomator/Data/SheetPreprocessor/YNM_Sales_Final.csv', 'w'
             total_sales = read_payout.total_sales,
             processing_fee = processing_fee,
             total_cost = read_payout.total_cost,
-            gross_profit = gross_profit
+            gross_profit = round(gross_profit, 2)
         )
 
         ynmwriter.writerow([
@@ -143,7 +143,7 @@ with open('/YNM/PayoutAutomator/Data/SheetPreprocessor/YNE_Sales_Final.csv', 'w'
             total_sales = read_payout.total_sales,
             processing_fee = processing_fee,
             total_cost = read_payout.total_cost,
-            gross_profit = gross_profit
+            gross_profit = round(gross_profit, 2)
         )
 
         ynewriter.writerow([
