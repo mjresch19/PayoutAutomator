@@ -54,6 +54,11 @@
     "aliases": ["BabyPink", "BBPink", "Babypink", "LadyPink", "bbpink"],
     "client_type": "Collab"
   },
+  "Baka store": {
+    "name": "Baka Store",
+    "aliases": ["Baka Store", "BakaStore"],
+    "client_type": "Artist"
+  },
   "Bambooale": {
     "name": "BambooAle",
     "aliases": ["BambooAle"],
@@ -503,10 +508,7 @@
     "aliases": ["Moxie", "MoxieWoxie", "MoxieChew", "Moxiewoxie"],
     "client_type": "Artist"
   },
-  "Mts": {
-    "name": "Mts",
-    "aliases": ["MTS", "MTS VT"]
-  },
+
   "Mythicduo": {
     "name": "MythicDuo",
     "aliases": ["MythicDuo", "Flare", "FlareVT", "Umbre", "UmbreVT"],
@@ -587,10 +589,6 @@
     "aliases": ["Peekeasy"],
     "client_type": "Artist"
   },
-  "Pgr": {
-    "name": "PGR",
-    "aliases": ["PGR", "PGR VT"]
-  },
   "Pingu": {
     "name": "Pingu",
     "aliases": ["Pingu", "VTPingu"],
@@ -613,7 +611,7 @@
   },
   "P.m. Seymour": {
     "name": "P.M. Seymour",
-    "aliases": ["P.M. Seymour", "Seymour", "P.m. seymour"],
+    "aliases": ["P.M. Seymour", "Seymour", "P.m. seymour", "PGR", "pgr"],
     "client_type": "Artist"
   },
   "Podge": {
@@ -650,7 +648,7 @@
   },
   "Pt": {
     "name": "PT",
-    "aliases": ["PT", "PTS", "pts", "PreciousTimeSpent"],
+    "aliases": ["PT", "PTS", "pts", "PreciousTimeSpent", "MTS', 'mts'"],
     "client_type": "Artist"
   },
   "Radium225": {
