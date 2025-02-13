@@ -39,6 +39,8 @@ with open('/YNM/PayoutAutomator/Data/SheetPreprocessor/YNM_Sales_Final.csv', 'w'
             total_sales = product[9], 
             total_cost = product[10]
         )
+
+        read_payout.check_cost()
         
         dist_type = read_payout.get_distribution_type()
 
@@ -122,6 +124,8 @@ with open('/YNM/PayoutAutomator/Data/SheetPreprocessor/YNE_Sales_Final.csv', 'w'
                 total_sales = product[9], 
                 total_cost = product[10]
             )
+        
+        read_payout.check_cost()
             
         dist_type = read_payout.get_distribution_type()
 

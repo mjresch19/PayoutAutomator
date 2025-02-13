@@ -61,3 +61,9 @@ class ReadPayout:
     def calculate_gross_profit(self):
 
         return self.total_sales - self.calculate_processing_fee() - self.total_cost
+
+
+    def check_cost(self):
+
+        if self.total_cost == 0:
+            print(f"WARNING: Cost is 0 for {self.product_title}. Please handle this item's cost manually before proceeding manually.")
