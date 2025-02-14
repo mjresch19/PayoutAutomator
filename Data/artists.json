@@ -2,22 +2,26 @@
   "A4Loveletter": {
     "name": "A4LoveLetter",
     "aliases": ["A4LoveLetter"],
-    "client_type": ["Artist"]
+    "client_type": ["Artist"],
+    "profit_split_premium": false
   },
   "Abi": {
     "name": "Abi",
     "aliases": ["Abi"],
-    "client_type": ["Artist"]
+    "client_type": ["Artist"],
+    "profit_split_premium": false
   },
   "Alphena": {
     "name": "Alphena",
     "aliases": ["Alphena", "AlphenaVT"],
-    "client_type": ["Collab"]
+    "client_type": ["Collab"],
+    "profit_split_premium": false
   },
   "Akariteru": {
     "name": "Akariteru",
     "aliases": ["Akariteru", "Akari"],
-    "client_type": ["Collab"]
+    "client_type": ["Collab"],
+    "profit_split_premium": false
   },
   "Ancestral Potato": {
     "name": "Ancestral Potato",
@@ -27,477 +31,572 @@
       "AncestralPotato",
       "Ancestralpotato"
     ],
-    "client_type": ["Artist"]
+    "client_type": ["Artist"],
+    "profit_split_premium": false
   },
   "Andou": {
     "name": "Andou",
     "aliases": ["Andou"],
-    "client_type": ["Artist"]
+    "client_type": ["Artist"],
+    "profit_split_premium": false
   },
   "Angstrom": {
     "name": "Angstrom",
     "aliases": ["Angstrom"],
-    "client_type": ["Artist"]
+    "client_type": ["Artist"],
+    "profit_split_premium": false
   },
   "Arky": {
     "name": "Arky",
     "aliases": ["Arky", "ArkytheBear"],
-    "client_type": ["Collab"]
+    "client_type": ["Collab"],
+    "profit_split_premium": false
   },
   "Ashiwakura": {
     "name": "Ashiwakura",
     "aliases": ["Ashiwakura"],
-    "client_type": ["Artist"]
+    "client_type": ["Artist"],
+    "profit_split_premium": false
   },
   "Babypink": {
     "name": "BabyPink",
     "aliases": ["BabyPink", "BBPink", "Babypink", "LadyPink", "bbpink"],
-    "client_type": ["Collab"]
+    "client_type": ["Collab"],
+    "profit_split_premium": true
   },
   "Baka store": {
     "name": "Baka Store",
     "aliases": ["Baka Store", "BakaStore"],
-    "client_type": ["Artist"]
+    "client_type": ["Artist"],
+    "profit_split_premium": false
   },
   "Bambooale": {
     "name": "BambooAle",
     "aliases": ["BambooAle"],
-    "client_type": ["Artist"]
+    "client_type": ["Artist"],
+    "profit_split_premium": false
   },
   "Banana": {
     "name": "Banana",
     "aliases": ["Banana", "BANANA"],
-    "client_type": ["Artist"]
+    "client_type": ["Artist"],
+    "profit_split_premium": false
   },
   "Beanni": {
     "name": "Beanni",
     "aliases": ["BeanniVT", "Beanni", "Beannibun", "BeanniBun"],
-    "client_type": ["Artist"]
+    "client_type": ["Artist"],
+    "profit_split_premium": false
   },
   "Beepunz": {
     "name": "Beepunz",
     "aliases": ["Beepunz"],
-    "client_type": ["Artist"]
+    "client_type": ["Artist"],
+    "profit_split_premium": false
   },
   "Bermuda": {
     "name": "Bermuda",
     "aliases": ["Bermuda", "IntoDebu", "Intodebu", "Muda", "Bermuda_Muda"],
-    "client_type": ["Artist"]
+    "client_type": ["Artist"],
+    "profit_split_premium": false
   },
   "Berry": {
     "name": "Berry",
     "aliases": ["Berry", "Gellatina", "Berry Gellatina", "Toasted Berries"],
-    "client_type": ["Collab"]
+    "client_type": ["Collab"],
+    "profit_split_premium": false
   },
   "Better With Salt": {
     "name": "Better With Salt",
     "aliases": ["Better With Salt", "BetterWithSalt"],
-    "client_type": ["Artist"]
+    "client_type": ["Artist"],
+    "profit_split_premium": false
   },
   "Blaqkkat": {
     "name": "Blaqkkat",
     "aliases": ["Blaqkkat", "The Blaqkkat", "Blaqk Kat"],
-    "client_type": ["Collab"]
+    "client_type": ["Collab"],
+    "profit_split_premium": false
   },
   "Blumoon": {
     "name": "BluMoon",
     "aliases": ["BluMoon", "Blu Moon"],
-    "client_type": ["Artist"]
+    "client_type": ["Artist"],
+    "profit_split_premium": false
   },
   "Bluuey": {
     "name": "Bluuey",
     "aliases": ["Bluuey", "Bluueygooey"],
-    "client_type": ["Artist"]
+    "client_type": ["Artist"],
+    "profit_split_premium": false
   },
   "Bobberkyu": {
     "name": "BobberKyu",
     "aliases": ["BobberKyu", "Bobberwcc", "BobberWCC", "Bobber"],
-    "client_type": ["Artist"]
+    "client_type": ["Artist"],
+    "profit_split_premium": false
   },
   "Botfishe": {
     "name": "Botfishe",
     "aliases": ["Botfishe", "BotFishe"],
-    "client_type": ["Artist"]
+    "client_type": ["Artist"],
+    "profit_split_premium": false
   },
   "Brocollie": {
     "name": "Brocollie",
     "aliases": ["Brocollie", "Broccoli"],
-    "client_type": ["Artist"]
+    "client_type": ["Artist"],
+    "profit_split_premium": false
   },
   "Bulumblebee": {
     "name": "Bulumblebee",
     "aliases": ["Bulumblebee"],
-    "client_type": ["Artist"]
+    "client_type": ["Artist"],
+    "profit_split_premium": false
   },
   "Burgerkurger": {
     "name": "Burgerkurger",
     "aliases": ["Burgerkurger"],
-    "client_type": ["Artist"]
+    "client_type": ["Artist"],
+    "profit_split_premium": false
   },
   "Cassie": {
     "name": "Cassie",
     "aliases": ["Cassie", "CassieVT", "Cassievt"],
-    "client_type": ["Collab"]
+    "client_type": ["Collab"],
+    "profit_split_premium": false
   },
   "Catboymech": {
     "name": "catboymech",
     "aliases": ["catboymech", "Catboy", "CBM", "Catboymech"],
-    "client_type": ["Collab"]
+    "client_type": ["Collab"],
+    "profit_split_premium": false
   },
   "Cerberos": {
     "name": "Cerberos",
     "aliases": ["Cerberos", "CerberosVA"],
-    "client_type": ["Collab"]
+    "client_type": ["Collab"],
+    "profit_split_premium": false
   },
   "Charity": {
     "name": "Charity",
     "aliases": ["Charity"],
-    "client_type": ["Artist"]
+    "client_type": ["Artist"],
+    "profit_split_premium": false
   },
   "Chet Rippo": {
     "name": "Chet Rippo",
     "aliases": ["Chet Rippo"],
-    "client_type": ["Artist"]
+    "client_type": ["Artist"],
+    "profit_split_premium": false
   },
   "Choji": {
     "name": "Choji",
     "aliases": ["Choji", "MissChoji"],
-    "client_type": ["Artist"]
+    "client_type": ["Artist"],
+    "profit_split_premium": false
   },
   "Corvus Kuro": {
     "name": "Corvus Kuro",
     "aliases": ["Corvus Kuro", "Kuro"],
-    "client_type": ["Collab"]
+    "client_type": ["Collab"],
+    "profit_split_premium": false
   },
   "Crikai": {
     "name": "Crikai",
     "aliases": ["CriKai", "Crikai"],
-    "client_type": ["Artist"]
+    "client_type": ["Artist"],
+    "profit_split_premium": false
   },
   "Crystalcheese": {
     "name": "Crystalcheese",
     "aliases": ["Crystalcheese", "CrystalC"],
-    "client_type": ["Artist"]
+    "client_type": ["Artist"],
+    "profit_split_premium": false
   },
   "Crysnickel": {
     "name": "CrysNickel",
     "aliases": ["CrysNickel"],
-    "client_type": ["Artist"]
+    "client_type": ["Artist"],
+    "profit_split_premium": false
   },
   "Crystally": {
     "name": "Crystally",
     "aliases": ["Crystally", "CrystallyVT"],
-    "client_type": ["Artist"]
+    "client_type": ["Artist"],
+    "profit_split_premium": false
   },
   "Cutiexcoffin": {
     "name": "CutiexCoffin",
     "aliases": ["CutiexCoffin", "CxC", "Lina", "Angelina Kumalo"],
-    "client_type": ["Artist", "Collab"]
+    "client_type": ["Artist", "Collab"],
+    "profit_split_premium": false
   },
   "Dai": {
     "name": "Dai",
     "aliases": ["Dai"],
-    "client_type": ["Artist"]
+    "client_type": ["Artist"],
+    "profit_split_premium": false
   },
   "Delichan": {
     "name": "Delichan",
     "aliases": ["Delichan"],
-    "client_type": ["Collab"]
+    "client_type": ["Collab"],
+    "profit_split_premium": false
   },
   "Diury": {
     "name": "Diury",
     "aliases": ["Diury"],
-    "client_type": ["Artist"]
+    "client_type": ["Artist"],
+    "profit_split_premium": false
   },
   "Digi": {
     "name": "Digi",
     "aliases": ["Digi", "Digi Shell"],
-    "client_type": ["Collab"]
+    "client_type": ["Collab"],
+    "profit_split_premium": false
   },
   "Dormir": {
     "name": "Dormir",
     "aliases": ["Dormir", "Dormir Vantis", "Revesaulait"],
-    "client_type": ["Artist"]
+    "client_type": ["Artist"],
+    "profit_split_premium": false
   },
   "Dr. Blackjack": {
     "name": "Dr. Blackjack",
     "aliases": ["Dr. Blackjack", "DrBlackjack"],
-    "client_type": ["Artist"]
+    "client_type": ["Artist"],
+    "profit_split_premium": false
   },
   "Eightxl": {
     "name": "EightXL",
     "aliases": ["EightXL", "Eightxl"],
-    "client_type": ["Artist"]
+    "client_type": ["Artist"],
+    "profit_split_premium": false
   },
   "Elena": {
     "name": "Elena",
     "aliases": ["Elena", "wettmilkk", "wetmilkk"],
-    "client_type": ["Artist", "Collab"]
+    "client_type": ["Artist", "Collab"],
+    "profit_split_premium": false
   },
   "Fapolantern": {
     "name": "Fapolantern",
     "aliases": ["Fapo", "Fapolantern"],
-    "client_type": ["Artist"]
+    "client_type": ["Artist"],
+    "profit_split_premium": false
   },
   "Finni": {
     "name": "Finni",
     "aliases": ["Swolefin", "SwoleFin", "Finni"],
-    "client_type": ["Artist"]
+    "client_type": ["Artist"],
+    "profit_split_premium": false
   },
   "Freya": {
     "name": "Freya",
     "aliases": ["Freya", "Amari", "Freya Amari"],
-    "client_type": ["Collab"]
+    "client_type": ["Collab"],
+    "profit_split_premium": false
   },
   "Fumetsu No Tora": {
     "name": "Fumetsu No Tora",
     "aliases": ["Fumetsu No Tora", "Tora"],
-    "client_type": ["Artist"]
+    "client_type": ["Artist"],
+    "profit_split_premium": false
   },
   "Gaikiken": {
     "name": "Gaikiken",
     "aliases": ["Gaikiken"],
-    "client_type": ["Artist"]
+    "client_type": ["Artist"],
+    "profit_split_premium": false
   },
   "Gaz": {
     "name": "Gaz Acantha",
     "aliases": ["Gaz Acantha", "Gaz"],
-    "client_type": ["Collab"]
+    "client_type": ["Collab"],
+    "profit_split_premium": false
   },
   "Gobbocks": {
     "name": "Gobbocks",
     "aliases": ["Gobbocks"],
-    "client_type": ["Artist"]
+    "client_type": ["Artist"],
+    "profit_split_premium": false
   },
   "Haerong": {
     "name": "Haerong",
     "aliases": ["Haerong"],
-    "client_type": ["Collab"]
+    "client_type": ["Collab"],
+    "profit_split_premium": false
   },
   "Hellbrains": {
     "name": "Hellbrains",
     "aliases": ["Hellbrains", "HellBrains", "HellbrainS"],
-    "client_type": ["Artist"]
+    "client_type": ["Artist"],
+    "profit_split_premium": false
   },
   "Himewawa": {
     "name": "Himewawa",
     "aliases": ["Himewawa"],
-    "client_type": ["Artist"]
+    "client_type": ["Artist"],
+    "profit_split_premium": false
   },
   "Hina": {
     "name": "Hina",
     "aliases": ["Hina"],
-    "client_type": ["Artist"]
+    "client_type": ["Artist"],
+    "profit_split_premium": false
   },
   "Hunibun": {
     "name": "Hunibun",
     "aliases": ["Hunibun", "HuniBun", "Huni", "Hunii"],
-    "client_type": ["Collab"]
+    "client_type": ["Collab"],
+    "profit_split_premium": false
   },
   "Joei": {
     "name": "Joei",
     "aliases": ["Joei"],
-    "client_type": ["Collab"]
+    "client_type": ["Collab"],
+    "profit_split_premium": false
   },
   "Joekie3Wl": {
     "name": "Joekie3Wl",
     "aliases": ["Joekie3Wl"],
-    "client_type": ["Artist"]
+    "client_type": ["Artist"],
+    "profit_split_premium": false
   },
   "Jomaro": {
     "name": "Jomaro",
     "aliases": ["Jomaro"],
-    "client_type": ["Artist"]
+    "client_type": ["Artist"],
+    "profit_split_premium": false
   },
   "Jujunaught": {
     "name": "JujuNaught",
     "aliases": ["Juju", "JujuNaught"],
-    "client_type": ["Artist"]
+    "client_type": ["Artist"],
+    "profit_split_premium": false
   },
   "Jsizzle": {
     "name": "JSizzle",
     "aliases": ["JSizzle", "JsizzleTheGreat"],
-    "client_type": ["Collab"]
+    "client_type": ["Collab"],
+    "profit_split_premium": false
   },
   "Jupiter": {
     "name": "Jupiter",
     "aliases": ["Jupiter"],
-    "client_type": ["Artist"]
+    "client_type": ["Artist"],
+    "profit_split_premium": false
   },
   "Kafekafei": {
     "name": "KafeKafei",
     "aliases": ["KafeKafei", "KafeKafeii"],
-    "client_type": ["Artist"]
+    "client_type": ["Artist"],
+    "profit_split_premium": false
   },
   "Kaiyo": {
     "name": "Kaiyo",
     "aliases": ["Kaiyo"],
-    "client_type": ["Collab"]
+    "client_type": ["Collab"],
+    "profit_split_premium": true
   },
   "Kekkitoz": {
     "name": "Kekkitoz",
     "aliases": ["Kekkitoz", "Kekki"],
-    "client_type": ["Artist"]
+    "client_type": ["Artist"],
+    "profit_split_premium": false
   },
   "Kennasaur": {
     "name": "Kennasaur",
     "aliases": ["Kennasaur", "Kenna"],
-    "client_type": ["Collab"]
+    "client_type": ["Collab"],
+    "profit_split_premium": false
   },
   "Ketsy": {
     "name": "Ketsy",
     "aliases": ["Ketsy", "Ketsy Yok", "KetsyYok"],
-    "client_type": ["Collab"]
+    "client_type": ["Collab"],
+    "profit_split_premium": false
   },
   "Kirana": {
     "name": "Kirana",
     "aliases": ["Kirana", "Kirana Yonome"],
-    "client_type": ["Collab"]
+    "client_type": ["Collab"],
+    "profit_split_premium": false
   },
   "Klebo": {
     "name": "Klebo",
     "aliases": ["Klebo", "Klebo_Stuff"],
-    "client_type": ["Artist"]
+    "client_type": ["Artist"],
+    "profit_split_premium": false
   },
   "Kofii-02": {
     "name": "Kofii-02",
     "aliases": ["Kofii-02", "Kofii"],
-    "client_type": ["Artist"]
+    "client_type": ["Artist"],
+    "profit_split_premium": false
   },
   "Kota": {
     "name": "Kota",
     "aliases": ["Kota", "Kota Kotonya"],
-    "client_type": ["Collab"]
+    "client_type": ["Collab"],
+    "profit_split_premium": false
   },
   "Kyoharu": {
     "name": "Kyoharu",
     "aliases": ["Kyoharu"],
-    "client_type": ["Artist"]
+    "client_type": ["Artist"],
+    "profit_split_premium": false
   },
   "Lewdwok": {
     "name": "Lewdwok",
     "aliases": ["Lewdwok"],
-    "client_type": ["Artist"]
+    "client_type": ["Artist"],
+    "profit_split_premium": false
   },
   "Lifelinelemons": {
     "name": "Lifelinelemons",
     "aliases": ["Lifelinelemons"],
-    "client_type": ["Artist"]
+    "client_type": ["Artist"],
+    "profit_split_premium": false
   },
   "Lucien": {
     "name": "Lucien",
     "aliases": ["Lucien", "Kuromiya", "Kuromiya Lucien", "Lulu"],
-    "client_type": ["Collab"]
+    "client_type": ["Collab"],
+    "profit_split_premium": false
   },
   "Lunermier": {
     "name": "Lunermier",
     "aliases": ["Lunermier"],
-    "client_type": ["Collab"]
+    "client_type": ["Collab"],
+    "profit_split_premium": false
   },
   "Mac": {
     "name": "Mac",
     "aliases": ["Mac", "Xi Li", "Xi Le"],
-    "client_type": ["Artist"]
+    "client_type": ["Artist"],
+    "profit_split_premium": false
   },
   "Madzisstacked": {
     "name": "Madzisstacked",
     "aliases": ["Madzisstacked", "MadzIsSTACKED"],
-    "client_type": ["Collab"]
+    "client_type": ["Collab"],
+    "profit_split_premium": false
   },
   "Mame": {
     "name": "Mame",
     "aliases": ["Mame"],
-    "client_type": ["Artist"]
+    "client_type": ["Artist"],
+    "profit_split_premium": false
   },
   "Maple Chicken": {
     "name": "Maple Chicken",
     "aliases": ["Maple Chicken"],
-    "client_type": ["Collab"]
+    "client_type": ["Collab"],
+    "profit_split_premium": false
   },
   "Mara": {
     "name": "Mara",
     "aliases": ["Mara Mirrosia", "Mara"],
-    "client_type": ["Artist"]
+    "client_type": ["Artist"],
+    "profit_split_premium": false
   },
   "Matemi": {
     "name": "Matemi",
     "aliases": ["Matemi"],
-    "client_type": ["Artist"]
+    "client_type": ["Artist"],
+    "profit_split_premium": false
   },
   "Marauder6272": {
     "name": "Marauder6272",
     "aliases": ["Marauder6272", "Marauder"],
-    "client_type": ["Artist"]
+    "client_type": ["Artist"],
+    "profit_split_premium": false
   },
   "Maxiebreak": {
     "name": "MaxieBreaker",
     "aliases": ["MaxieBreaker", "Maxie", "KappAllNight", "Kappallnight"],
-    "client_type": ["Artist"]
+    "client_type": ["Artist"],
+    "profit_split_premium": false
   },
   "Meimei": {
     "name": "Meimei",
     "aliases": ["Meimei", "Mei"],
-    "client_type": ["Artist"]
+    "client_type": ["Artist"],
+    "profit_split_premium": false
   },
   "Miabyte": {
     "name": "Miabyte",
     "aliases": ["Miabyte"],
-    "client_type": ["Collab"]
+    "client_type": ["Collab"],
+    "profit_split_premium": false
   },
   "Michiirou": {
     "name": "Michiirou",
     "aliases": ["Michiirou", "Michii"],
-    "client_type": ["Artist"]
+    "client_type": ["Artist"],
+    "profit_split_premium": false
   },
   "Milk tea": {
     "name": "Milk Tea",
     "aliases": ["Milk Tea"],
-    "client_type": ["Artist"]
+    "client_type": ["Artist"],
+    "profit_split_premium": false
   },
   "Milkcubus": {
     "name": "Milkcubus",
     "aliases": ["Milkcubus", "Milkubus"],
-    "client_type": ["Artist"]
+    "client_type": ["Artist"],
+    "profit_split_premium": false
   },
   "Mintmoo": {
     "name": "Mintmoo",
     "aliases": ["Mintmoo", "Mint"],
-    "client_type": ["Collab"]
+    "client_type": ["Collab"],
+    "profit_split_premium": false
   },
   "Mintrimo": {
     "name": "Mintrimo",
     "aliases": ["Mintrimo", "Miro"],
-    "client_type": ["Artist"]
+    "client_type": ["Artist"],
+    "profit_split_premium": false
   },
   "Missus Mummy": {
     "name": "Missus Mummy",
     "aliases": ["Missus Mummy", "Mummy"],
-    "client_type": ["Collab"]
+    "client_type": ["Collab"],
+    "profit_split_premium": false
   },
   "Mistko": {
     "name": "Mistko",
     "aliases": ["Mistko"],
-    "client_type": ["Artist"]
+    "client_type": ["Artist"],
+    "profit_split_premium": false
   },
   "Mitsu_qo": {
     "name": "Mitsu_qo",
     "aliases": ["Mitsu_qo", "Mitsu"],
-    "client_type": ["Artist"]
+    "client_type": ["Artist"],
+    "profit_split_premium": false
   },
   "Miwo": {
     "name": "Miwo",
     "aliases": ["Miwo", "MiwoVT"],
-    "client_type": ["Artist"]
+    "client_type": ["Artist"],
+    "profit_split_premium": false
   },
   "Mofuuwafuwa": {
     "name": "Mofuuwafuwa",
     "aliases": ["Mofuuwafuwa", "mofuuwafuwa"],
-    "client_type": ["Artist"]
+    "client_type": ["Artist"],
+    "profit_split_premium": false
   },
   "Moiyablochki": {
     "name": "Moi Yablochki",
     "aliases": ["Moi Yablochki", "moiyablochki"],
-    "client_type": ["Artist"]
+    "client_type": ["Artist"],
+    "profit_split_premium": false
   },
   "Moomochi": {
     "name": "Moomochi",
@@ -506,302 +605,362 @@
   "Monoyoki": {
     "name": "Monoyoki",
     "aliases": ["Monoyoki", "Mono"],
-    "client_type": ["Artist"]
+    "client_type": ["Artist"],
+    "profit_split_premium": false
   },
   "Moretimespent": {
     "name": "MoreTimeSpent",
     "aliases": ["MoreTimeSpent", "MTS"],
-    "client_type": ["Artist"]
+    "client_type": ["Artist"],
+    "profit_split_premium": false
   },
   "Morgana": {
     "name": "Morgana",
     "aliases": ["Morgana"],
-    "client_type": ["Artist"]
+    "client_type": ["Artist"],
+    "profit_split_premium": false
   },
   "Moxie": {
     "name": "Moxie",
     "aliases": ["Moxie", "MoxieWoxie", "MoxieChew", "Moxiewoxie"],
-    "client_type": ["Artist"]
+    "client_type": ["Artist"],
+    "profit_split_premium": false
   },
   "Mythicduo": {
     "name": "MythicDuo",
     "aliases": ["MythicDuo", "Flare", "FlareVT", "Umbre", "UmbreVT"],
-    "client_type": ["Collab"]
+    "client_type": ["Collab"],
+    "profit_split_premium": false
   },
   "Nahokoveta": {
     "name": "NahokoVeta",
     "aliases": ["NahokaVeta", "Nahoko"],
-    "client_type": ["Artist", "Collab"]
+    "client_type": ["Artist", "Collab"],
+    "profit_split_premium": false
   },
   "Nasu": {
     "name": "Nasu",
     "aliases": ["Nasu", "Nasu Aisuru"],
-    "client_type": ["Collab"]
+    "client_type": ["Collab"],
+    "profit_split_premium": false
   },
   "Nananana": {
     "name": "Nananana",
     "aliases": ["Nananana", "NANANANA"],
-    "client_type": ["Artist"]
+    "client_type": ["Artist"],
+    "profit_split_premium": false
   },
   "Natas": {
     "name": "Natas",
     "aliases": ["Natas"],
-    "client_type": ["Artist"]
+    "client_type": ["Artist"],
+    "profit_split_premium": false
   },
   "Near": {
     "name": "Near",
     "aliases": ["Near"],
-    "client_type": ["Artist"]
+    "client_type": ["Artist"],
+    "profit_split_premium": false
   },
   "Nitty": {
     "name": "Nitty",
     "aliases": ["Nitty"],
-    "client_type": ["Artist"]
+    "client_type": ["Artist"],
+    "profit_split_premium": false
   },
   "Nohr": {
     "name": "Nohr",
     "aliases": ["Nohr", "NohrandTea"],
-    "client_type": ["Collab"]
+    "client_type": ["Collab"],
+    "profit_split_premium": false
   },
   "Nonnbell": {
     "name": "Nonnbell",
     "aliases": ["Nonnbell"],
-    "client_type": ["Artist"]
+    "client_type": ["Artist"],
+    "profit_split_premium": false
   },
   "Nyanilla": {
     "name": "Nyanilla",
     "aliases": ["Nyanilla"],
-    "client_type": ["Artist"]
+    "client_type": ["Artist"],
+    "profit_split_premium": false
   },
   "Oko": {
     "name": "Oko",
     "aliases": ["Oko", "Afaik Oko", "Okome"],
-    "client_type": ["Artist"]
+    "client_type": ["Artist"],
+    "profit_split_premium": false
   },
   "Onelittlepiranha": {
     "name": "OneLittlePiranha",
     "aliases": ["OneLittlePiranha", "OLP", "One Little Piranha"],
-    "client_type": ["Collab"]
+    "client_type": ["Collab"],
+    "profit_split_premium": false
   },
   "Pandawa": {
     "name": "Pandawa",
     "aliases": ["Pandawa"],
-    "client_type": ["Collab"]
+    "client_type": ["Collab"],
+    "profit_split_premium": false
   },
   "Papamutt": {
     "name": "Papamutt",
     "aliases": ["Papamutt"],
-    "client_type": ["Collab"]
+    "client_type": ["Collab"],
+    "profit_split_premium": false
   },
   "Peachyghouls": {
     "name": "PeachyGhouls",
     "aliases": ["PeachyGhouls"],
-    "client_type": ["Artist"]
+    "client_type": ["Artist"],
+    "profit_split_premium": false
   },
   "Peekeasy": {
     "name": "Peekeasy",
     "aliases": ["Peekeasy"],
-    "client_type": ["Artist"]
+    "client_type": ["Artist"],
+    "profit_split_premium": false
   },
   "Pingu": {
     "name": "Pingu",
     "aliases": ["Pingu", "VTPingu"],
-    "client_type": ["Collab"]
+    "client_type": ["Collab"],
+    "profit_split_premium": false
   },
   "Pinbun": {
     "name": "Pinbun",
     "aliases": ["Pinbun", "PinBun"],
-    "client_type": ["Collab"]
+    "client_type": ["Collab"],
+    "profit_split_premium": false
   },
   "Pivko": {
     "name": "Pivko",
     "aliases": ["Pivko"],
-    "client_type": ["Artist"]
+    "client_type": ["Artist"],
+    "profit_split_premium": false
   },
   "Plumpcognito": {
     "name": "Plumpcognito",
     "aliases": ["Plumpcognito"],
-    "client_type": ["Artist"]
+    "client_type": ["Artist"],
+    "profit_split_premium": false
   },
   "P.m. Seymour": {
     "name": "P.M. Seymour",
     "aliases": ["P.M. Seymour", "Seymour", "P.m. seymour", "PGR", "pgr"],
-    "client_type": ["Artist"]
+    "client_type": ["Artist"],
+    "profit_split_premium": false
   },
   "Podge": {
     "name": "Podge",
     "aliases": ["Podge", "Podge the Goblin"],
-    "client_type": ["Collab"]
+    "client_type": ["Collab"],
+    "profit_split_premium": false
   },
   "Pomatomaster": {
     "name": "Pomatomaster",
     "aliases": ["Pomatomaster"],
-    "client_type": ["Artist"]
+    "client_type": ["Artist"],
+    "profit_split_premium": false
   },
   "Pomme": {
     "name": "Pomme",
     "aliases": ["Pomme", "Pommette", "Pommuu"],
-    "client_type": ["Artist"]
+    "client_type": ["Artist"],
+    "profit_split_premium": false
   },
   "Poors": {
     "name": "Poors",
     "aliases": ["Poors", "Poors."],
-    "client_type": ["Artist"]
+    "client_type": ["Artist"],
+    "profit_split_premium": false
   },
   "Potatoblu": {
     "name": "PotatoBlu",
     "aliases": ["PotatoBlu", "Potato Blu"],
-    "client_type": ["Artist"]
+    "client_type": ["Artist"],
+    "profit_split_premium": false
   },
   "Princematchacakes": {
     "name": "PrinceMatchaCakes",
     "aliases": ["PrinceMatchaCakes", "Matcha"],
-    "client_type": ["Artist"]
+    "client_type": ["Artist"],
+    "profit_split_premium": false
   },
   "Purpleguyri": {
     "name": "PurpleGuyRi",
     "aliases": ["PurpleGuyRi", "Ri"],
-    "client_type": ["Artist"]
+    "client_type": ["Artist"],
+    "profit_split_premium": false
   },
   "Pt": {
     "name": "PT",
     "aliases": ["PT", "PTS", "pts", "PreciousTimeSpent", "MTS', 'mts'"],
-    "client_type": ["Artist"]
+    "client_type": ["Artist"],
+    "profit_split_premium": false
   },
   "Radium225": {
     "name": "Radium225",
     "aliases": ["Radium225"],
-    "client_type": ["Artist"]
+    "client_type": ["Artist"],
+    "profit_split_premium": false
   },
   "Ransome Rex": {
     "name": "Ransome Rex",
     "aliases": ["Ransome Rex"],
-    "client_type": ["Artist"]
+    "client_type": ["Artist"],
+    "profit_split_premium": false
   },
   "Rattie": {
     "name": "Rattie",
     "aliases": ["Rattie", "RattieSteps"],
-    "client_type": ["Artist"]
+    "client_type": ["Artist"],
+    "profit_split_premium": false
   },
   "Requinn": {
     "name": "Requinn",
     "aliases": ["Requinn"],
-    "client_type": ["Artist"]
+    "client_type": ["Artist"],
+    "profit_split_premium": false
   },
   "Rhea": {
     "name": "Rhea",
     "aliases": ["Rhea", "Rheaeris"],
-    "client_type": ["Collab"]
+    "client_type": ["Collab"],
+    "profit_split_premium": false
   },
   "Rira": {
     "name": "Rira",
     "aliases": ["Rira"],
-    "client_type": ["Artist"]
+    "client_type": ["Artist"],
+    "profit_split_premium": false
   },
   "Roundersofter": {
     "name": "Roundersofter",
     "aliases": ["Roundersofter", "RounderSofter"],
-    "client_type": ["Artist"]
+    "client_type": ["Artist"],
+    "profit_split_premium": false
   },
   "Roxy": {
     "name": "Roxy",
     "aliases": ["Roxy", "Manticore", "Roxy Manticore"],
-    "client_type": ["Collab"]
+    "client_type": ["Collab"],
+    "profit_split_premium": false
   },
   "Rozen": {
     "name": "Rozen",
     "aliases": ["Rozen", "Roz-kun"],
-    "client_type": ["Artist", "Collab"]
+    "client_type": ["Artist", "Collab"],
+    "profit_split_premium": false
   },
   "Ruinous": {
     "name": "Ruinous",
     "aliases": ["Ruinous", "Ruin", "Ruin Greatwrym"],
-    "client_type": ["Artist"]
+    "client_type": ["Artist"],
+    "profit_split_premium": false
   },
   "Ryker": {
     "name": "Ryker",
     "aliases": ["Ryker"],
-    "client_type": ["Collab"]
+    "client_type": ["Collab"],
+    "profit_split_premium": false
   },
   "Saa Halust": {
     "name": "Saa Halust",
     "aliases": ["Saa", "Halust", "Saa Halust"],
-    "client_type": ["Collab"]
+    "client_type": ["Collab"],
+    "profit_split_premium": true
   },
   "Safershawnk": {
     "name": "Safershawnk",
     "aliases": ["Safershawnk"],
-    "client_type": ["Artist"]
+    "client_type": ["Artist"],
+    "profit_split_premium": false
   },
   "Sakananotenshi": {
     "name": "SakanaNoTenshi",
     "aliases": ["SakanaNoTenshi"],
-    "client_type": ["Artist"]
+    "client_type": ["Artist"],
+    "profit_split_premium": false
   },
   "Sammie": {
     "name": "Sammie",
     "aliases": ["Sammie", "SammieSage"],
-    "client_type": ["Artist"]
+    "client_type": ["Artist"],
+    "profit_split_premium": false
   },
   "Savehymn": {
     "name": "Savehymn",
     "aliases": ["Savehymn"],
-    "client_type": ["Artist"]
+    "client_type": ["Artist"],
+    "profit_split_premium": false
   },
   "Sharkbubble": {
     "name": "Sharkbubble",
     "aliases": ["Sharkbubble", "SharkBubble"],
-    "client_type": ["Artist"]
+    "client_type": ["Artist"],
+    "profit_split_premium": false
   },
   "Shiiva": {
     "name": "Shiiva",
     "aliases": ["Shiiva", "Radavaris"],
-    "client_type": ["Artist"]
+    "client_type": ["Artist"],
+    "profit_split_premium": false
   },
   "Shinku": {
     "name": "Shinku",
     "aliases": ["Shinku"],
-    "client_type": ["Artist"]
+    "client_type": ["Artist"],
+    "profit_split_premium": false
   },
   "Skullgeist": {
     "name": "Skullgeist",
     "aliases": ["Skullgeist"],
-    "client_type": ["Artist"]
+    "client_type": ["Artist"],
+    "profit_split_premium": false
   },
   "Smol": {
     "name": "Smol",
     "aliases": ["Smol", "Smol&Stronk", "Smol and Stronk"],
-    "client_type": ["Collab"]
+    "client_type": ["Collab"],
+    "profit_split_premium": false
   },
   "Snoozy": {
     "name": "Snoozy",
     "aliases": ["Snoozy", "Snoozychu"],
-    "client_type": ["Artist"]
+    "client_type": ["Artist"],
+    "profit_split_premium": false
   },
   "Softon": {
     "name": "Softon",
     "aliases": ["Softon"],
-    "client_type": ["Artist"]
+    "client_type": ["Artist"],
+    "profit_split_premium": false
   },
   "Spooky": {
     "name": "Spooky",
     "aliases": ["Spooky"],
-    "client_type": ["Artist"]
+    "client_type": ["Artist"],
+    "profit_split_premium": false
   },
   "Starrylotty": {
     "name": "StarryLotty",
     "aliases": ["StarryLotty", "Starry Lotty"],
-    "client_type": ["Artist"]
+    "client_type": ["Artist"],
+    "profit_split_premium": false
   },
   "Stixdraws": {
     "name": "StixDraws",
     "aliases": ["StixDraws"],
-    "client_type": ["Artist"]
+    "client_type": ["Artist"],
+    "profit_split_premium": false
   },
   "Strongmoist": {
     "name": "StrongMoist",
     "aliases": ["StrongMoist"],
-    "client_type": ["Artist"]
+    "client_type": ["Artist"],
+    "profit_split_premium": false
   },
   "Suikaart": {
     "name": "Suikaart",
@@ -812,161 +971,193 @@
       "Suika's Sweets",
       "Suika'S Sweets"
     ],
-    "client_type": ["Artist"]
+    "client_type": ["Artist"],
+    "profit_split_premium": false
   },
   "Superspoe": {
     "name": "SuperSpoe",
     "aliases": ["SuperSpoe"],
-    "client_type": ["Artist"]
+    "client_type": ["Artist"],
+    "profit_split_premium": false
   },
   "Sweetdreamcoffee": {
     "name": "SweetDreamCoffee",
     "aliases": ["SweetDreamCoffee", "SDC"],
-    "client_type": ["Artist"]
+    "client_type": ["Artist"],
+    "profit_split_premium": false
   },
   "Synical": {
     "name": "Synical",
     "aliases": ["Synical"],
-    "client_type": ["Collab"]
+    "client_type": ["Collab"],
+    "profit_split_premium": false
   },
   "Takamoom": {
     "name": "Takamoom",
     "aliases": ["Takamoom", "Moomy"],
-    "client_type": ["Artist"]
+    "client_type": ["Artist"],
+    "profit_split_premium": false
   },
   "Tdookus": {
     "name": "TDookus",
     "aliases": ["TDookus"],
-    "client_type": ["Artist"]
+    "client_type": ["Artist"],
+    "profit_split_premium": false
   },
   "Teikki": {
     "name": "Teikki",
     "aliases": ["Teikki"],
-    "client_type": ["Artist"]
+    "client_type": ["Artist"],
+    "profit_split_premium": false
   },
   "Thehelmetguy": {
     "name": "Helmet Guy",
     "aliases": ["Helmet Guy", "TheHelmetGuy"],
-    "client_type": ["Artist"]
+    "client_type": ["Artist"],
+    "profit_split_premium": false
   },
   "Thejieb": {
     "name": "TheJieb",
     "aliases": ["TheJieb"],
-    "client_type": ["Artist"]
+    "client_type": ["Artist"],
+    "profit_split_premium": false
   },
   "Tonic": {
     "name": "Tonic",
     "aliases": ["Tonic"],
-    "client_type": ["Artist"]
+    "client_type": ["Artist"],
+    "profit_split_premium": false
   },
   "Truck Chan": {
     "name": "Truck Chan",
     "aliases": ["Truck Chan"],
-    "client_type": ["Collab"]
+    "client_type": ["Collab"],
+    "profit_split_premium": false
   },
   "Umbre": {
     "name": "UmbreVT",
     "aliases": ["UmbreVT", "Umbre"],
-    "client_type": ["Artist"]
+    "client_type": ["Artist"],
+    "profit_split_premium": false
   },
   "Vaille": {
     "name": "Vaille",
     "aliases": ["Vaille", "VailleVamp"],
-    "client_type": ["Collab"]
+    "client_type": ["Collab"],
+    "profit_split_premium": false
   },
   "Valentine": {
     "name": "Valentine",
     "aliases": ["Valentine", "Ophelia", "Ophelia Valentine"],
-    "client_type": ["Collab"]
+    "client_type": ["Collab"],
+    "profit_split_premium": false
   },
   "Vellamy": {
     "name": "Vellamy",
     "aliases": ["Vellamy", "Vella"],
-    "client_type": ["Artist"]
+    "client_type": ["Artist"],
+    "profit_split_premium": false
   },
   "Veune": {
     "name": "Veune",
     "aliases": ["Veune"],
-    "client_type": ["Artist"]
+    "client_type": ["Artist"],
+    "profit_split_premium": false
   },
   "Velvet Bambi": {
     "name": "Velvet Bambi",
     "aliases": ["Velvet Bambi"],
-    "client_type": ["Artist"]
+    "client_type": ["Artist"],
+    "profit_split_premium": false
   },
   "Vetarix": {
     "name": "Vetarix",
     "aliases": ["Vetarix"],
-    "client_type": ["Artist"]
+    "client_type": ["Artist"],
+    "profit_split_premium": false
   },
   "Verybatty": {
     "name": "Verybatty",
     "aliases": ["Verybatty"],
-    "client_type": ["Artist"]
+    "client_type": ["Artist"],
+    "profit_split_premium": false
   },
   "Voraisha": {
     "name": "Voraisha",
     "aliases": ["Voraisha"],
-    "client_type": ["Collab"]
+    "client_type": ["Collab"],
+    "profit_split_premium": false
   },
   "Vortex Virus": {
     "name": "Vortex Virus",
     "aliases": ["Vortex Virus", "VortexVirus", "Vortex"],
-    "client_type": ["Artist"]
+    "client_type": ["Artist"],
+    "profit_split_premium": false
   },
   "Waifudekai": {
     "name": "Waifudekai",
     "aliases": ["Waifudekai", "WaifuDekai"],
-    "client_type": ["Artist"]
+    "client_type": ["Artist"],
+    "profit_split_premium": false
   },
   "Xenvita": {
     "name": "Xenvita",
     "aliases": ["Xenvita"],
-    "client_type": ["Artist"]
+    "client_type": ["Artist"],
+    "profit_split_premium": false
   },
   "Yorunomachi": {
     "name": "Yorunomachi",
     "aliases": ["Yorunomachi"],
-    "client_type": ["Artist"]
+    "client_type": ["Artist"],
+    "profit_split_premium": false
   },
   "Yorunoecchi": {
     "name": "Yorunoecchi",
     "aliases": ["Yorunoecchi"],
-    "client_type": ["Artist"]
+    "client_type": ["Artist"],
+    "profit_split_premium": false
   },
   "Yuchi": {
     "name": "Yuchi",
     "aliases": ["Yuchi", "YuchiVT"],
-    "client_type": ["Collab"]
+    "client_type": ["Collab"],
+    "profit_split_premium": false
   },
   "Yume Kuzukawa": {
     "name": "Yume Kuzukawa",
     "aliases": ["Yume", "Yuyu", "Yume Kuzukawa"],
-    "client_type": ["Collab"]
+    "client_type": ["Collab"],
+    "profit_split_premium": false
   },
   "Yummygoods": {
     "name": "YummyGoods",
     "aliases": ["YummyGoods"],
-    "client_type": ["Artist"]
+    "client_type": ["Artist"],
+    "profit_split_premium": false
   },
   "Zambee": {
     "name": "Zambee",
     "aliases": ["Zambee"],
-    "client_type": ["Artist"]
+    "client_type": ["Artist"],
+    "profit_split_premium": false
   },
   "Zion": {
     "name": "Zion",
     "aliases": ["Zion", "Zeep", "Zion Zeep", "ZionZeep"],
-    "client_type": ["Collab"]
+    "client_type": ["Collab"],
+    "profit_split_premium": false
   },
   "Zoruadrawsstuff": {
     "name": "ZoruaDrawsStuff",
     "aliases": ["ZoruaDrawsStuff", "Zorua Draws Stuff"],
-    "client_type": ["Artist"]
+    "client_type": ["Artist"],
+    "profit_split_premium": false
   },
   "Zsen": {
     "name": "Zsen",
     "aliases": ["Zsen", "ZSen"],
-    "client_type": ["Artist"]
+    "client_type": ["Artist"],
+    "profit_split_premium": false
   }
 }
