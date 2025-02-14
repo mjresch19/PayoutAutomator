@@ -62,7 +62,7 @@ def parse_product_information(store_financial_info: list):
                 product_vendor = product_vendors[:product_vendors.index("(") - 1]
 
                 #Obtain all chars past the ") "
-                collab_vendor = product_vendors[product_vendors.index(") ") + 2:]
+                second_product_vendor = product_vendors[product_vendors.index(") ") + 2:]
 
             except:
 
@@ -157,13 +157,13 @@ def parse_product_information(store_financial_info: list):
         elif distribution_type == "Collab":
 
             #First check to see if our vendor is an *actual* artist
-            if collab_vendor.title() in artist_info:
+            if second_product_vendor.title() in artist_info:
                 
-                collab_name = collab_vendor.title()
+                collab_name = second_product_vendor.title()
             else:
 
                 #We find the collaborator and add them to the collab dict through a deeper search
-                collab_name = artist_lookup(collab_vendor, artist_info)
+                collab_name = artist_lookup(second_product_vendor, artist_info)
 
             if not(collab_name):
 
@@ -229,6 +229,7 @@ def construct_df(store_dict: dict):
     store_source_df["Total Cost"] = cost_col
     store_source_df["Gross Profit"] = profit_col
     #TODO: Consolidate columns - make a column for profit cuts separately 
+    #store_source_df["SPE"] = store_source_df["Gross Profit"] * multiplier
     store_source_df["SPE 40%"] = store_source_df["Gross Profit"] * 0.4
     store_source_df["SPE 50%"] = store_source_df["Gross Profit"] * 0.5
     store_source_df["SPE 60%"] = store_source_df["Gross Profit"] * 0.6
