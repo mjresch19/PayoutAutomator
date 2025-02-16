@@ -8,7 +8,7 @@ import pandas as pd
 from openpyxl.styles import PatternFill, Alignment, Font
 from openpyxl.formatting.rule import CellIsRule
 from ExcelRW.readcsv import read_csv
-from datalookups import artist_lookup
+from datalookups import artist_lookup, identify_vendors
 from Models.PendingRollover import PendingRollover, parse_pending_rollovers
 
 ynm_file_path = '/YNM/PayoutAutomator/Data/SheetPreprocessor/YNM_Sales_Final.csv'
@@ -159,25 +159,36 @@ def parse_product_information(store_financial_info: list):
             #First check to see if our vendor is an *actual* artist
             if second_product_vendor.title() in artist_info:
                 
-                collab_name = second_product_vendor.title()
+                second_product_vendor = second_product_vendor.title()
             else:
 
                 #We find the collaborator and add them to the collab dict through a deeper search
-                collab_name = artist_lookup(second_product_vendor, artist_info)
+                second_product_vendor = artist_lookup(second_product_vendor, artist_info)
 
-            if not(collab_name):
+            if not(second_product_vendor):
 
                 print("COLLABORATOR NOT FOUND, TAKE ACTION. SKIPPING FOR NOW:", product[1].title(), "==>",product_vendor, "(" + product_name + ")")
                 continue
 
 
-            if collab_name not in store_collab_dict:
+            #Perform a search to determine the roles of the first product vendor and second product venor
+            if (product_vendor and second_product_vendor):
 
-                store_collab_dict[collab_name] = [[product_name, distribution_type, total_sales, processor_fee, total_cost, gross_profit]]
+                vendor_identifications = identify_vendors(product_vendor, second_product_vendor, artist_info)
+
+                if not(vendor_identifications):
+
+                    print("COLLAB VENDORS COULD NOT BE IDENTIFIED, TAKE ACTION. SKIPPING FOR NOW:", product[1].title(), "==>",product_vendor, "(" + product_name + ")")
+
+                print("SUCCESS FOR COLLAB VENDORS:",vendor_identifications)
+
+            if second_product_vendor not in store_collab_dict:
+
+                store_collab_dict[second_product_vendor] = [[product_name, distribution_type, total_sales, processor_fee, total_cost, gross_profit]]
             
             else:
                     
-                store_collab_dict[collab_name].append([product_name, distribution_type, total_sales, processor_fee, total_cost, gross_profit])
+                store_collab_dict[second_product_vendor].append([product_name, distribution_type, total_sales, processor_fee, total_cost, gross_profit])
 
             #Next, we must find the product vendor as an original source, so they go in the original source dict
             if product_vendor not in store_original_dict:

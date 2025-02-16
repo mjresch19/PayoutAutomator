@@ -464,7 +464,7 @@
     "name": "Lucien",
     "aliases": ["Lucien", "Kuromiya", "Kuromiya Lucien", "Lulu"],
     "client_type": ["Collab"],
-    "profit_split_premium": false
+    "profit_split_premium": true
   },
   "Lunermier": {
     "name": "Lunermier",
@@ -608,12 +608,6 @@
     "client_type": ["Artist"],
     "profit_split_premium": false
   },
-  "Moretimespent": {
-    "name": "MoreTimeSpent",
-    "aliases": ["MoreTimeSpent", "MTS"],
-    "client_type": ["Artist"],
-    "profit_split_premium": false
-  },
   "Morgana": {
     "name": "Morgana",
     "aliases": ["Morgana"],
@@ -746,9 +740,9 @@
     "client_type": ["Artist"],
     "profit_split_premium": false
   },
-  "P.m. Seymour": {
+  "P.M. Seymour": {
     "name": "P.M. Seymour",
-    "aliases": ["P.M. Seymour", "Seymour", "P.m. seymour", "PGR", "pgr"],
+    "aliases": ["P.M. Seymour", "Seymour", "P.m. seymour", "PGR", "pgr", "Pgr"],
     "client_type": ["Artist"],
     "profit_split_premium": false
   },
@@ -796,7 +790,7 @@
   },
   "Pt": {
     "name": "PT",
-    "aliases": ["PT", "PTS", "pts", "PreciousTimeSpent", "MTS', 'mts'"],
+    "aliases": ["PT", "PTS", "pts", "PreciousTimeSpent", "MTS", "mts", "Mts"],
     "client_type": ["Artist"],
     "profit_split_premium": false
   },
@@ -893,7 +887,7 @@
   "Savehymn": {
     "name": "Savehymn",
     "aliases": ["Savehymn"],
-    "client_type": ["Artist"],
+    "client_type": ["Collab"],
     "profit_split_premium": false
   },
   "Sharkbubble": {
@@ -1050,7 +1044,7 @@
     "name": "Valentine",
     "aliases": ["Valentine", "Ophelia", "Ophelia Valentine"],
     "client_type": ["Collab"],
-    "profit_split_premium": false
+    "profit_split_premium": true
   },
   "Vellamy": {
     "name": "Vellamy",
