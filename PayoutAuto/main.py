@@ -547,10 +547,10 @@ def construct_payout_worksheet(store_source_df: pd.DataFrame, artists_payments_d
 #Check to see if we updated non-automated pages
 update_rollovers = input("Did you update the rollover sheet (y/n)? ")
 update_pending_rollovers = input("Did you update the pending rollovers sheet (y/n)? ")
-fix_payments_and_bugs = input("Did you resolve all payment fixes and bugs that were in the code?")
+fix_payments_and_bugs = input("Did you resolve all payment fixes and bugs that were in the code? (y/n)? ")
 
 if update_rollovers.lower() != "y" or update_pending_rollovers.lower() != "y" or fix_payments_and_bugs.lower() != "y":
-    print("Please update the rollover and pending rollover sheets before running the script.")
+    print("Please update the rollover and pending rollover sheets before running the script. Additionally ensure all bugs are fixed")
     sys.exit()
 
 ynm_original_dict, ynm_collab_dict = parse_product_information(ynm_financial_info)
