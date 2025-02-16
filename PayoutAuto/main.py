@@ -8,7 +8,7 @@ import pandas as pd
 from openpyxl.styles import PatternFill, Alignment, Font
 from openpyxl.formatting.rule import CellIsRule
 from ExcelRW.readcsv import read_csv
-from datalookups import artist_lookup, identify_vendors
+from datalookups import artist_lookup, identify_vendors, isPremium
 from Models.PendingRollover import PendingRollover, parse_pending_rollovers
 
 ynm_file_path = '/YNM/PayoutAutomator/Data/SheetPreprocessor/YNM_Sales_Final.csv'
@@ -95,66 +95,69 @@ def parse_product_information(store_financial_info: list):
 
         if distribution_type == "Original":
 
+            default_profit_split = 0.6
+
             if product_vendor not in store_original_dict:
 
-                store_original_dict[product_vendor] = [[product_name, distribution_type, total_sales, processor_fee, total_cost, gross_profit]]
+                store_original_dict[product_vendor] = [[product_name, distribution_type, total_sales, processor_fee, total_cost, gross_profit, default_profit_split]]
 
             else:
 
-                store_original_dict[product_vendor].append([product_name, distribution_type, total_sales, processor_fee, total_cost, gross_profit])
+                store_original_dict[product_vendor].append([product_name, distribution_type, total_sales, processor_fee, total_cost, gross_profit,default_profit_split ])
     
         elif distribution_type == "Digital":
 
+            default_profit_split = 0.9
+
             if product_vendor not in store_original_dict:
 
-                store_original_dict[product_vendor] = [[product_name, distribution_type, total_sales, processor_fee, total_cost, gross_profit]]
+                store_original_dict[product_vendor] = [[product_name, distribution_type, total_sales, processor_fee, total_cost, gross_profit, default_profit_split]]
 
             else:
 
-                store_original_dict[product_vendor].append([product_name, distribution_type, total_sales, processor_fee, total_cost, gross_profit])
+                store_original_dict[product_vendor].append([product_name, distribution_type, total_sales, processor_fee, total_cost, gross_profit, default_profit_split])
 
         elif distribution_type == "Charity":
 
-            if product_vendor not in store_collab_dict:
-
-                store_original_dict[product_vendor] = [[product_name, distribution_type, total_sales, processor_fee, total_cost, gross_profit]]
-
-            else:
-
-                store_original_dict[product_vendor].append([product_name, distribution_type, total_sales, processor_fee, total_cost, gross_profit])
-
-        elif distribution_type == "Commercial":
+            default_profit_split = 0
 
             if product_vendor not in store_collab_dict:
 
-                store_collab_dict[product_vendor] = [[product_name, distribution_type, total_sales, processor_fee, total_cost, gross_profit]]
+                store_original_dict[product_vendor] = [[product_name, distribution_type, total_sales, processor_fee, total_cost, gross_profit, default_profit_split]]
 
             else:
 
-                store_collab_dict[product_vendor].append([product_name, distribution_type, total_sales, processor_fee, total_cost, gross_profit])
+                store_original_dict[product_vendor].append([product_name, distribution_type, total_sales, processor_fee, total_cost, gross_profit, default_profit_split])
 
-        elif distribution_type == "Book":
+        elif distribution_type == "Commercial" or distribution_type == "Book":
 
-            if product_vendor not in store_original_dict:
+            default_profit_split = 0.5
 
-                store_original_dict[product_vendor] = [[product_name, distribution_type, total_sales, processor_fee, total_cost, gross_profit]]
+            if product_vendor not in store_collab_dict:
+
+                store_collab_dict[product_vendor] = [[product_name, distribution_type, total_sales, processor_fee, total_cost, gross_profit, default_profit_split]]
 
             else:
 
-                store_original_dict[product_vendor].append([product_name, distribution_type, total_sales, processor_fee, total_cost, gross_profit])
+                store_collab_dict[product_vendor].append([product_name, distribution_type, total_sales, processor_fee, total_cost, gross_profit, default_profit_split])
+
 
         elif distribution_type == "In-House":
 
+            default_profit_split = 1
 
             if product_vendor not in store_original_dict:
 
-                store_original_dict[product_vendor] = [[product_name, distribution_type, total_sales, processor_fee, total_cost, gross_profit]]
+                store_original_dict[product_vendor] = [[product_name, distribution_type, total_sales, processor_fee, total_cost, gross_profit, default_profit_split]]
 
             else:
 
-                store_original_dict[product_vendor].append([product_name, distribution_type, total_sales, processor_fee, total_cost, gross_profit])
+                store_original_dict[product_vendor].append([product_name, distribution_type, total_sales, processor_fee, total_cost, gross_profit, default_profit_split])
 
         elif distribution_type == "Collab":
+
+            default_profit_split_collab = 0.2
+            default_profit_split_artist = 0.4
 
             #First check to see if our vendor is an *actual* artist
             if second_product_vendor.title() in artist_info:
@@ -179,25 +182,39 @@ def parse_product_information(store_financial_info: list):
                 if not(vendor_identifications):
 
                     print("COLLAB VENDORS COULD NOT BE IDENTIFIED, TAKE ACTION. SKIPPING FOR NOW:", product[1].title(), "==>",product_vendor, "(" + product_name + ")")
+                    continue
 
                 print("SUCCESS FOR COLLAB VENDORS:",vendor_identifications)
 
-            if second_product_vendor not in store_collab_dict:
+                artist_vendor = vendor_identifications["Artist"]
+                collab_vendor = vendor_identifications["Collab"]
 
-                store_collab_dict[second_product_vendor] = [[product_name, distribution_type, total_sales, processor_fee, total_cost, gross_profit]]
+            else:
+
+                print("One (or both) of the vendors were not found. Skipping for now.", product[1].title(), "==>",product_vendor, "(" + product_name + ")")
+                continue
+
+            #Determine if collaborator is a premium member
+            if isPremium(collab_vendor, artist_info):
+
+                default_profit_split_collab = 0.25
+
+            if collab_vendor not in store_collab_dict:
+
+                store_collab_dict[collab_vendor] = [[product_name, distribution_type, total_sales, processor_fee, total_cost, gross_profit, default_profit_split_collab]]
             
             else:
                     
-                store_collab_dict[second_product_vendor].append([product_name, distribution_type, total_sales, processor_fee, total_cost, gross_profit])
+                store_collab_dict[collab_vendor].append([product_name, distribution_type, total_sales, processor_fee, total_cost, gross_profit, default_profit_split_collab])
 
             #Next, we must find the product vendor as an original source, so they go in the original source dict
-            if product_vendor not in store_original_dict:
+            if artist_vendor not in store_original_dict:
 
-                store_original_dict[product_vendor] = [[product_name, distribution_type, total_sales, processor_fee, total_cost, gross_profit]]
+                store_original_dict[artist_vendor] = [[product_name, distribution_type, total_sales, processor_fee, total_cost, gross_profit, default_profit_split_artist]]
 
             else:
 
-                store_original_dict[product_vendor].append([product_name, distribution_type, total_sales, processor_fee, total_cost, gross_profit])  
+                store_original_dict[artist_vendor].append([product_name, distribution_type, total_sales, processor_fee, total_cost, gross_profit, default_profit_split_artist])  
 
     return store_original_dict, store_collab_dict
 

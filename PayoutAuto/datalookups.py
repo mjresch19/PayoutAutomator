@@ -58,6 +58,12 @@ def identify_vendors(product_vendor, second_product_vendor, artist_info):
         #This is a breaking error and should exit the program
         exit()
 
-
-
     return None
+
+
+def isPremium(product_vendor, artist_info): 
+    
+    if artist_info[product_vendor]["profit_split_premium"]:
+        return True
+    
+    return False
