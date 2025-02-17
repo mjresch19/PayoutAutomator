@@ -736,7 +736,7 @@
   },
   "Plumpcognito": {
     "name": "Plumpcognito",
-    "aliases": ["Plumpcognito"],
+    "aliases": ["Plumpcognito", "Summadlad", "SumMadLad"],
     "client_type": ["Artist"],
     "profit_split_premium": false
   },
