@@ -229,6 +229,8 @@ def construct_df(store_dict: dict):
     process_fee_col = []
     cost_col = []
     profit_col = []
+    profit_split_col = []
+    client_profit = []
 
     for key, val_list in sorted_store_dict.items():
 
@@ -245,6 +247,8 @@ def construct_df(store_dict: dict):
             process_fee_col.append(round(float(val[3]), 2))
             cost_col.append(round(float(val[4]),2))
             profit_col.append(float(val[5]))
+            profit_split_col.append(float(val[6]))
+            client_profit.append(float(val[5]) * float(val[6]))
 
             #create logic to determine the profit cuts for each artist (dist_type_col and profit_col)
 
@@ -256,12 +260,12 @@ def construct_df(store_dict: dict):
     store_source_df["Processing Fee"] = process_fee_col
     store_source_df["Total Cost"] = cost_col
     store_source_df["Gross Profit"] = profit_col
-    #TODO: Consolidate columns - make a column for profit cuts separately 
-    #store_source_df["SPE"] = store_source_df["Gross Profit"] * multiplier
-    store_source_df["SPE 40%"] = store_source_df["Gross Profit"] * 0.4
-    store_source_df["SPE 50%"] = store_source_df["Gross Profit"] * 0.5
-    store_source_df["SPE 60%"] = store_source_df["Gross Profit"] * 0.6
-    store_source_df["SPE 90%"] = store_source_df["Gross Profit"] * 0.9
+    store_source_df["SPE"] = profit_split_col
+    store_source_df["Artist Profit"] = client_profit
+    # store_source_df["SPE 40%"] = store_source_df["Gross Profit"] * 0.4
+    # store_source_df["SPE 50%"] = store_source_df["Gross Profit"] * 0.5
+    # store_source_df["SPE 60%"] = store_source_df["Gross Profit"] * 0.6
+    # store_source_df["SPE 90%"] = store_source_df["Gross Profit"] * 0.9
 
     return pd.DataFrame(store_source_df)
 
@@ -279,7 +283,7 @@ def construct_payout_worksheet(store_source_df: pd.DataFrame, artists_payments_d
     center = Alignment(horizontal="center")
     fill = PatternFill(start_color="D3D3D3", end_color="D3D3D3", fill_type="solid")
     #TODO - change columns - consolidate columns
-    new_header = ["Artist Name", "Item", "Distribution Type", "Total Value", "Processing Fee", "Cost", "Profit", "SPE 40%", "SPE 50%", "SPE 60%", "SPE 90%"]
+    new_header = ["Artist Name", "Item", "Distribution Type", "Total Value", "Processing Fee", "Cost", "Gross Profit", "SPE", "Client Profit"]
     green_fill = PatternFill(start_color="00dc00", end_color="00dc00", fill_type="solid")
     orange_fill = PatternFill(start_color="FFA500", end_color="FFA500", fill_type="solid")
     purple_fill = PatternFill(start_color="800080", end_color="DB67DB", fill_type="solid")
@@ -292,10 +296,10 @@ def construct_payout_worksheet(store_source_df: pd.DataFrame, artists_payments_d
             # Insert total profit for previous artist
             if i > 2:  # skip for the first artist
                 worksheet.insert_rows(i)
-                worksheet.cell(row=i, column=10).value = "Total Payout"
-                worksheet.cell(row=i, column=10).font = bold_underline
-                worksheet.cell(row=i, column=11).value = total_profit
-                worksheet.cell(row=i, column=11).font = bold_underline
+                worksheet.cell(row=i, column=8).value = "Total Payout"
+                worksheet.cell(row=i, column=8).font = bold_underline
+                worksheet.cell(row=i, column=9).value = total_profit
+                worksheet.cell(row=i, column=9).font = bold_underline
                 i += 1  # skip the newly inserted row
             # Reset total profit for the new artist
             total_profit = 0
@@ -308,8 +312,6 @@ def construct_payout_worksheet(store_source_df: pd.DataFrame, artists_payments_d
             worksheet.cell(row=i, column=1).value = new_artist
             worksheet.cell(row=i, column=1).font = bold_underline  # make the artist name bold and underlined
             worksheet.cell(row=i, column=1).alignment = center
-            # i += 1  # skip the newly inserted row
-            # worksheet.insert_rows(i)
             for j, header in enumerate(new_header, start=1):
                 cell = worksheet.cell(row=i, column=j)
                 cell.value = header
@@ -317,220 +319,22 @@ def construct_payout_worksheet(store_source_df: pd.DataFrame, artists_payments_d
                 cell.alignment = center
             i += 1  # skip the newly inserted row
 
-            new_profit = 0
-            if worksheet.cell(row=i, column=1).value not in artists_payments_dict.keys():
+        # Increment total_profit by the current row's value
+        total_profit += worksheet.cell(row=i, column=9).value
 
-                #Ensure that we still add the new profit to the total profit
-                if worksheet.cell(row=i, column=3).value == "Original":
-
-                    total_profit += worksheet.cell(row=i, column=10).value
-                    worksheet.cell(row=i, column=10).fill = green_fill
-
-                    new_profit = worksheet.cell(row=i, column=10).value
-
-                elif worksheet.cell(row=i, column=3).value == "Charity":
-
-                    for col in range(1, 11):
-                        worksheet.cell(row=i, column=col).fill = orange_fill
-
-                    total_profit += 0
-
-                    new_profit = 0
-
-                elif worksheet.cell(row=i, column=3).value == "In-House":
-
-                    for col in range(1,11):
-                        worksheet.cell(row=i, column=col).fill = purple_fill
-
-                    total_profit += worksheet.cell(row=i, column=7).value
-
-                    new_profit = worksheet.cell(row=i, column=7).value
-            
-                elif worksheet.cell(row=i, column=3).value == "Commercial" or worksheet.cell(row=i, column=3).value == "Book":
-
-                    total_profit += worksheet.cell(row=i, column=9).value
-                    worksheet.cell(row=i, column=9).fill = green_fill
-
-                    new_profit = worksheet.cell(row=i, column=9).value
-                
-                elif worksheet.cell(row=i, column=3).value == "Collab":
-
-                    total_profit += worksheet.cell(row=i, column=8).value
-                    worksheet.cell(row=i, column=8).fill = green_fill
-
-                    new_profit = worksheet.cell(row=i, column=8).value
-            
-                elif worksheet.cell(row=i, column=3).value == "Digital":
-
-                    total_profit += worksheet.cell(row=i, column=11).value
-                    worksheet.cell(row=i, column=11).fill = green_fill
-
-                    new_profit = worksheet.cell(row=i, column=11).value
-
-                artists_payments_dict[worksheet.cell(row=i, column=1).value] = new_profit
-
-            else:
-
-                #Ensure that we still add the new profit to the total profit
-                if worksheet.cell(row=i, column=3).value == "Original":
-
-                    total_profit += worksheet.cell(row=i, column=10).value
-                    worksheet.cell(row=i, column=10).fill = green_fill
-
-                    new_profit = worksheet.cell(row=i, column=10).value
-
-
-                elif worksheet.cell(row=i, column=3).value == "Charity":
-
-                    for col in range(1, 11):
-                        worksheet.cell(row=i, column=col).fill = orange_fill
-
-                    total_profit += 0
-
-                    new_profit = 0
-
-                elif worksheet.cell(row=i, column=3).value == "In-House":
-
-                    for col in range(1,11):
-                        worksheet.cell(row=i, column=col).fill = purple_fill
-
-                    total_profit += worksheet.cell(row=i, column=7).value
-
-                    new_profit = worksheet.cell(row=i, column=7).value
-
-                elif worksheet.cell(row=i, column=3).value == "Commercial" or worksheet.cell(row=i, column=3).value == "Book":
-
-                    total_profit += worksheet.cell(row=i, column=9).value
-                    worksheet.cell(row=i, column=9).fill = green_fill
-
-                    new_profit = worksheet.cell(row=i, column=9).value
-                
-                elif worksheet.cell(row=i, column=3).value == "Collab":
-
-                    total_profit += worksheet.cell(row=i, column=8).value
-                    worksheet.cell(row=i, column=8).fill = green_fill
-
-                    new_profit = worksheet.cell(row=i, column=8).value
-
-                elif worksheet.cell(row=i, column=3).value == "Digital":
-
-                    total_profit += worksheet.cell(row=i, column=11).value
-                    worksheet.cell(row=i, column=11).fill = green_fill
-
-                    new_profit = worksheet.cell(row=i, column=11).value
-
-                artists_payments_dict[worksheet.cell(row=i, column=1).value] += new_profit
-
+        if worksheet.cell(row=i, column=1).value not in artists_payments_dict.keys():
+            artists_payments_dict[worksheet.cell(row=i, column=1).value] = worksheet.cell(row=i, column=9).value
         else:
-            if worksheet.cell(row=i, column=1).value not in artists_payments_dict.keys():
-                #Ensure that we still add the new profit to the total profit
-                if worksheet.cell(row=i, column=3).value == "Original":
-
-                    total_profit += worksheet.cell(row=i, column=10).value
-                    worksheet.cell(row=i, column=10).fill = green_fill
-
-                    new_profit = worksheet.cell(row=i, column=10).value
-                
-                elif worksheet.cell(row=i, column=3).value == "Charity":
-
-                    for col in range(1, 11):
-                        worksheet.cell(row=i, column=col).fill = orange_fill
-                    total_profit += 0
-
-                    new_profit = 0
-            
-                elif worksheet.cell(row=i, column=3).value == "In-House":
-
-                    for col in range(1,11):
-                        worksheet.cell(row=i, column=col).fill = purple_fill
-
-                    total_profit += worksheet.cell(row=i, column=7).value
-
-                    new_profit = worksheet.cell(row=i, column=7).value
-
-                elif worksheet.cell(row=i, column=3).value == "Commercial" or worksheet.cell(row=i, column=3).value == "Book":
-
-                    total_profit += worksheet.cell(row=i, column=9).value
-                    worksheet.cell(row=i, column=9).fill = green_fill
-
-                    new_profit = worksheet.cell(row=i, column=9).value
-                
-                elif worksheet.cell(row=i, column=3).value == "Collab":
-
-                    total_profit += worksheet.cell(row=i, column=8).value
-                    worksheet.cell(row=i, column=8).fill = green_fill
-
-                    new_profit = worksheet.cell(row=i, column=8).value
-                
-
-                elif worksheet.cell(row=i, column=3).value == "Digital":
-
-                    total_profit += worksheet.cell(row=i, column=11).value
-                    worksheet.cell(row=i, column=11).fill = green_fill
-
-                    new_profit = worksheet.cell(row=i, column=11).value
-
-                artists_payments_dict[worksheet.cell(row=i, column=1).value] = new_profit
-
-            else:
-
-                #Ensure that we still add the new profit to the total profit
-                if worksheet.cell(row=i, column=3).value == "Original":
-
-                    total_profit += worksheet.cell(row=i, column=10).value
-                    worksheet.cell(row=i, column=10).fill = green_fill
-
-                    new_profit = worksheet.cell(row=i, column=10).value
-
-                elif worksheet.cell(row=i, column=3).value == "Charity":
-
-                    for col in range(1, 11):
-                        worksheet.cell(row=i, column=col).fill = orange_fill
-
-                    total_profit += 0
-
-                    new_profit = 0
-
-                elif worksheet.cell(row=i, column=3).value == "In-House":
-
-                    for col in range(1,11):
-                        worksheet.cell(row=i, column=col).fill = purple_fill
-
-                    total_profit += worksheet.cell(row=i, column=7).value
-
-                    new_profit = worksheet.cell(row=i, column=7).value    
-
-                elif worksheet.cell(row=i, column=3).value == "Commercial" or worksheet.cell(row=i, column=3).value == "Book":
-
-                    total_profit += worksheet.cell(row=i, column=9).value
-                    worksheet.cell(row=i, column=9).fill = green_fill
-
-                    new_profit = worksheet.cell(row=i, column=9).value
-                
-                elif worksheet.cell(row=i, column=3).value == "Collab":
-
-                    total_profit += worksheet.cell(row=i, column=8).value
-                    worksheet.cell(row=i, column=8).fill = green_fill
-
-                    new_profit = worksheet.cell(row=i, column=8).value
-                
-                elif worksheet.cell(row=i, column=3).value == "Digital":
-
-                    total_profit += worksheet.cell(row=i, column=11).value
-                    worksheet.cell(row=i, column=11).fill = green_fill
-
-                    new_profit = worksheet.cell(row=i, column=11).value
-
-                artists_payments_dict[worksheet.cell(row=i, column=1).value] += new_profit
+            artists_payments_dict[worksheet.cell(row=i, column=1).value] += worksheet.cell(row=i, column=9).value
         
         i += 1
 
     # Insert total profit for the last artist
     worksheet.insert_rows(i)
-    worksheet.cell(row=i, column=10).value = "Total Payout"
-    worksheet.cell(row=i, column=10).font = bold_underline
-    worksheet.cell(row=i, column=11).value = total_profit
-    worksheet.cell(row=i, column=11).font = bold_underline
+    worksheet.cell(row=i, column=8).value = "Total Payout"
+    worksheet.cell(row=i, column=8).font = bold_underline
+    worksheet.cell(row=i, column=9).value = total_profit
+    worksheet.cell(row=i, column=9).font = bold_underline
 
     # Remove header
     worksheet.delete_rows(1)
@@ -572,7 +376,7 @@ center = Alignment(horizontal="center")
 fill = PatternFill(start_color="D3D3D3", end_color="D3D3D3", fill_type="solid")
 
 #TODO - change columns 
-new_header = ["Artist Name", "Item", "Distribution Type", "Total Value", "Processing Fee", "Cost", "Profit", "SPE 40%", "SPE 50%", "SPE 60%", "SPE 90%"]
+new_header = ["Artist Name", "Item", "Distribution Type", "Total Value", "Processing Fee", "Cost", "Gross Profit", "SPE", "Client Profit"]
 green_fill = PatternFill(start_color="00dc00", end_color="00dc00", fill_type="solid")
 orange_fill = PatternFill(start_color="FFA500", end_color="FFA500", fill_type="solid")
 purple_fill = PatternFill(start_color="800080", end_color="DB67DB", fill_type="solid")
