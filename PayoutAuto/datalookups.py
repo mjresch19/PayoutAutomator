@@ -46,12 +46,18 @@ def identify_vendors(product_vendor, second_product_vendor, artist_info):
             return {"Artist": second_product_vendor, "Collab": product_vendor}
         
         else:
-            print("ERROR:", product_vendor, "and", second_product_vendor, "both are of the collab type. Please check the artist information and correct the roles or correct the item manually.")
+            print("ERROR:", product_vendor, "and", second_product_vendor, "both are of the artist type. Please check the artist information and correct the roles or correct the item manually.")
             
             #This is a breaking error and should exit the program
             exit()
 
     elif "Collab" in product_vendor_role and "Collab" in second_product_vendor_role:
+
+        if "Artist" in product_vendor_role and "Artist" not in second_product_vendor_role:
+            return {"Artist": second_product_vendor, "Collab": product_vendor}
+        
+        if "Artist" in second_product_vendor_role and "Artist" not in product_vendor_role:
+            return {"Artist": product_vendor, "Collab": second_product_vendor}
 
         print("ERROR:", product_vendor, "and", second_product_vendor, "both are of the collab type. Please check the artist information and correct the roles or correct the item manually.")
             
