@@ -63,7 +63,7 @@ class ReadPayout:
         return self.total_sales - self.calculate_processing_fee() - self.total_cost
 
 
-    def check_cost(self):
+    def check_cost(self, dist_type):
 
-        if self.total_cost == 0:
+        if self.total_cost == 0 and dist_type != "Digital":
             print(f"WARNING: Cost is 0 for {self.product_title}. Please handle this item's cost manually before proceeding manually.")

@@ -40,9 +40,10 @@ with open('/YNM/PayoutAutomator/Data/SheetPreprocessor/YNM_Sales_Final.csv', 'w'
             total_cost = product[10]
         )
 
-        read_payout.check_cost()
         
         dist_type = read_payout.get_distribution_type()
+
+        read_payout.check_cost(dist_type)
 
         processing_fee = read_payout.calculate_processing_fee()
 
@@ -83,7 +84,7 @@ with open('/YNM/PayoutAutomator/Data/SheetPreprocessor/YNM_Sales_Final.csv', 'w'
         ])
 
 
-        if write_payout.total_cost == 0:
+        if write_payout.total_cost == 0 and write_payout.distribution_type != "Digital":
             
             to_do_cost_list.append([
                 "YNM", 
@@ -124,10 +125,10 @@ with open('/YNM/PayoutAutomator/Data/SheetPreprocessor/YNE_Sales_Final.csv', 'w'
                 total_sales = product[9], 
                 total_cost = product[10]
             )
-        
-        read_payout.check_cost()
-            
+                    
         dist_type = read_payout.get_distribution_type()
+
+        read_payout.check_cost(dist_type)
 
         processing_fee = read_payout.calculate_processing_fee()
 
@@ -168,7 +169,7 @@ with open('/YNM/PayoutAutomator/Data/SheetPreprocessor/YNE_Sales_Final.csv', 'w'
         ])
 
 
-        if write_payout.total_cost == 0:
+        if write_payout.total_cost == 0 and write_payout.distribution_type != "Digital":
             
             to_do_cost_list.append([
                 "YNE", 
