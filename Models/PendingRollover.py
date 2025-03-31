@@ -1,25 +1,33 @@
 class PendingRollover:
 
     def __init__(
-                    self, 
+                    self,
+                    product_title: str,  
+                    product_vendor: str,
+                    product_type: str, 
+                    net_quantity: int, 
+                    gross_sales: float, 
+                    discounts: float, 
+                    returns: float, 
+                    net_sales: float, 
+                    taxes: float, 
+                    total_sales: float, 
+                    total_cost: float, 
                     origin: str,
-                    artist: str, 
-                    item: str, 
-                    distribution_type: str, 
-                    total_value: float, 
-                    processing_fee: float, 
-                    cost: float, 
-                    profit: float, 
-                    ready: bool
+                    ready: str,
                 ):
+        self.product_title = product_title.strip("'").replace("''", "'")
+        self.product_vendor = product_vendor.strip("'").replace("''", "'").title()
+        self.product_type = product_type
+        self.net_quantity = int(net_quantity)
+        self.gross_sales = round(float(gross_sales),2)
+        self.discounts = round(float(discounts),2)
+        self.returns = round(float(returns),2)
+        self.net_sales = round(float(net_sales),2)
+        self.taxes = round(float(taxes),2)
+        self.total_sales = round(float(total_sales),2)
+        self.total_cost = round(float(total_cost),2)
         self.origin = origin
-        self.artist = artist
-        self.item = item
-        self.distribution_type = distribution_type
-        self.total_value = total_value
-        self.processing_fee = processing_fee
-        self.cost = cost
-        self.profit = profit
         self.ready = ready
 
 
@@ -39,30 +47,36 @@ def parse_pending_rollovers(pending_rollover_info, ynm_financial_info, yne_finan
     for pending_rollover in pending_rollover_info:
 
         curr_pr = PendingRollover(
-            origin = pending_rollover[0],
-            artist = pending_rollover[1].title(),
-            item = pending_rollover[2],
-            distribution_type = pending_rollover[3],
-            total_value = pending_rollover[4],
-            processing_fee = pending_rollover[5],
-            cost = pending_rollover[6],
-            profit = pending_rollover[7],
-            ready = pending_rollover[8],
+            pending_rollover[0],
+            pending_rollover[1],
+            pending_rollover[2], 
+            pending_rollover[3], 
+            pending_rollover[4], 
+            pending_rollover[5],  
+            pending_rollover[6],  
+            pending_rollover[7], 
+            pending_rollover[8],  
+            pending_rollover[9],
+            pending_rollover[10], 
+            pending_rollover[11],  
+            pending_rollover[12]  
         )
 
         if curr_pr.ready.lower() == "y":
 
             if curr_pr.origin.upper() == "YNM":
 
-                ynm_financial_info.append([curr_pr.item, curr_pr.artist, curr_pr.distribution_type, '', '', '', '',
-                                            '', '', '', curr_pr.total_value, curr_pr.processing_fee, curr_pr.cost,
-                                            curr_pr.profit])
+                ynm_financial_info.append([curr_pr.product_title, curr_pr.product_vendor, curr_pr.product_type, curr_pr.net_quantity, curr_pr.gross_sales,
+                                            curr_pr.discounts, curr_pr.returns, curr_pr.net_sales, curr_pr.taxes,
+                                            curr_pr.total_sales, curr_pr.total_cost, curr_pr.calculate_processing_fee(),
+                                            curr_pr.calculate_gross_profit()])
 
             elif curr_pr.origin.upper() == "YNE":
 
-                yne_financial_info.append([curr_pr.item, curr_pr.artist, curr_pr.distribution_type, '', '', '', '',
-                                            '', '', '', curr_pr.total_value, curr_pr.processing_fee, curr_pr.cost,
-                                            curr_pr.profit])
+                yne_financial_info.append([curr_pr.product_title, curr_pr.product_vendor, curr_pr.product_type, curr_pr.net_quantity, curr_pr.gross_sales,
+                                            curr_pr.discounts, curr_pr.returns, curr_pr.net_sales, curr_pr.taxes,
+                                            curr_pr.total_sales, curr_pr.total_cost, curr_pr.calculate_processing_fee(),
+                                            curr_pr.calculate_gross_profit()])
 
         else:
                 
