@@ -41,10 +41,10 @@ def identify_vendors(product_vendor, second_product_vendor, artist_info):
     elif "Artist" in product_vendor_role and "Artist" in second_product_vendor_role:
 
         if "Collab" in product_vendor_role and "Collab" not in second_product_vendor_role:
-            return {"Artist": product_vendor, "Collab": second_product_vendor}
+            return {"Artist": second_product_vendor, "Collab": product_vendor_role}
         
         if "Collab" in second_product_vendor_role and "Collab" not in product_vendor_role:
-            return {"Artist": second_product_vendor, "Collab": product_vendor}
+            return {"Artist": product_vendor_role, "Collab": second_product_vendor}
         
         else:
             print("ERROR:", product_vendor, "and", second_product_vendor, "both are of the artist type. Please check the artist information and correct the roles or correct the item manually.")
