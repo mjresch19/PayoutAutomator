@@ -23,6 +23,8 @@ def identify_vendors(product_vendor, second_product_vendor, artist_info):
     This way we know which is the artist and which is the collaborator. This is important as we need this information
     to determine splits
     '''
+    if (product_vendor == "Saa Halust" and second_product_vendor == "Rozen") or (product_vendor == "Rozen" and second_product_vendor == "Saa Halust"):
+        print("TEST")
 
     #vendor indentification
     product_vendor_role = artist_info[product_vendor]["client_type"]
@@ -35,7 +37,6 @@ def identify_vendors(product_vendor, second_product_vendor, artist_info):
     elif ("Artist" in second_product_vendor_role and len(second_product_vendor_role) == 1) and ("Collab" in product_vendor_role and len(product_vendor_role) == 1):
         return {"Artist": second_product_vendor, "Collab": product_vendor}
     
-
     #If one has multiple roles, we should check and see if the other has the collab role to differentiate
     elif "Artist" in product_vendor_role and "Artist" in second_product_vendor_role:
 
@@ -54,10 +55,10 @@ def identify_vendors(product_vendor, second_product_vendor, artist_info):
     elif "Collab" in product_vendor_role and "Collab" in second_product_vendor_role:
 
         if "Artist" in product_vendor_role and "Artist" not in second_product_vendor_role:
-            return {"Artist": second_product_vendor, "Collab": product_vendor}
+            return {"Artist": product_vendor, "Collab": second_product_vendor}
         
         if "Artist" in second_product_vendor_role and "Artist" not in product_vendor_role:
-            return {"Artist": product_vendor, "Collab": second_product_vendor}
+            return {"Artist": second_product_vendor, "Collab": product_vendor}
 
         print("ERROR:", product_vendor, "and", second_product_vendor, "both are of the collab type. Please check the artist information and correct the roles or correct the item manually.")
             
