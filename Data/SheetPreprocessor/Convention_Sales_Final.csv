@@ -1,2 +1,2 @@
-Item Name,Product Vendor,Distribution Type,Quantity Sold,Sales,Production Cost,Processing Fee Cost,Gross Profit
-Secret Hedgehog,Jupiter,Original,2,40,20,10,10
+Item Name,Product Vendor,Quantity Sold,Sales,Production Cost,Processing Fee Cost,Gross Profit
+Secret Hedgehog,Jupiter (Original),2,40,20,20,10

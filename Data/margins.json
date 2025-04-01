@@ -1,0 +1,146 @@
+{
+  "3D Mousepad": {
+    "Average": 55.63
+  },
+  "Acrylic Charm": {
+    "Average": 66.34
+  },
+  "Acrylic Charm Lanyard": {
+    "Average": 71.47
+  },
+  "Bag": {
+    "Average": 39.17
+  },
+  "Belly Mousepad": {
+    "Average": 58
+  },
+  "Book": {
+    "Average": 56.68
+  },
+  "Daki Keychain": {
+    "Average": 72.67
+  },
+  "Daki Cover": {
+    "Average": 71.8
+  },
+  "Deskmat": {
+    "Average": 46.49
+  },
+  "Hat": {
+    "Average": 41.23
+  },
+  "Home Decor": {
+    "Average": 37.58
+  },
+  "Hoodie": {
+    "Average": 28.13,
+    "XS": {
+      "Average": 31.56
+    },
+    "S": {
+      "Average": 31.56
+    },
+    "M": {
+      "Average": 31.56
+    },
+    "L": {
+      "Average": 31.56
+    },
+    "XL": {
+      "Average": 31.56
+    },
+    "2XL": {
+      "Average": 27.39
+    },
+    "3XL": {
+      "Average": 24.05
+    },
+    "4XL": {
+      "Average": 22.98
+    },
+    "5XL": {
+      "Average": 20.95
+    }
+  },
+  "Mousepad": {
+    "Average": 56.42
+  },
+  "Photocard": {
+    "Average": 71.71
+  },
+  "Print": {
+    "Average": 76.08
+  },
+  "Standee": {
+    "Average": 55.98
+  },
+  "Sticker": {
+    "Average": 69.68
+  },
+  "Sticker Bundle": {
+    "Average": 64.34
+  },
+  "Sticker Sheet": {
+    "Average": 78.57
+  },
+  "T-Shirts": {
+    "Average": 45.02,
+    "XS": {
+      "Average": 52.27
+    },
+    "S": {
+      "Average": 52.27
+    },
+    "M": {
+      "Average": 52.27
+    },
+    "L": {
+      "Average": 52.27
+    },
+    "XL": {
+      "Average": 52.27
+    },
+    "2XL": {
+      "Average": 45.74
+    },
+    "3XL": {
+      "Average": 39.22
+    },
+    "4XL": {
+      "Average": 32.71
+    },
+    "5XL": {
+      "Average": 26.19
+    }
+  },
+  "Tank Top": {
+    "Average": 36.84,
+    "XS": {
+      "Average": 40.13
+    },
+    "S": {
+      "Average": 40.13
+    },
+    "M": {
+      "Average": 40.13
+    },
+    "L": {
+      "Average": 40.13
+    },
+    "XL": {
+      "Average": 40.13
+    },
+    "2XL": {
+      "Average": 33
+    },
+    "3XL": {
+      "Average": 24.2
+    }
+  },
+  "Tote Bag": {
+    "Average": 33.1
+  },
+  "Water Bottle": {
+    "Average": 31.11
+  }
+}

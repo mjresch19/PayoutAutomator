@@ -348,7 +348,7 @@ def construct_payout_worksheet(store_source_df: pd.DataFrame, artists_payments_d
     return artists_payments_dict
 
 
-def construct_payout_worksheet(store_source_df: pd.DataFrame, artists_payments_dict: dict, sheet_name: str):
+def construct_convention_payout_worksheet(store_source_df: pd.DataFrame, artists_payments_dict: dict, sheet_name: str):
 
     pass
 
@@ -392,7 +392,7 @@ with pd.ExcelWriter("Data/PayoutPrototype/YNM_Payout_Prototype.xlsx", engine="op
     artists_payments_dict = construct_payout_worksheet(ynm_collab_df, artists_payments_dict, "YNM Collab Payouts")
     artists_payments_dict = construct_payout_worksheet(yne_original_df, artists_payments_dict, "YNE Artist Payouts")
     artists_payments_dict = construct_payout_worksheet(yne_collab_df, artists_payments_dict, "YNE Collab Payouts")
-    aritsts_payment_dict = construct_convention_payout_worksheet(ynm_original_df, artists_payments_dict, "Convention Payouts")
+    aritsts_payment_dict = construct_convention_payout_worksheet(convention_financial_info, artists_payments_dict, "Convention Payouts")
 
   
     for rollover in rollover_info:
