@@ -17,6 +17,9 @@ ynm_financial_info = read_csv(ynm_file_path)
 yne_file_path = '/YNM/PayoutAutomator/Data/SheetPreprocessor/YNE_Sales_Final.csv'
 yne_financial_info = read_csv(yne_file_path)
 
+convention_file_path = '/YNM/PayoutAutomator/Data/SheetPreprocessor/Convention_Sales_Final.csv'
+convention_financial_info = read_csv(convention_file_path)
+
 rollover_path = "/YNM/PayoutAutomator/Data/PayoutPrototype/Rollovers.csv"
 rollover_info = read_csv(rollover_path)
 
@@ -284,9 +287,6 @@ def construct_payout_worksheet(store_source_df: pd.DataFrame, artists_payments_d
     fill = PatternFill(start_color="D3D3D3", end_color="D3D3D3", fill_type="solid")
     #TODO - change columns - consolidate columns
     new_header = ["Artist Name", "Item", "Distribution Type", "Total Value", "Processing Fee", "Cost", "Gross Profit", "SPE", "Client Profit"]
-    green_fill = PatternFill(start_color="00dc00", end_color="00dc00", fill_type="solid")
-    orange_fill = PatternFill(start_color="FFA500", end_color="FFA500", fill_type="solid")
-    purple_fill = PatternFill(start_color="800080", end_color="DB67DB", fill_type="solid")
 
     # Apply the fill to cells where the artist changes
     i = 2  # start from 2 because 1 is the header
@@ -348,6 +348,10 @@ def construct_payout_worksheet(store_source_df: pd.DataFrame, artists_payments_d
     return artists_payments_dict
 
 
+def construct_payout_worksheet(store_source_df: pd.DataFrame, artists_payments_dict: dict, sheet_name: str):
+
+    pass
+
 #Check to see if we updated non-automated pages
 update_rollovers = input("Did you update the rollover sheet (y/n)? ")
 update_pending_rollovers = input("Did you update the pending rollovers sheet (y/n)? ")
@@ -388,6 +392,7 @@ with pd.ExcelWriter("Data/PayoutPrototype/YNM_Payout_Prototype.xlsx", engine="op
     artists_payments_dict = construct_payout_worksheet(ynm_collab_df, artists_payments_dict, "YNM Collab Payouts")
     artists_payments_dict = construct_payout_worksheet(yne_original_df, artists_payments_dict, "YNE Artist Payouts")
     artists_payments_dict = construct_payout_worksheet(yne_collab_df, artists_payments_dict, "YNE Collab Payouts")
+    aritsts_payment_dict = construct_convention_payout_worksheet(ynm_original_df, artists_payments_dict, "Convention Payouts")
 
   
     for rollover in rollover_info:
