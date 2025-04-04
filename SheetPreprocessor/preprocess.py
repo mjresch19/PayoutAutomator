@@ -1,4 +1,5 @@
 import csv
+import json
 import sys
 import os
 curr_dir = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
@@ -16,6 +17,9 @@ ynm_financial_info = read_csv_utf8(ynm_file_path)
 
 yne_file_path = '/YNM/PayoutAutomator/Data/SheetPreprocessor/YNE_Sales.csv'
 yne_financial_info = read_csv_utf8(yne_file_path)
+
+with open('/YNM/PayoutAutomator/Data/margins.json') as fp:
+    anamoly_info = json.load(fp)
 
 #Iterate throuh the raw YNM Information
 with open('/YNM/PayoutAutomator/Data/SheetPreprocessor/YNM_Sales_Final.csv', 'w', newline='') as ynmcsvfile:
@@ -37,9 +41,13 @@ with open('/YNM/PayoutAutomator/Data/SheetPreprocessor/YNM_Sales_Final.csv', 'w'
             net_sales = product[7], 
             taxes = product[8], 
             total_sales = product[9], 
-            total_cost = product[10]
+            total_cost = product[10],
+            gross_profit= product[11],
+            gross_margin= product[12]
         )
 
+        
+        read_payout.detect_anamolies()
         
         dist_type = read_payout.get_distribution_type()
 
@@ -63,7 +71,8 @@ with open('/YNM/PayoutAutomator/Data/SheetPreprocessor/YNM_Sales_Final.csv', 'w'
             total_sales = read_payout.total_sales,
             processing_fee = processing_fee,
             total_cost = read_payout.total_cost,
-            gross_profit = round(gross_profit, 2)
+            gross_profit = round(gross_profit, 2),
+            gross_margin= round(read_payout.gross_margin, 3)
         )
 
         ynmwriter.writerow([
@@ -80,7 +89,9 @@ with open('/YNM/PayoutAutomator/Data/SheetPreprocessor/YNM_Sales_Final.csv', 'w'
             write_payout.total_sales, 
             write_payout.processing_fee,
             write_payout.total_cost, 
-            write_payout.gross_profit
+            write_payout.gross_profit,
+            write_payout.gross_margin
+            
         ])
 
 
@@ -101,7 +112,8 @@ with open('/YNM/PayoutAutomator/Data/SheetPreprocessor/YNM_Sales_Final.csv', 'w'
                 write_payout.total_sales, 
                 write_payout.processing_fee,
                 write_payout.total_cost, 
-                write_payout.gross_profit
+                write_payout.gross_profit,
+                write_payout.gross_margin
             ])
 
 with open('/YNM/PayoutAutomator/Data/SheetPreprocessor/YNE_Sales_Final.csv', 'w', newline='') as ynecsvfile:
@@ -123,8 +135,12 @@ with open('/YNM/PayoutAutomator/Data/SheetPreprocessor/YNE_Sales_Final.csv', 'w'
                 net_sales = product[7], 
                 taxes = product[8], 
                 total_sales = product[9], 
-                total_cost = product[10]
+                total_cost = product[10],
+                gross_profit= product[11],
+                gross_margin= product[12]
             )
+        
+        read_payout.detect_anamolies()
                     
         dist_type = read_payout.get_distribution_type()
 
@@ -148,7 +164,8 @@ with open('/YNM/PayoutAutomator/Data/SheetPreprocessor/YNE_Sales_Final.csv', 'w'
             total_sales = read_payout.total_sales,
             processing_fee = processing_fee,
             total_cost = read_payout.total_cost,
-            gross_profit = round(gross_profit, 2)
+            gross_profit = round(gross_profit, 2),
+            gross_margin= round(read_payout.gross_margin, 3)
         )
 
         ynewriter.writerow([
@@ -165,7 +182,8 @@ with open('/YNM/PayoutAutomator/Data/SheetPreprocessor/YNE_Sales_Final.csv', 'w'
             write_payout.total_sales, 
             write_payout.processing_fee,
             write_payout.total_cost, 
-            write_payout.gross_profit
+            write_payout.gross_profit,
+            write_payout.gross_margin
         ])
 
 
@@ -186,7 +204,8 @@ with open('/YNM/PayoutAutomator/Data/SheetPreprocessor/YNE_Sales_Final.csv', 'w'
                 write_payout.total_sales, 
                 write_payout.processing_fee,
                 write_payout.total_cost, 
-                write_payout.gross_profit
+                write_payout.gross_profit,
+                write_payout.gross_margin
             ])
 
 
@@ -195,7 +214,7 @@ with open('/YNM/PayoutAutomator/Data/SheetPreprocessor/No_Cost_Items.csv', 'w', 
     nocostitemswriter = csv.writer(nocostitems, delimiter=',')
 
     #Write Header
-    nocostitemswriter.writerow(["Origin", "product_title", "product_name", "dist_type","product_type", "net_quantity", "gross_sales", "discounts", "returns", "net_sales", "taxes", "total_sales", "process_fee","total_cost", "gross_profit"])
+    nocostitemswriter.writerow(["Origin", "product_title", "product_name", "dist_type","product_type", "net_quantity", "gross_sales", "discounts", "returns", "net_sales", "taxes", "total_sales", "process_fee","total_cost", "gross_profit", "gross margin"])
 
     #Iterate through each no cost item and add to the sheet
     for item in to_do_cost_list:

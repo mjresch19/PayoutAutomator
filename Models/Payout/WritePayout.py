@@ -24,7 +24,8 @@ class WritePayout:
                     total_sales: float, 
                     processing_fee: float, 
                     total_cost: float, 
-                    gross_profit: float
+                    gross_profit: float,
+                    gross_margin: float
                 ):
         
         self.product_title = product_title
@@ -41,6 +42,7 @@ class WritePayout:
         self.processing_fee = processing_fee
         self.total_cost = total_cost
         self.gross_profit = gross_profit
+        self.gross_margin = gross_margin
 
     def extract_artist(self):
         '''

@@ -1,146 +1,149 @@
 {
   "3D Mousepad": {
-    "Average": 55.63
+    "Average": 0.556
   },
   "Acrylic Charm": {
-    "Average": 66.34
+    "Average": 0.663
   },
   "Acrylic Charm Lanyard": {
-    "Average": 71.47
+    "Average": 0.715
   },
   "Bag": {
-    "Average": 39.17
+    "Average": 0.392
   },
   "Belly Mousepad": {
-    "Average": 58
+    "Average": 0.58
   },
   "Book": {
-    "Average": 56.68
+    "Average": 0.567
   },
   "Daki Keychain": {
-    "Average": 72.67
+    "Average": 0.727
   },
   "Daki Cover": {
-    "Average": 71.8
+    "Average": 0.718
   },
   "Deskmat": {
-    "Average": 46.49
+    "Average": 0.465
   },
   "Hat": {
-    "Average": 41.23
+    "Average": 0.412
   },
   "Home Decor": {
-    "Average": 37.58
+    "Average": 0.376
   },
   "Hoodie": {
-    "Average": 28.13,
+    "Average": 0.281,
     "XS": {
-      "Average": 31.56
+      "Average": 0.316
     },
     "S": {
-      "Average": 31.56
+      "Average": 0.316
     },
     "M": {
-      "Average": 31.56
+      "Average": 0.316
     },
     "L": {
-      "Average": 31.56
+      "Average": 0.316
     },
     "XL": {
-      "Average": 31.56
+      "Average": 0.316
     },
     "2XL": {
-      "Average": 27.39
+      "Average": 0.274
     },
     "3XL": {
-      "Average": 24.05
+      "Average": 0.241
     },
     "4XL": {
-      "Average": 22.98
+      "Average": 0.23
     },
     "5XL": {
-      "Average": 20.95
+      "Average": 0.21
     }
   },
   "Mousepad": {
-    "Average": 56.42
+    "Average": 0.564
+  },
+  "Mug": {
+    "Average": 0.478
   },
   "Photocard": {
-    "Average": 71.71
+    "Average": 0.717
   },
   "Print": {
-    "Average": 76.08
+    "Average": 0.761
   },
   "Standee": {
-    "Average": 55.98
+    "Average": 0.56
   },
   "Sticker": {
-    "Average": 69.68
+    "Average": 0.697
   },
   "Sticker Bundle": {
-    "Average": 64.34
+    "Average": 0.643
   },
   "Sticker Sheet": {
-    "Average": 78.57
+    "Average": 0.786
   },
-  "T-Shirts": {
-    "Average": 45.02,
+  "T-Shirt": {
+    "Average": 0.45,
     "XS": {
-      "Average": 52.27
+      "Average": 0.523
     },
     "S": {
-      "Average": 52.27
+      "Average": 0.523
     },
     "M": {
-      "Average": 52.27
+      "Average": 0.523
     },
     "L": {
-      "Average": 52.27
+      "Average": 0.523
     },
     "XL": {
-      "Average": 52.27
+      "Average": 0.523
     },
     "2XL": {
-      "Average": 45.74
+      "Average": 0.457
     },
     "3XL": {
-      "Average": 39.22
+      "Average": 0.392
     },
     "4XL": {
-      "Average": 32.71
+      "Average": 0.327
     },
     "5XL": {
-      "Average": 26.19
+      "Average": 0.262
     }
   },
   "Tank Top": {
-    "Average": 36.84,
+    "Average": 0.368,
     "XS": {
-      "Average": 40.13
+      "Average": 0.401
     },
     "S": {
-      "Average": 40.13
+      "Average": 0.401
     },
     "M": {
-      "Average": 40.13
+      "Average": 0.401
     },
     "L": {
-      "Average": 40.13
+      "Average": 0.401
     },
     "XL": {
-      "Average": 40.13
+      "Average": 0.401
     },
     "2XL": {
-      "Average": 33
+      "Average": 0.33
     },
     "3XL": {
-      "Average": 24.2
+      "Average": 0.242
     }
   },
   "Tote Bag": {
-    "Average": 33.1
+    "Average": 0.331
   },
   "Water Bottle": {
-    "Average": 31.11
+    "Average": 0.311
   }
 }
