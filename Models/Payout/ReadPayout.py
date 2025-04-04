@@ -89,7 +89,7 @@ class ReadPayout:
                 "Please enter information on product in Shopify"
             )
         elif self.product_type.title() not in anamoly_info:
-            print(f"WARNING: Product type {self.product_type} for {self.product_title} not registered.")
+            print(f"WARNING: Product type {self.product_type} for {self.product_title} not registered on anomaly detector.")
         elif (
             self.gross_margin < anamoly_info[self.product_type.title()]["Average"] - 0.10
             or self.gross_margin > anamoly_info[self.product_type.title()]["Average"] + 0.10
