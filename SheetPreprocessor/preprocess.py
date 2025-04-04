@@ -207,17 +207,4 @@ with open('/YNM/PayoutAutomator/Data/SheetPreprocessor/YNE_Sales_Final.csv', 'w'
                 write_payout.gross_profit,
                 write_payout.gross_margin
             ])
-
-
-#Write to a third sheet that will be composed of all items that have no cost associated with them
-with open('/YNM/PayoutAutomator/Data/SheetPreprocessor/No_Cost_Items.csv', 'w', newline='') as nocostitems:
-    nocostitemswriter = csv.writer(nocostitems, delimiter=',')
-
-    #Write Header
-    nocostitemswriter.writerow(["Origin", "product_title", "product_name", "dist_type","product_type", "net_quantity", "gross_sales", "discounts", "returns", "net_sales", "taxes", "total_sales", "process_fee","total_cost", "gross_profit", "gross margin"])
-
-    #Iterate through each no cost item and add to the sheet
-    for item in to_do_cost_list:
-        nocostitemswriter.writerow(item)
-
                     
