@@ -1030,6 +1030,12 @@
     "client_type": ["Artist"],
     "profit_split_premium": false
   },
+  "Tastescomics": {
+    "name": "Tastescomics",
+    "aliases": ["Tastescomics"],
+    "client_type": ["Artist"],
+    "profit_split_premium": false
+  },
   "Tdookus": {
     "name": "TDookus",
     "aliases": ["TDookus"],
@@ -1051,6 +1057,18 @@
   "Thejieb": {
     "name": "TheJieb",
     "aliases": ["TheJieb"],
+    "client_type": ["Artist"],
+    "profit_split_premium": false
+  },
+  "Themaintummy": {
+    "name": "TheMainTummy",
+    "aliases": ["TheMainTummy"],
+    "client_type": ["Artist"],
+    "profit_split_premium": false
+  },
+  "Tobiass": {
+    "name": "Tobiass",
+    "aliases": ["Tobiass"],
     "client_type": ["Artist"],
     "profit_split_premium": false
   },
@@ -1129,6 +1147,12 @@
   "Waifudekai": {
     "name": "Waifudekai",
     "aliases": ["Waifudekai", "WaifuDekai"],
+    "client_type": ["Artist"],
+    "profit_split_premium": false
+  },
+  "Wildegems": {
+    "name": "Wildegems",
+    "aliases": ["Wildegems"],
     "client_type": ["Artist"],
     "profit_split_premium": false
   },

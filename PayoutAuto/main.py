@@ -516,36 +516,57 @@ with pd.ExcelWriter("Data/PayoutPrototype/YNM_Payout_Prototype.xlsx", engine="op
     #Create a pending rollovers sheet
     pending_rollover_df = pd.DataFrame()
 
-    origin_col = []
-    artist_col = []
-    item_col = []
+    product_title_col = []
+    product_vendor_col = []
     dist_type_col = []
-    sales_col = []
-    process_fee_col = []
-    cost_col = []
-    profit_col = []
+    product_type_col = []
+    net_quantity_col = []
+    gross_sales_col = []
+    discounts_col = []
+    returns_col = []
+    net_sales_col = []
+    taxes_col = []
+    total_sales_col = []
+    total_cost_col = []
+    processing_fee_col = []
+    gross_profit_col = []
+    origin_col = []
     ready_col = []
 
     for carryover in carry_pending_rollovers:
 
+        product_title_col.append(carryover.product_title)
+        product_vendor_col.append(carryover.product_vendor)
+        dist_type_col.append(carryover.dist_type)
+        product_type_col.append(carryover.product_type)
+        net_quantity_col.append(carryover.net_quantity)
+        gross_sales_col.append(carryover.gross_sales)
+        discounts_col.append(carryover.discounts)
+        returns_col.append(carryover.returns)
+        net_sales_col.append(carryover.net_sales)
+        taxes_col.append(carryover.taxes)
+        total_sales_col.append(carryover.total_sales)
+        total_cost_col.append(carryover.total_cost)
+        processing_fee_col.append(carryover.processing_fee)
+        gross_profit_col.append(carryover.gross_profit)
         origin_col.append(carryover.origin)
-        artist_col.append(carryover.artist)
-        item_col.append(carryover.item)
-        dist_type_col.append(carryover.distribution_type)
-        sales_col.append(float(carryover.total_value))
-        process_fee_col.append(float(carryover.processing_fee))
-        cost_col.append(float(carryover.cost))
-        profit_col.append(float(carryover.profit))
         ready_col.append(carryover.ready)
 
-    pending_rollover_df["Origin"] = origin_col
-    pending_rollover_df["Artist"] = artist_col
-    pending_rollover_df["Item"] = item_col
+    pending_rollover_df["Product Title"] = product_title_col
+    pending_rollover_df["Product Vendor"] = product_vendor_col
     pending_rollover_df["Distribution Type"] = dist_type_col
-    pending_rollover_df["Total Value"] = sales_col
-    pending_rollover_df["Processing Fee"] = process_fee_col
-    pending_rollover_df["Cost"] = cost_col
-    pending_rollover_df["Profit"] = profit_col
+    pending_rollover_df["Product Type"] = product_type_col
+    pending_rollover_df["Net Quantity"] = net_quantity_col
+    pending_rollover_df["Gross Sales"] = gross_sales_col
+    pending_rollover_df["Discounts"] = discounts_col
+    pending_rollover_df["Returns"] = returns_col
+    pending_rollover_df["Net Sales"] = net_sales_col
+    pending_rollover_df["Taxes"] = taxes_col
+    pending_rollover_df["Total Sales"] = total_sales_col
+    pending_rollover_df["Total Cost"] = total_cost_col
+    pending_rollover_df["Processing Fee"] = processing_fee_col
+    pending_rollover_df["Gross Profit"] = gross_profit_col
+    pending_rollover_df["Origin"] = origin_col
     pending_rollover_df["Ready"] = ready_col
 
     pending_rollover_df.to_excel(writer, sheet_name="Pending Rollovers", index=False)

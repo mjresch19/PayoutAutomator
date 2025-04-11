@@ -23,8 +23,6 @@ def identify_vendors(product_vendor, second_product_vendor, artist_info):
     This way we know which is the artist and which is the collaborator. This is important as we need this information
     to determine splits
     '''
-    if (product_vendor == "Saa Halust" and second_product_vendor == "Rozen") or (product_vendor == "Rozen" and second_product_vendor == "Saa Halust"):
-        print("TEST")
 
     #vendor indentification
     product_vendor_role = artist_info[product_vendor]["client_type"]
