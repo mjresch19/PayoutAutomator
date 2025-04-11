@@ -423,6 +423,7 @@ with pd.ExcelWriter("Data/PayoutPrototype/YNM_Payout_Prototype.xlsx", engine="op
 
     combined_payments_df = pd.DataFrame()
 
+    paid_status_col = []
     artist_col = []
     payment_col = []
     for key, val in artists_payments_dict.items():
@@ -430,10 +431,16 @@ with pd.ExcelWriter("Data/PayoutPrototype/YNM_Payout_Prototype.xlsx", engine="op
             #skip if artist doesn't have any debit/credit
             if val == 0:
                 continue
+            
+            if val < 5:
+                paid_status_col.append("r")
+            else: 
+                paid_status_col.append("")
 
             artist_col.append(key)
             payment_col.append(round(val, 2))
 
+    combined_payments_df["Paid?"] = paid_status_col
     combined_payments_df["Artist"] = artist_col
     combined_payments_df["Payment Due"] = payment_col
 
@@ -445,10 +452,10 @@ with pd.ExcelWriter("Data/PayoutPrototype/YNM_Payout_Prototype.xlsx", engine="op
     # Worksheet
     worksheet = workbook["Combined Payouts"]
 
-    # Add a new column "Paid?" on the left
-    worksheet.insert_cols(1)
-    worksheet.cell(row=1, column=1).value = "Paid?"
-    worksheet.cell(row=1, column=1).font = Font(bold=True)
+    # # Add a new column "Paid?" on the left
+    # worksheet.insert_cols(1)
+    # worksheet.cell(row=1, column=1).value = "Paid?"
+    # worksheet.cell(row=1, column=1).font = Font(bold=True)
 
     # Add new columns "Payments Made", "Transaction ID", and "Notes" on the right
     for i, header in enumerate(["Payments Made", "Transaction ID", "Notes"], start=worksheet.max_column+1):
