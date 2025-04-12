@@ -80,6 +80,8 @@ class ReadPayout:
 
     def detect_anamolies_margins(self):
 
+        ynm_gross_margin = (self.total_sales - self.total_cost - self.calculate_processing_fee()) / self.total_sales if self.total_sales != 0 else 0.0
+
         if self.net_quantity <= 0 or self.gross_profit < 0:
             return
 
@@ -91,11 +93,11 @@ class ReadPayout:
         elif self.product_type.title() not in anamoly_info:
             print(f"WARNING: Product type {self.product_type} for {self.product_title} not registered on anomaly detector.")
         elif (
-            self.gross_margin < anamoly_info[self.product_type.title()]["Average"] - 0.10
-            or self.gross_margin > anamoly_info[self.product_type.title()]["Average"] + 0.10
+            ynm_gross_margin < anamoly_info[self.product_type.title()]["Average"] - 0.10
+            or ynm_gross_margin > anamoly_info[self.product_type.title()]["Average"] + 0.10
             ):
             print(
-                f"WARNING: {self.product_title} has a gross margin of {self.gross_margin} "
+                f"WARNING: {self.product_title} has a gross margin of {round(ynm_gross_margin,3)} "
                 f"which is outside the expected range of "
                 f"{round(anamoly_info[self.product_type.title()]['Average'] - 0.10,3)} to "
                 f"{round(anamoly_info[self.product_type.title()]['Average'] + 0.10,3)}. "
