@@ -47,10 +47,13 @@ with open('/YNM/PayoutAutomator/Data/SheetPreprocessor/YNM_Sales_Final.csv', 'w'
         )
 
         
-        read_payout.detect_anamolies()
         
         dist_type = read_payout.get_distribution_type()
+        
+        # read_payout.detect_anamolies_margins()
 
+        read_payout.detect_anamolies_dist_type(dist_type)
+        
         read_payout.check_cost(dist_type)
 
         processing_fee = read_payout.calculate_processing_fee()
@@ -140,9 +143,12 @@ with open('/YNM/PayoutAutomator/Data/SheetPreprocessor/YNE_Sales_Final.csv', 'w'
                 gross_margin= product[12]
             )
         
-        read_payout.detect_anamolies()
                     
         dist_type = read_payout.get_distribution_type()
+
+        # read_payout.detect_anamolies_margins()
+
+        read_payout.detect_anamolies_dist_type(dist_type)
 
         read_payout.check_cost(dist_type)
 

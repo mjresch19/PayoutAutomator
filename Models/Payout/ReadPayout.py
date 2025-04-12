@@ -78,7 +78,7 @@ class ReadPayout:
                 "Please handle this item's cost manually before proceeding manually."
             )
 
-    def detect_anamolies(self):
+    def detect_anamolies_margins(self):
 
         if self.net_quantity <= 0 or self.gross_profit < 0:
             return
@@ -102,3 +102,11 @@ class ReadPayout:
                 "Please check the item manually."
             )
 
+
+    def detect_anamolies_dist_type(self, dist_type):
+
+        if dist_type == "Unknown":
+            print(
+                f"WARNING: Distribution type for {self.product_title} is not listed. "
+                "Please check the item manually."
+            )
